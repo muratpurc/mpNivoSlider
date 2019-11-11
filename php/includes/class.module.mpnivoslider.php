@@ -71,7 +71,7 @@ abstract class ModuleMpNivoSliderAbstract
 </div><!-- END:BLOCK -->';
 
     /**
-     * Assoziative order array
+     * Associative order array
      * @var  array
      */
     protected $_aOrder;
@@ -138,7 +138,7 @@ abstract class ModuleMpNivoSliderAbstract
      * Constructor sets some properties
      *
      * @param  array  $aConfig  Module configuration
-     * @param  array  $aTranslations  Assoziative translations list
+     * @param  array  $aTranslations  Associative translations list
      * @param  int    $clientId   Client id
      * @param  array  $aClientCfg  Client configuration
      * @param  int    $iLangId  Language id
@@ -213,9 +213,9 @@ abstract class ModuleMpNivoSliderAbstract
     /**
      * Sets module translations
 	 *
-     * @param  array  $translations  Assoziative translations list
+     * @param  array  $translations  Associative translations list
      */
-    public function setMi18n(array $aTranslations)
+    public function setMi18n(array $translations)
     {
         $this->_i18n = array_merge($this->_i18n, $translations);
     }
