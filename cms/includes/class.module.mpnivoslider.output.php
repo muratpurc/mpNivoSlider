@@ -12,9 +12,9 @@
  * @package     CONTENIDO_Modules
  * @subpackage  mpNivoSlider
  * @author      Murat Purc <murat@purc.de>
- * @copyright   Copyright (c) 2011-2012 Murat Purc (http://www.purc.de)
+ * @copyright   Copyright (c) 2011-2013 Murat Purc (http://www.purc.de)
  * @license     http://www.gnu.org/licenses/gpl-2.0.html - GNU General Public License, version 2
- * @version     $Id: class.module.mpnivoslider.output.php 16 2013-03-23 14:22:06Z murat $
+ * @version     $Id: class.module.mpnivoslider.output.php 34 2013-11-14 19:53:12Z murat $
  */
 
 
@@ -99,6 +99,12 @@ class ModuleMpNivoSliderOutput extends ModuleMpNivoSliderAbstract
 		// quality of resized jpeg images
 		if ($this->imageQuality < 0 || $this->imageQuality > 100) {
 			$this->imageQuality = self::DEFAULT_QUALITY;
+		}
+
+		// responsive mode flag
+        $this->responsiveMode = (int) $this->responsiveMode;
+		if ($this->responsiveMode < 0) {
+			$this->responsiveMode = '';
 		}
 
 		// max cachetime in minutes 4 resized images
@@ -332,11 +338,14 @@ class ModuleMpNivoSliderOutput extends ModuleMpNivoSliderAbstract
 
         // additional styles
         $moduleStyle = '';
-        if (is_numeric($this->maxWidth)) {
-            $moduleStyle .= 'width:' . $this->maxWidth . 'px;';
-        }
-        if (is_numeric($this->maxHeight)) {
-            $moduleStyle .= 'height:' . $this->maxHeight . 'px;';
+        if (!$this->responsiveMode) {
+            // add module dimensions only if responsive mode is off
+            if (is_numeric($this->maxWidth)) {
+                $moduleStyle .= 'width:' . $this->maxWidth . 'px;';
+            }
+            if (is_numeric($this->maxHeight)) {
+                $moduleStyle .= 'height:' . $this->maxHeight . 'px;';
+            }
         }
         $oTemplate->set('s', 'MODULE.STYLE', $moduleStyle);
 
@@ -451,6 +460,11 @@ class ModuleMpNivoSliderOutput extends ModuleMpNivoSliderAbstract
                 $downsizeFactor = $maxHeight / $size[1];
             }
 
+            // prevent scalip up of small images
+            if ($downsizeFactor > 1) {
+                $downsizeFactor = 1;
+            }
+
             // calculate dimensions
             $maxWidth = round($size[0] * $downsizeFactor);
             $maxHeight = round($size[1] * $downsizeFactor);
@@ -468,9 +482,9 @@ class ModuleMpNivoSliderOutput extends ModuleMpNivoSliderAbstract
             $file = $this->_sUploadDir . $oUploadItem->get('dirname') . $oUploadItem->get('filename');
         }
 
-        // get'n store image dimensions
+        // get'n store image dimensions, but save width/height attributes only for disabled responsive mode
         $size = $this->_getImageSize($file);
-        $attr = (is_array($size)) ? ' ' . $size[3] : '';
+        $attr = (is_array($size) && !$this->responsiveMode) ? ' ' . $size[3] : '';
 
         // add new images array item
         return array(

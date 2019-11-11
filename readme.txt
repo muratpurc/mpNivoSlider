@@ -1,4 +1,4 @@
-CONTENIDO Nivo Slider Modul mpNivoSlider 0.2 für CONTENIDO 4.8.x
+CONTENIDO Nivo Slider Modul mpNivoSlider 0.3.0 für CONTENIDO 4.8.x
 
 ################################################################################
 TOC (Table of contents)
@@ -16,11 +16,11 @@ BESCHREIBUNG
 
 Nivo Slider:
 ------------
-Nivo Slider (v3.1) ist ein Image-Slider basierend auf jQuery, mit vielen Features 
+Nivo Slider (v3.2) ist ein Image-Slider basierend auf jQuery, mit vielen Features 
 wie Effekte, Tastatursteuerung, Verlinkung von Bildern, Themes, diverse Einstellungen, 
 usw.
 
-Benötigt jQuery v1.4+ und unterstützt folgende Browser:
+Benötigt jQuery v1.7+ und unterstützt folgende Browser:
 Internet Explorer v7+, Firefox v3+, Google Chrome v4+, Safari v4+, Opera v10+
 
 Webseite von Nivo Slider:
@@ -163,7 +163,7 @@ FTP-Upload:
 Das Modul liest Bildinformationen aus der Upload Datenbank-Tabelle aus, nicht aus dem
 Upload Verzeichnis. Wenn Bilder per FTP auf den Server übertragen wurden, sollte das
 entsprechende Uploadverzeichnis im Backend unter Dateiverwaltung synchronisiert werden,
-damit die neuen Bilder im Frontend angezeigt werden.
+damit das Modul die neuen Bilder im Frontend anzeigen kann.
 
 Anzahl der Bilder:
 ------------------
@@ -183,10 +183,15 @@ Daher ist es ratsam, im Layout nur jQuery einzubinden.
 ################################################################################
 CHANGELOG
 
-2013-03-23 mpNivoSlider Modul 0.2.1
+2013-03-23 mpNivoSlider Modul 0.3.0 (für CONTENIDO 4.8.x)
+    * new: Update auf Nivo Slider v3.2
+    * new: Responsive Modus integriert
+    * bugfix: Kleine Bilder nicht hochskalieren
+
+2013-03-23 mpNivoSlider Modul 0.2.1 (für CONTENIDO 4.8.x)
     * bugfix: Fehler bei der Ausgabe der Sortierung korrigiert
 
-2012-09-07 mpNivoSlider Modul 0.2
+2012-09-07 mpNivoSlider Modul 0.2 (für CONTENIDO 4.8.x)
     * new: Update auf Nivo Slider v3.1
     * new: Konfiguration für die Qualität von generierten JPEG-Bildern
     * new: json_decode() implementation in PHP falls json_decode nicht verfügbar ist
@@ -195,12 +200,12 @@ CHANGELOG
     * change: Entfernen diverser Nivo Slider Optionen,
 	  siehe http://nivo.dev7studios.com/2012/05/30/the-nivo-slider-is-responsive/
 
-2011-11-22 mpNivoSlider Modul 0.13rc
+2011-11-22 mpNivoSlider Modul 0.13rc (für CONTENIDO 4.8.x)
     * new: Erweitert auf mehrfachen Einsatz innerhalb einer Seite
     * bugfix: Sprachabhängige Bildbeschreibung auslesen
     * bugfix: Englische Modulübersetzung korrigiert
 
-2011-09-28 mpNivoSlider Modul 0.1rc
+2011-09-28 mpNivoSlider Modul 0.1rc (für CONTENIDO 4.8.x)
     * Erste Veröffentlichung des mpNivoSlider Moduls
 
 

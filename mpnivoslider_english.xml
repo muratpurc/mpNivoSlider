@@ -222,5 +222,14 @@ if any values for max width and height are defined)</translation>
 <string><original>JavaScript Einstellungen f&amp;uuml;r jQuery Nivo Slider Plugin</original>
 <translation>JavaScript settings for jQuery Nivo Slider plug-in</translation>
 </string>
+<string><original>Responsive Modus:</original>
+<translation>Responsive mode:</translation>
+</string>
+<string><original>Responsive Modus aktivieren</original>
+<translation>Enable responsive mode</translation>
+</string>
+<string><original>(Bei Bildern werden Breite und H&amp;ouml;he nicht ausgegeben und der Modulcontainer hat auch keine Angaben für Breite und H&amp;ouml;he!</original>
+<translation>(Images won't get the width and height attribute, the same for the module container)</translation>
+</string>
 </translation>
 </module>

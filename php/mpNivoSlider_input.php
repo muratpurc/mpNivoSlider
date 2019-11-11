@@ -8,9 +8,9 @@
  * @package     CONTENIDO_Modules
  * @subpackage  mpNivoSlider
  * @author      Murat Purc <murat@purc.de>
- * @copyright   Copyright (c) 2011-2012 Murat Purc (http://www.purc.de)
+ * @copyright   Copyright (c) 2011-2013 Murat Purc (http://www.purc.de)
  * @license     http://www.gnu.org/licenses/gpl-2.0.html - GNU General Public License, version 2
- * @version     $Id: mpNivoSlider_input.php 5 2012-09-07 19:22:49Z murat $
+ * @version     $Id: mpNivoSlider_input.php 34 2013-11-14 19:53:12Z murat $
  */
 
 cInclude('frontend', 'includes/functions.mpnivoslider.php');
@@ -28,6 +28,7 @@ $aModuleConfiguration = array(
     'selectedOrder' => "CMS_VALUE[7]",
     'darkImages' => "CMS_VALUE[33]",
     'imageQuality' => "CMS_VALUE[34]",
+    'responsiveMode' => "CMS_VALUE[35]",
 
     // Nivo Slider specific configuration
     'effect' => "CMS_VALUE[8]",
@@ -90,7 +91,7 @@ $oModule = new ModuleMpNivoSliderInput($aModuleConfiguration, $aModuleTranslatio
         <small><?php echo mi18n("(Der ausgew&auml;hlte Ordner sollte nur Bilder enthalten)") ?></small><br />
         <br />
         <input type="checkbox" class="text_medium" name="CMS_VAR[2]" id="<?php echo $oModule->getIdValue('useSubdirectories') ?>" value="1"<?php echo $oModule->getCheckedAttribute('useSubdirectories') ?> />
-		<label for="<?php echo $oModule->getIdValue('useSubdirectories') ?>"><?php echo mi18n("Vorhandene Unterordner auch verwenden") ?></label><br />
+        <label for="<?php echo $oModule->getIdValue('useSubdirectories') ?>"><?php echo mi18n("Vorhandene Unterordner auch verwenden") ?></label><br />
         <small><?php echo mi18n("(Alle Bilder auch in vorhandenen Unterordnen verwenden)") ?></small><br />
         <br />
     </td>
@@ -99,7 +100,7 @@ $oModule = new ModuleMpNivoSliderInput($aModuleConfiguration, $aModuleTranslatio
     <td valign="top" class="text_medium"><?php echo mi18n("Helligkeit der Bilder:") ?></td>
     <td class="text_medium">
         <input type="checkbox" class="text_medium" name="CMS_VAR[33]" id="<?php echo $oModule->getIdValue('darkImages') ?>" value="1"<?php echo $oModule->getCheckedAttribute('darkImages') ?> />
-		<label for="<?php echo $oModule->getIdValue('darkImages') ?>"><?php echo mi18n("Die Bilder sind in der Regel dunkel") ?></label><br />
+        <label for="<?php echo $oModule->getIdValue('darkImages') ?>"><?php echo mi18n("Die Bilder sind in der Regel dunkel") ?></label><br />
         <small><?php echo mi18n("(Bei dunklen Bildern werden helle Navigationspfeile und Bildunterschriften mit hellem Hintergrund ausgegeben, bei hellen Bildern umgekehrt)") ?></small><br />
         <br />
     </td>
@@ -150,6 +151,16 @@ $oModule = new ModuleMpNivoSliderInput($aModuleConfiguration, $aModuleTranslatio
         <br />
     </td>
 </tr>
+<tr>
+    <td valign="top" class="text_medium"><?php echo mi18n("Responsive Modus:") ?></td>
+    <td>
+        <input type="checkbox" class="text_medium" name="CMS_VAR[35]" id="<?php echo $oModule->getIdValue('responsiveMode') ?>" value="1"<?php echo $oModule->getCheckedAttribute('responsiveMode') ?> />
+        <label for="<?php echo $oModule->getIdValue('responsiveMode') ?>"><?php echo mi18n("Responsive Modus aktivieren") ?></label><br />
+        <small><?php echo mi18n("(Bei Bildern werden Breite und H&ouml;he nicht ausgegeben und der Modulcontainer hat auch keine Angaben für Breite und H&ouml;he!") ?></small><br />
+        <br />
+    </td>
+</tr>
+<!-- Nivo Slider JS settings -->
 <tr>
     <td valign="top" colspan="2" class="text_medium">
         <hr /><br />
@@ -220,7 +231,7 @@ $oModule = new ModuleMpNivoSliderInput($aModuleConfiguration, $aModuleTranslatio
     <td valign="top" class="text_medium"><?php echo mi18n("Navigation") ?>:</td>
     <td class="text_medium">
         <input type="checkbox" class="text_medium" name="CMS_VAR[15]" id="<?php echo $oModule->getIdValue('directionNav') ?>" value="1"<?php echo $oModule->getCheckedAttribute('directionNav') ?> />
-		<label for="<?php echo $oModule->getIdValue('directionNav') ?>"><?php echo mi18n("Navigation aktivieren (vor und zur&uuml;ck)") ?></label><br />
+        <label for="<?php echo $oModule->getIdValue('directionNav') ?>"><?php echo mi18n("Navigation aktivieren (vor und zur&uuml;ck)") ?></label><br />
         <br />
         <input type="text" class="text_medium" name="CMS_VAR[26]" value="<?php echo $oModule->prevText ?>" /> <?php echo mi18n("Text f&uuml;r vorheriges Element") ?><br />
         <br />
@@ -232,12 +243,12 @@ $oModule = new ModuleMpNivoSliderInput($aModuleConfiguration, $aModuleTranslatio
     <td valign="top" class="text_medium"><?php echo mi18n("Erweiterte Navigation") ?>:</td>
     <td class="text_medium">
         <input type="checkbox" class="text_medium" name="CMS_VAR[17]" id="<?php echo $oModule->getIdValue('controlNav') ?>" value="1"<?php echo $oModule->getCheckedAttribute('controlNav') ?> />
-		<label for="<?php echo $oModule->getIdValue('controlNav') ?>"><?php echo mi18n("Erweiterte Navigation aktivieren (Steuerung &uuml;ber grafische Listenpunkte)") ?></label><br />
+        <label for="<?php echo $oModule->getIdValue('controlNav') ?>"><?php echo mi18n("Erweiterte Navigation aktivieren (Steuerung &uuml;ber grafische Listenpunkte)") ?></label><br />
         <br />
         <div style="padding-left:20px;">
-			<input type="checkbox" class="text_medium" name="CMS_VAR[18]" id="<?php echo $oModule->getIdValue('controlNavThumbs') ?>" value="1"<?php echo $oModule->getCheckedAttribute('controlNavThumbs') ?> />
-			<label for="<?php echo $oModule->getIdValue('controlNavThumbs') ?>"><?php echo mi18n("Verwende Thumbnails f&uuml;r die erweiterte Navigation") ?></label><br />
-		</div>
+            <input type="checkbox" class="text_medium" name="CMS_VAR[18]" id="<?php echo $oModule->getIdValue('controlNavThumbs') ?>" value="1"<?php echo $oModule->getCheckedAttribute('controlNavThumbs') ?> />
+            <label for="<?php echo $oModule->getIdValue('controlNavThumbs') ?>"><?php echo mi18n("Verwende Thumbnails f&uuml;r die erweiterte Navigation") ?></label><br />
+        </div>
         <br />
         <input type="text" class="text_medium" name="CMS_VAR[20]" value="<?php echo $oModule->controlNavThumbsWidthX ?>" /> <?php echo mi18n("Thumbnailbreite in Pixel") ?><br />
         <br />
@@ -248,7 +259,7 @@ $oModule = new ModuleMpNivoSliderInput($aModuleConfiguration, $aModuleTranslatio
     <td valign="top" class="text_medium"><?php echo mi18n("Anhalten bei mouseover") ?>:</td>
     <td class="text_medium">
         <input type="checkbox" class="text_medium" name="CMS_VAR[23]" id="<?php echo $oModule->getIdValue('pauseOnHover') ?>" value="1"<?php echo $oModule->getCheckedAttribute('pauseOnHover') ?> />
-		<label for="<?php echo $oModule->getIdValue('pauseOnHover') ?>"><?php echo mi18n("Animationen bei mouseover anhalten") ?></label><br />
+        <label for="<?php echo $oModule->getIdValue('pauseOnHover') ?>"><?php echo mi18n("Animationen bei mouseover anhalten") ?></label><br />
         <br />
     </td>
 </tr>
@@ -256,7 +267,7 @@ $oModule = new ModuleMpNivoSliderInput($aModuleConfiguration, $aModuleTranslatio
     <td valign="top" class="text_medium"><?php echo mi18n("Manuelle Slides") ?>:</td>
     <td class="text_medium">
         <input type="checkbox" class="text_medium" name="CMS_VAR[24]" id="<?php echo $oModule->getIdValue('manualAdvance') ?>" value="1"<?php echo $oModule->getCheckedAttribute('manualAdvance') ?> />
-		<label for="<?php echo $oModule->getIdValue('manualAdvance') ?>"><?php echo mi18n("Manuelle &Uuml;berblendeffekte erzwingen") ?></label><br />
+        <label for="<?php echo $oModule->getIdValue('manualAdvance') ?>"><?php echo mi18n("Manuelle &Uuml;berblendeffekte erzwingen") ?></label><br />
         <br />
     </td>
 </tr>

@@ -12,9 +12,9 @@
  * @package     CONTENIDO_Modules
  * @subpackage  mpNivoSlider
  * @author      Murat Purc <murat@purc.de>
- * @copyright   Copyright (c) 2011-2012 Murat Purc (http://www.purc.de)
+ * @copyright   Copyright (c) 2011-2013 Murat Purc (http://www.purc.de)
  * @license     http://www.gnu.org/licenses/gpl-2.0.html - GNU General Public License, version 2
- * @version     $Id: class.module.mpnivoslider.input.php 5 2012-09-07 19:22:49Z murat $
+ * @version     $Id: class.module.mpnivoslider.input.php 34 2013-11-14 19:53:12Z murat $
  */
 
 
@@ -90,6 +90,11 @@ class ModuleMpNivoSliderInput extends ModuleMpNivoSliderAbstract
 
 		if ($this->imageQuality < 0 || $this->imageQuality > 100) {
 			$this->imageQuality = self::DEFAULT_QUALITY;
+		}
+
+        $this->responsiveMode = (int) $this->responsiveMode;
+		if ($this->responsiveMode < 0) {
+			$this->responsiveMode = '';
 		}
 
         $this->maxCachetime = (int) $this->maxCachetime;

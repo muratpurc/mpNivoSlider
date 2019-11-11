@@ -221,5 +221,14 @@
 <string><original>JavaScript Einstellungen f&amp;uuml;r jQuery Nivo Slider Plugin</original>
 <translation/>
 </string>
+<string><original>Responsive Modus:</original>
+<translation/>
+</string>
+<string><original>Responsive Modus aktivieren</original>
+<translation/>
+</string>
+<string><original>(Bei Bildern werden Breite und H&amp;ouml;he nicht ausgegeben und der Modulcontainer hat auch keine Angaben für Breite und H&amp;ouml;he!</original>
+<translation/>
+</string>
 </translation>
 </module>

@@ -8,9 +8,9 @@
  * @package     CONTENIDO_Modules
  * @subpackage  mpNivoSlider
  * @author      Murat Purc <murat@purc.de>
- * @copyright   Copyright (c) 2011-2012 Murat Purc (http://www.purc.de)
+ * @copyright   Copyright (c) 2011-2013 Murat Purc (http://www.purc.de)
  * @license     http://www.gnu.org/licenses/gpl-2.0.html - GNU General Public License, version 2
- * @version     $Id: mpNivoSlider_output.php 5 2012-09-07 19:22:49Z murat $
+ * @version     $Id: mpNivoSlider_output.php 34 2013-11-14 19:53:12Z murat $
  */
 
 cInclude('frontend', 'includes/functions.mpnivoslider.php');
@@ -30,6 +30,7 @@ $aModuleConfiguration = array(
     'selectedOrder' => "CMS_VALUE[7]",
     'darkImages' => "CMS_VALUE[33]",
     'imageQuality' => "CMS_VALUE[34]",
+    'responsiveMode' => "CMS_VALUE[35]",
 
     // Nivo Slider specific configuration
     'effect' => "CMS_VALUE[8]",
