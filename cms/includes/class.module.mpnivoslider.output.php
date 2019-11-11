@@ -14,7 +14,7 @@
  * @author      Murat Purc <murat@purc.de>
  * @copyright   Copyright (c) 2011-2012 Murat Purc (http://www.purc.de)
  * @license     http://www.gnu.org/licenses/gpl-2.0.html - GNU General Public License, version 2
- * @version     $Id: class.module.mpnivoslider.output.php 279 2012-09-07 13:53:45Z murat $
+ * @version     $Id: class.module.mpnivoslider.output.php 16 2013-03-23 14:22:06Z murat $
  */
 
 
@@ -108,8 +108,7 @@ class ModuleMpNivoSliderOutput extends ModuleMpNivoSliderAbstract
         }
 
         // selected order type
-        $this->selectedOrder = $this->selectedOrder;
-        if (!isset($this->selectedOrder[$this->_aOrder])) {
+        if (!isset($this->_aOrder[$this->selectedOrder])) {
             $this->selectedOrder = 'filename:ASC';
         }
 

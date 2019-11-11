@@ -183,6 +183,9 @@ Daher ist es ratsam, im Layout nur jQuery einzubinden.
 ################################################################################
 CHANGELOG
 
+2013-03-23 mpNivoSlider Modul 0.2.1
+    * bugfix: Fehler bei der Ausgabe der Sortierung korrigiert
+
 2012-09-07 mpNivoSlider Modul 0.2
     * new: Update auf Nivo Slider v3.1
     * new: Konfiguration für die Qualität von generierten JPEG-Bildern

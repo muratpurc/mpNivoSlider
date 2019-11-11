@@ -14,7 +14,7 @@
  * @author      Murat Purc <murat@purc.de>
  * @copyright   Copyright (c) 2011-2012 Murat Purc (http://www.purc.de)
  * @license     http://www.gnu.org/licenses/gpl-2.0.html - GNU General Public License, version 2
- * @version     $Id: class.module.mpnivoslider.php 281 2012-09-07 14:40:40Z murat $
+ * @version     $Id: class.module.mpnivoslider.php 5 2012-09-07 19:22:49Z murat $
  */
 
 
