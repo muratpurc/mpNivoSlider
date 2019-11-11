@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<module><translation origin-language-id="1" origin-language-name="deutsch"><string><original>Dateiname aufsteigend</original>
+<translation/>
+</string>
+<string><original>Dateiname absteigend</original>
+<translation/>
+</string>
+<string><original>Dateityp aufsteigend</original>
+<translation/>
+</string>
+<string><original>Dateityp absteigend</original>
+<translation/>
+</string>
+<string><original>Erstellungsdatum aufsteigend</original>
+<translation/>
+</string>
+<string><original>Erstellungsdatum absteigend</original>
+<translation/>
+</string>
+<string><original>Id aufsteigend</original>
+<translation/>
+</string>
+<string><original>Id absteigend</original>
+<translation/>
+</string>
+<string><original>vor</original>
+<translation/>
+</string>
+<string><original>Vorhandene Unterordner auch verwenden</original>
+<translation/>
+</string>
+<string><original>(Alle Bilder auch in vorhandenen Unterordnen verwenden)</original>
+<translation/>
+</string>
+<string><original>Maximale Anzahl der Bilder:</original>
+<translation/>
+</string>
+<string><original>Maximale Breite der Bilder:</original>
+<translation/>
+</string>
+<string><original>Pixel</original>
+<translation/>
+</string>
+<string><original>Maximale Cachedauer der Bilder:</original>
+<translation/>
+</string>
+<string><original>Minuten</original>
+<translation/>
+</string>
+<string><original>Sortierung der Bilder im Nivo Slider:</original>
+<translation/>
+</string>
+<string><original>Effekt</original>
+<translation/>
+</string>
+<string><original>(Standardwert: 'random', Sets: 'fold,fade,sliceDown')</original>
+<translation/>
+</string>
+<string><original>Anzahl der Slices</original>
+<translation/>
+</string>
+<string><original>Anzahl der Spalten</original>
+<translation/>
+</string>
+<string><original>Anzahl der Reihen</original>
+<translation/>
+</string>
+<string><original>Geschwindigkeit der Animation</original>
+<translation/>
+</string>
+<string><original>Zeit zwischen zwei Slides</original>
+<translation/>
+</string>
+<string><original>Startposition</original>
+<translation/>
+</string>
+<string><original>0 (index)</original>
+<translation/>
+</string>
+<string><original>(Beginn mit der Slideposition)</original>
+<translation/>
+</string>
+<string><original>Navigation</original>
+<translation/>
+</string>
+<string><original>Nur bei mouseover anzeigen</original>
+<translation/>
+</string>
+<string><original>Erweiterte Navigation</original>
+<translation/>
+</string>
+<string><original>Thumbnailbreite in Pixel</original>
+<translation/>
+</string>
+<string><original>Tastaturnavigation</original>
+<translation/>
+</string>
+<string><original>Anhalten bei mouseover</original>
+<translation/>
+</string>
+<string><original>Animationen bei mouseover anhalten</original>
+<translation/>
+</string>
+<string><original>Manuelle Slides</original>
+<translation/>
+</string>
+<string><original>CSS Opacity-Wert zwischen 0.1 - 1.0</original>
+<translation/>
+</string>
+<string><original>on beforeChange</original>
+<translation/>
+</string>
+<string><original>on afterChange</original>
+<translation/>
+</string>
+<string><original>on slideshowEnd</original>
+<translation/>
+</string>
+<string><original>on lastSlide</original>
+<translation/>
+</string>
+<string><original>on afterLoad</original>
+<translation/>
+</string>
+<string><original>Zuf&amp;auml;llig</original>
+<translation/>
+</string>
+<string><original>Dateigr&amp;ouml;&amp;szlig;e aufsteigend</original>
+<translation/>
+</string>
+<string><original>Dateigr&amp;ouml;&amp;szlig;e absteigend</original>
+<translation/>
+</string>
+<string><original>-- Ordner ausw&amp;auml;hlen --</original>
+<translation/>
+</string>
+<string><original>-- Sortierung ausw&amp;auml;hlen --</original>
+<translation/>
+</string>
+<string><original>zur&amp;uuml;ck</original>
+<translation/>
+</string>
+<string><original>Bilderordner f&amp;uuml;r Nivo Slider w&amp;auml;hlen:</original>
+<translation/>
+</string>
+<string><original>(Der ausgew&amp;auml;hlte Ordner sollte nur Bilder enthalten)</original>
+<translation/>
+</string>
+<string><original>Helligkeit der Bilder:</original>
+<translation/>
+</string>
+<string><original>Die Bilder sind in der Regel dunkel</original>
+<translation/>
+</string>
+<string><original>(Bei dunklen Bildern werden helle Navigationspfeile und Bildunterschriften mit hellem Hintergrund ausgegeben, bei hellen Bildern umgekehrt)</original>
+<translation/>
+</string>
+<string><original>(Leer lassen, wenn alle Bilder im ausgew&amp;auml;hlten Verzeichnis ausgegeben werden sollen)</original>
+<translation/>
+</string>
+<string><original>Maximale H&amp;ouml;he der Bilder:</original>
+<translation/>
+</string>
+<string><original>JavaScript Einstellungen f&amp;uuml;r jQuery Nova Slide Plugin</original>
+<translation/>
+</string>
+<string><original>M&amp;ouml;gliche Werte</original>
+<translation/>
+</string>
+<string><original>F&amp;uuml;r Slice Animationen</original>
+<translation/>
+</string>
+<string><original>F&amp;uuml;r Box Animationen</original>
+<translation/>
+</string>
+<string><original>(F&amp;uuml;r den &amp;Uuml;berblendeffekt)</original>
+<translation/>
+</string>
+<string><original>Navigation aktivieren (vor und zur&amp;uuml;ck)</original>
+<translation/>
+</string>
+<string><original>Text f&amp;uuml;r vorheriges Element</original>
+<translation/>
+</string>
+<string><original>Text f&amp;uuml;r n&amp;auml;chstes Element</original>
+<translation/>
+</string>
+<string><original>Steuerung &amp;uuml;ber 1,2,3...</original>
+<translation/>
+</string>
+<string><original>Thumbnailh&amp;ouml;he in Pixel</original>
+<translation/>
+</string>
+<string><original>Aktiviere Navigation &amp;uuml;ber Pfeiltasten (links/rechts)</original>
+<translation/>
+</string>
+<string><original>Manuelle &amp;Uuml;berblendeffekte erzwingen</original>
+<translation/>
+</string>
+<string><original>JavaScript Code f&amp;uuml;r Nivo Slider Events</original>
+<translation/>
+</string>
+<string><original>Wird vor dem Slide ausgel&amp;ouml;st</original>
+<translation/>
+</string>
+<string><original>Wird nach dem Slide ausgel&amp;ouml;st</original>
+<translation/>
+</string>
+<string><original>Wird ausgel&amp;ouml;st nachdem alle Slides gezeigt wurden</original>
+<translation/>
+</string>
+<string><original>Wird ausgel&amp;ouml;st der letzte Slide angezeigt wird</original>
+<translation/>
+</string>
+<string><original>Wird ausgel&amp;ouml;st Nova Slider geladen wurde</original>
+<translation/>
+</string>
+<string><original>Millisekunden</original>
+<translation/>
+</string>
+<string><original>(Sind Werte f&amp;uuml;r maximale Breite und/oder H&amp;ouml;he angegeben,&lt;br /&gt;werden gro&amp;szlig;e Bilder herunter gerechnet.)</original>
+<translation/>
+</string>
+<string><original>(Gilt nur f&amp;uuml;r zu gro&amp;szlig;e Bilder, die herunter gerechnet wurden. F&amp;uuml;r unbegrenzte Dauer leer lassen.)</original>
+<translation/>
+</string>
+<string><original>Verwende Thumbnails f&amp;uuml;r die erweiterte Navigation</original>
+<translation/>
+</string>
+<string><original>Transparenz f&amp;uuml;r Bildunterschriften</original>
+<translation/>
+</string>
+</translation>
+</module>

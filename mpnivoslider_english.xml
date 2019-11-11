@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<module><translation origin-language-id="2" origin-language-name="english"><string><original>Dateiname aufsteigend</original>
+<translation>Filename ascending</translation>
+</string>
+<string><original>Dateiname absteigend</original>
+<translation>Filename descending</translation>
+</string>
+<string><original>Dateityp aufsteigend</original>
+<translation>File type ascending</translation>
+</string>
+<string><original>Dateityp absteigend</original>
+<translation>File type descending</translation>
+</string>
+<string><original>Erstellungsdatum aufsteigend</original>
+<translation>Creation date ascending</translation>
+</string>
+<string><original>Erstellungsdatum absteigend</original>
+<translation>Creation date descending</translation>
+</string>
+<string><original>Id aufsteigend</original>
+<translation>Id ascending</translation>
+</string>
+<string><original>Id absteigend</original>
+<translation>Id descending</translation>
+</string>
+<string><original>vor</original>
+<translation>next</translation>
+</string>
+<string><original>Vorhandene Unterordner auch verwenden</original>
+<translation>Select also existing sub directories</translation>
+</string>
+<string><original>(Alle Bilder auch in vorhandenen Unterordnen verwenden)</original>
+<translation>(Use also all images in existing sub directories)</translation>
+</string>
+<string><original>Maximale Anzahl der Bilder:</original>
+<translation>Max number of images:</translation>
+</string>
+<string><original>Maximale Breite der Bilder:</original>
+<translation>Max width of the images:</translation>
+</string>
+<string><original>Pixel</original>
+<translation>pixel</translation>
+</string>
+<string><original>Maximale Cachedauer der Bilder:</original>
+<translation>Max cache duration for the images: </translation>
+</string>
+<string><original>Minuten</original>
+<translation>minutes</translation>
+</string>
+<string><original>Sortierung der Bilder im Nivo Slider:</original>
+<translation>Order of Nivo Slider images:</translation>
+</string>
+<string><original>Effekt</original>
+<translation>Effect</translation>
+</string>
+<string><original>(Standardwert: 'random', Sets: 'fold,fade,sliceDown')</original>
+<translation>(Default value: 'random', Sets: 'fold,fade,sliceDown')</translation>
+</string>
+<string><original>Anzahl der Slices</original>
+<translation>Number of slices</translation>
+</string>
+<string><original>Anzahl der Spalten</original>
+<translation>Number of columns</translation>
+</string>
+<string><original>Anzahl der Reihen</original>
+<translation>Number of rows</translation>
+</string>
+<string><original>Geschwindigkeit der Animation</original>
+<translation>Speed of the animations</translation>
+</string>
+<string><original>Zeit zwischen zwei Slides</original>
+<translation>Time between slides</translation>
+</string>
+<string><original>Startposition</original>
+<translation>Start position</translation>
+</string>
+<string><original>0 (index)</original>
+<translation>0 (index)</translation>
+</string>
+<string><original>(Beginn mit der Slideposition)</original>
+<translation>(Start of slide position)</translation>
+</string>
+<string><original>Navigation</original>
+<translation>Navigation</translation>
+</string>
+<string><original>Nur bei mouseover anzeigen</original>
+<translation>Show only at mouseover</translation>
+</string>
+<string><original>Erweiterte Navigation</original>
+<translation>Extended navigation (Control Nav)</translation>
+</string>
+<string><original>Thumbnailbreite in Pixel</original>
+<translation>Thumbnail width in pixel</translation>
+</string>
+<string><original>Tastaturnavigation</original>
+<translation>Keyboard navigation</translation>
+</string>
+<string><original>Anhalten bei mouseover</original>
+<translation>Stop at mouseover</translation>
+</string>
+<string><original>Animationen bei mouseover anhalten</original>
+<translation>Stop animation while hovering</translation>
+</string>
+<string><original>Manuelle Slides</original>
+<translation>Manual transitions</translation>
+</string>
+<string><original>CSS Opacity-Wert zwischen 0.1 - 1.0</original>
+<translation>CSS opacity value between 0.1 and 1.0</translation>
+</string>
+<string><original>on beforeChange</original>
+<translation>on beforeChange</translation>
+</string>
+<string><original>on afterChange</original>
+<translation>on afterChange</translation>
+</string>
+<string><original>on slideshowEnd</original>
+<translation>on slideshowEnd</translation>
+</string>
+<string><original>on lastSlide</original>
+<translation>on lastSlide</translation>
+</string>
+<string><original>on afterLoad</original>
+<translation>on afterLoad</translation>
+</string>
+<string><original>Zuf&amp;auml;llig</original>
+<translation>Random</translation>
+</string>
+<string><original>Dateigr&amp;ouml;&amp;szlig;e aufsteigend</original>
+<translation>Filesize ascending</translation>
+</string>
+<string><original>Dateigr&amp;ouml;&amp;szlig;e absteigend</original>
+<translation>Filesize descending</translation>
+</string>
+<string><original>-- Ordner ausw&amp;auml;hlen --</original>
+<translation>-- Select folder --</translation>
+</string>
+<string><original>-- Sortierung ausw&amp;auml;hlen --</original>
+<translation>-- Select order --</translation>
+</string>
+<string><original>zur&amp;uuml;ck</original>
+<translation>previous</translation>
+</string>
+<string><original>Bilderordner f&amp;uuml;r Nivo Slider w&amp;auml;hlen:</original>
+<translation>Select images directory for Nivo Slider</translation>
+</string>
+<string><original>(Der ausgew&amp;auml;hlte Ordner sollte nur Bilder enthalten)</original>
+<translation>(Selected directory should contain only images)</translation>
+</string>
+<string><original>Helligkeit der Bilder:</original>
+<translation>Brightness of the images</translation>
+</string>
+<string><original>Die Bilder sind in der Regel dunkel</original>
+<translation>The images are in generally dark</translation>
+</string>
+<string><original>(Bei dunklen Bildern werden helle Navigationspfeile und Bildunterschriften mit hellem Hintergrund ausgegeben, bei hellen Bildern umgekehrt)</original>
+<translation>(Output of bright navigation buttons and caption bars with bright background for dark images, vice versa for bright images)</translation>
+</string>
+<string><original>(Leer lassen, wenn alle Bilder im ausgew&amp;auml;hlten Verzeichnis ausgegeben werden sollen)</original>
+<translation>(Leave this empty to use all images within selected directory)</translation>
+</string>
+<string><original>Maximale H&amp;ouml;he der Bilder:</original>
+<translation>Max height of the images:</translation>
+</string>
+<string><original>JavaScript Einstellungen f&amp;uuml;r jQuery Nova Slide Plugin</original>
+<translation>JavaScript settings for jQuery Nova Slide plug in</translation>
+</string>
+<string><original>M&amp;ouml;gliche Werte</original>
+<translation>Feasible values</translation>
+</string>
+<string><original>F&amp;uuml;r Slice Animationen</original>
+<translation>For slice animations</translation>
+</string>
+<string><original>F&amp;uuml;r Box Animationen</original>
+<translation>For box animations</translation>
+</string>
+<string><original>(F&amp;uuml;r den &amp;Uuml;berblendeffekt)</original>
+<translation>(For the transition)</translation>
+</string>
+<string><original>Navigation aktivieren (vor und zur&amp;uuml;ck)</original>
+<translation>Enable navigation (previous and next)</translation>
+</string>
+<string><original>Text f&amp;uuml;r vorheriges Element</original>
+<translation>Text for previous element</translation>
+</string>
+<string><original>Text f&amp;uuml;r n&amp;auml;chstes Element</original>
+<translation>Text for next element</translation>
+</string>
+<string><original>Steuerung &amp;uuml;ber 1,2,3...</original>
+<translation/>
+</string>
+<string><original>Thumbnailh&amp;ouml;he in Pixel</original>
+<translation>Thumbnail height in pixel</translation>
+</string>
+<string><original>Aktiviere Navigation &amp;uuml;ber Pfeiltasten (links/rechts)</original>
+<translation>Enable via left &amp;amp; right arrows</translation>
+</string>
+<string><original>Manuelle &amp;Uuml;berblendeffekte erzwingen</original>
+<translation>Force manual transitions</translation>
+</string>
+<string><original>JavaScript Code f&amp;uuml;r Nivo Slider Events</original>
+<translation>JavaScript code for Nivo Slider events</translation>
+</string>
+<string><original>Wird vor dem Slide ausgel&amp;ouml;st</original>
+<translation>Triggers before a slide transition</translation>
+</string>
+<string><original>Wird nach dem Slide ausgel&amp;ouml;st</original>
+<translation>Triggers after a slide transition</translation>
+</string>
+<string><original>Wird ausgel&amp;ouml;st nachdem alle Slides gezeigt wurden</original>
+<translation>Triggers after all slides have been shown</translation>
+</string>
+<string><original>Wird ausgel&amp;ouml;st der letzte Slide angezeigt wird</original>
+<translation>Triggers when last slide is shown</translation>
+</string>
+<string><original>Wird ausgel&amp;ouml;st Nova Slider geladen wurde</original>
+<translation>Triggers when slider has loaded</translation>
+</string>
+<string><original>Millisekunden</original>
+<translation>milliseconds</translation>
+</string>
+<string><original>(Sind Werte f&amp;uuml;r maximale Breite und/oder H&amp;ouml;he angegeben,&lt;br /&gt;werden gro&amp;szlig;e Bilder herunter gerechnet.)</original>
+<translation>(Bigger images will be downscaled,
+if any values for max width and height are defined)</translation>
+</string>
+<string><original>Verwende Thumbnails f&amp;uuml;r die erweiterte Navigation</original>
+<translation>Use thumbnails for Control Nav</translation>
+</string>
+<string><original>Transparenz f&amp;uuml;r Bildunterschriften</original>
+<translation>Opacity for image captions</translation>
+</string>
+<string><original>(Gilt nur f&amp;uuml;r zu gro&amp;szlig;e Bilder, die herunter gerechnet wurden. F&amp;uuml;r unbegrenzte Dauer leer lassen.)</original>
+<translation>(Is valid for images being downscaled. Leave it empty for unlimited caching.)</translation>
+</string>
+</translation>
+</module>

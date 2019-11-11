@@ -1,0 +1,17 @@
+
+<div class="modMpNivoSlider{MODULE.CLASSNAME}" style="{MODULE.STYLE}">
+    <div class="slider-wrapper theme-default">
+        <div class="ribbon"></div>
+        <div id="mpNivoSlider" class="nivoSlider">
+            <!-- BEGIN:BLOCK -->
+            <img src="{IMG.SRC}" alt="{IMG.ALT}" title="{IMG.TITLE}"{IMG.ATTRIBUTES} /><!-- END:BLOCK -->
+        </div>
+        {CAPTIONS}
+    </div>
+
+    <script type="text/javascript">
+    jQuery(window).load(function() {
+        jQuery('#mpNivoSlider').nivoSlider({NIVO.OPTIONS});
+    });
+    </script>
+</div>
