@@ -156,12 +156,40 @@ CHANGELOG
 2013-11-15 mpNivoSlider Modul 0.3.0 (für CONTENIDO 4.9.x)
     * Erste Veröffentlichung des mpNivoSlider Moduls für CONTENIDO 4.9.x
 
+2013-03-23 mpNivoSlider Modul 0.3.0 (für CONTENIDO 4.8.x)
+    * new: Update auf Nivo Slider v3.2
+    * new: Responsive Modus integriert
+    * bugfix: Kleine Bilder nicht hochskalieren
+
+2013-03-23 mpNivoSlider Modul 0.2.1 (für CONTENIDO 4.8.x)
+    * bugfix: Fehler bei der Ausgabe der Sortierung korrigiert
+
+2012-09-07 mpNivoSlider Modul 0.2 (für CONTENIDO 4.8.x)
+    * new: Update auf Nivo Slider v3.1
+    * new: Konfiguration für die Qualität von generierten JPEG-Bildern
+    * new: json_decode() implementation in PHP falls json_decode nicht verfügbar ist
+    * change: jQuery Nivo Slider Plugins im separaten Scope um Probleme mit anderen
+	  JS-Frameworks zu vermeiden
+    * change: Entfernen diverser Nivo Slider Optionen,
+	  siehe http://nivo.dev7studios.com/2012/05/30/the-nivo-slider-is-responsive/
+
+2011-11-22 mpNivoSlider Modul 0.13rc (für CONTENIDO 4.8.x)
+    * new: Erweitert auf mehrfachen Einsatz innerhalb einer Seite
+    * bugfix: Sprachabhängige Bildbeschreibung auslesen
+    * bugfix: Englische Modulübersetzung korrigiert
+
+2011-09-28 mpNivoSlider Modul 0.1rc (für CONTENIDO 4.8.x)
+    * Erste Veröffentlichung des mpNivoSlider Moduls
+
 
 ################################################################################
 MPNIVOSLIDER MODUL THEMEN IM CONTENIDO FORUM
 
 mpNivoSlider: Nivo Slider Image-Gallery Modul für CONTENIDO 4.9.x:
 http://forum.contenido.org/viewtopic.php?f=89&t=34705
+
+mpNivoSlider: Nivo Slider Image-Gallery Modul für CONTENIDO 4.8:
+http://forum.contenido.org/viewtopic.php?f=60&t=31601
 
 
 ################################################################################
