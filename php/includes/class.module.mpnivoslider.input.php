@@ -6,9 +6,6 @@
  * Description:
  * CONTENIDO module input class for mpNivoSlider
  *
- * Requirements:
- * @con_php_req 5.0
- *
  * @package     CONTENIDO_Modules
  * @subpackage  mpNivoSlider
  * @author      Murat Purc <murat@purc.de>
@@ -22,7 +19,7 @@ if (!defined('CON_FRAMEWORK')) {
     die('Illegal call');
 }
 
-cInclude('frontend', 'includes/class.module.mpnivoslider.php');
+include_once('class.module.mpnivoslider.php');
 
 
 /**
@@ -38,7 +35,7 @@ class ModuleMpNivoSliderInput extends ModuleMpNivoSliderAbstract
      */
     public function generateDirSelectOptions()
     {
-        $oUploadColl = new UploadCollection();
+        $oUploadColl = new cApiUploadCollection();
         $oUploadColl->flexSelect('dirname', '', 'idclient=' . $this->_client, 'dirname');
 
         $opt = '<option value="">' . $this->_i18n['__select_folder__'] . '</option>' . "\n";

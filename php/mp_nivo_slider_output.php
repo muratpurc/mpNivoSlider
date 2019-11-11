@@ -13,10 +13,8 @@
  * @version     $Id: mpNivoSlider_output.php 34 2013-11-14 19:53:12Z murat $
  */
 
-cInclude('frontend', 'includes/functions.mpnivoslider.php');
-cInclude('frontend', 'includes/class.module.mpnivoslider.output.php');
-cInclude('classes', 'class.upload.php');
-cInclude('frontend', 'includes/class.uploadmeta.php');
+cInclude('module', 'includes/functions.mpnivoslider.php');
+cInclude('module', 'includes/class.module.mpnivoslider.output.php');
 cInclude('includes', 'functions.api.images.php');
 
 // module configuration
@@ -57,23 +55,7 @@ $aModuleConfiguration = array(
 );
 
 // module translation
-$aModuleTranslations = array(
-    'random' => mi18n("Zuf&auml;llig"),
-    'filename_asc' => mi18n("Dateiname aufsteigend"),
-    'filename_desc' => mi18n("Dateiname absteigend"),
-    'size_asc' => mi18n("Dateigr&ouml;&szlig;e aufsteigend"),
-    'size_desc' => mi18n("Dateigr&ouml;&szlig;e absteigend"),
-    'filetype_asc' => mi18n("Dateityp aufsteigend"),
-    'filetype_desc' => mi18n("Dateityp absteigend"),
-    'created_asc' => mi18n("Erstellungsdatum aufsteigend"),
-    'created_esc' => mi18n("Erstellungsdatum absteigend"),
-    'id_asc' => mi18n("Id aufsteigend"),
-    'id_desc' => mi18n("Id absteigend"),
-    '__select_folder__' => mi18n("-- Ordner ausw&auml;hlen --"),
-    '__select_order__' => mi18n("-- Sortierung ausw&auml;hlen --"),
-    'previous' => mi18n("zur&uuml;ck"),
-    'next' => mi18n("vor"),
-);
+$aModuleTranslations = module_mpNivoSlider_getModuleTranslations();
 
 // create mpNivoSlider module instance
 $oModule = new ModuleMpNivoSliderOutput($aModuleConfiguration, $aModuleTranslations, $client, $cfgClient[$client], $lang);

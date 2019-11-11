@@ -6,9 +6,6 @@
  * Description:
  * CONTENIDO module output class for mpNivoSlider
  *
- * Requirements:
- * @con_php_req 5.0
- *
  * @package     CONTENIDO_Modules
  * @subpackage  mpNivoSlider
  * @author      Murat Purc <murat@purc.de>
@@ -22,7 +19,7 @@ if (!defined('CON_FRAMEWORK')) {
     die('Illegal call');
 }
 
-cInclude('frontend', 'includes/class.module.mpnivoslider.php');
+include_once('class.module.mpnivoslider.php');
 
 
 /**
@@ -206,7 +203,7 @@ class ModuleMpNivoSliderOutput extends ModuleMpNivoSliderAbstract
             return;
         }
 
-        $oTemplate = new Template();
+        $oTemplate = new cTemplate();
 
         // get images
         $aImages = $this->_getImages();
@@ -240,7 +237,7 @@ class ModuleMpNivoSliderOutput extends ModuleMpNivoSliderAbstract
         // create captions markup
         $captions = '';
         if (!empty($aCaptions)) {
-            $oCaptionsTpl = new Template();
+            $oCaptionsTpl = new cTemplate();
             foreach ($aCaptions as $id => $text) {
                 $oCaptionsTpl->set('d', 'ID', $id);
                 $oCaptionsTpl->set('d', 'TEXT', $text);
@@ -358,7 +355,7 @@ class ModuleMpNivoSliderOutput extends ModuleMpNivoSliderAbstract
 
         $oTemplate->set('s', 'MODULE.UID', $this->getUid());
 
-        $oTemplate->generate('templates/mpNivoSlider.html', 0, 0);
+        $oTemplate->generate('mpNivoSlider.html', 0, 0);
     }
 
     /**
@@ -395,7 +392,7 @@ class ModuleMpNivoSliderOutput extends ModuleMpNivoSliderAbstract
         }
 
         // run the statement
-        $oUploadColl = new UploadCollection();
+        $oUploadColl = new cApiUploadCollection();
         $oUploadColl->select($sWhere, '', $sOrder, $sLimit);
 
         $aImages = array();
@@ -426,7 +423,7 @@ class ModuleMpNivoSliderOutput extends ModuleMpNivoSliderAbstract
         if (count($aImages) > 0) {
             // now get description by language
             $sWhere = 'idlang=' . $this->_lang . ' AND idupl IN(' . implode(', ', array_keys($aImages)) . ')';
-            $oUploadMetaColl = new UploadMetaCollection();
+            $oUploadMetaColl = new cApiUploadMetaCollection();
             $oUploadMetaColl->select($sWhere, '', '');
 
             // iterate upload meta collection 2 store description in images array

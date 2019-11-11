@@ -1,0 +1,107 @@
+RANDOM=Random
+FILENAME_ASC=Filename ascending
+FILENAME_DESC=Filename descending
+SIZE_ASC=Filesize ascending
+SIZE_DESC=Filesize descending
+FILETYPE_ASC=File type ascending
+FILETYPE_DESC=File type descending
+CREATED_ASC=Creation date ascending
+CREATED_ESC=Creation date descending
+ID_ASC=Id ascending
+ID_DESC=Id descending
+__SELECT_FOLDER__=-- Select folder --
+__SELECT_ORDER__=-- Select order --
+PREVIOUS=previous
+NEXT=next
+
+PIXEL=pixel
+MINUTES=minutes
+MILLISECONDS=milliseconds
+
+MSG_SELECT_IMAGE_FOLDER=Select images directory for Nivo Slider:
+INFO_SELECT_IMAGE_FOLDER=(Selected directory should contain only images)
+
+MSG_USE_SUBDIRS=Select also existing sub directories
+INFO_USE_SUBDIRS=(Use also all images in existing sub directories)
+
+MSG_IMAGES_BRIGHTNESS=Brightness of the images:
+LBL_IMAGES_BRIGHTNESS=The images are in generally dark
+INFO_IMAGES_BRIGHTNESS=(Output of bright navigation buttons and caption bars with bright background for dark images, vice versa for bright images)
+
+MSG_MAX_NUM_IMAGES=Max number of images:
+INFO_MAX_NUM_IMAGES=(Leave this empty to use all images within selected directory)
+
+MSG_MAX_WIDTH_IMAGES=Max width of the images:
+
+MSG_MAX_HEIGHT_IMAGES=Max height of the images:
+INFO_MAX_HEIGHT_IMAGES=(Bigger images will be downscaled, if any values for max width and height are defined)
+
+MSG_QUALITY_IMAGES=Quality of the images:
+INFO_QUALITY_IMAGES=(Quality for resized JPEG-images.)
+
+MSG_CACHETIME_IMAGES=Max cache duration for the images:
+INFO_CACHETIME_IMAGES=(Is valid for images being downscaled. Leave it empty for unlimited caching.)
+
+MSG_SORT_TYPE=Order of Nivo Slider images:
+
+MSG_RESPONSIVE_MODE=Responsive mode:
+LBL_RESPONSIVE_MODE=Enable responsive mode
+INFO_RESPONSIVE_MODE=(Images won't get the width and height attribute, the same for the module container)
+
+MSG_NIVO_SLIDER_SETTINGS=JavaScript settings for jQuery Nivo Slider plug-in
+
+MSG_EFFECT=Effect
+INFO_EFFECT=(Default value: 'random', Sets: 'fold,fade,sliceDown')
+INFO2_EFFECT=Feasible values
+
+MSG_NUM_SLIDES=Number of slices
+INFO_NUM_SLIDES=For slice animations
+
+MSG_NUM_COLS=Number of columns
+INFO_NUM_COLS=For box animations
+
+MSG_NUM_ROWS=Number of rows
+INFO_NUM_ROWS=(For the transition)
+
+MSG_ANIM_SPEED=Speed of the animations
+INFO_ANIM_SPEED=
+
+MSG_TIME_BETWEEN_SLIDES=Time between slides
+
+MSG_STARTPOS=Start position
+MSG2_STARTPOS=0 (index)
+INFO_STARTPOS=(Start of slide position)
+
+MSG_NAVIGATION=Navigation
+LBL_ENABLE_NAVIGATION=Enable navigation (previous and next)
+LBL_TEXT_PREVIOUS=Text for previous element
+LBL_TEXT_NEXT=Text for next element
+
+MSG_EXTENDED_NAVIGATION=Extended navigation (Control Nav)
+LBL_ENABLE_EXTENDED_NAVIGATION=Enable extended Navigation (Control via graphical Listitems)
+LBL_USE_THUMBNAILS=Use thumbnails for Control Nav
+LBL_THUMBNAIL_WIDTH=Thumbnail height in pixel
+LBL_THUMBNAIL_HEIGHT=Thumbnailh&ouml;he in Pixel
+
+MSG_STOP_ON_MOUSEOVER=Stop at mouseover
+LBL_STOP_ON_MOUSEOVER=Stop animation while hovering
+
+MSG_MANUAL_SLIDES=Manual transitions
+LBL_MANUAL_SLIDES=Force manual transitions
+
+MSG_NIVO_SLIDER_JS_EVENTS=JavaScript code for Nivo Slider events
+
+MSG_ON_BEFORECHANGE=on beforeChange
+INFO_ON_BEFORECHANGE=Triggers before a slide transition
+
+MSG_ON_AFTERCHANGE=on afterChange
+INFO_ON_AFTERCHANGE=Triggers after a slide transition
+
+MSG_ON_SLIDESHOWEND=on slideshowEnd
+INFO_ON_SLIDESHOWEND=Triggers after all slides have been shown
+
+MSG_ON_LASTSLIDE=on lastSlide
+INFO_ON_LASTSLIDE=Triggers after all slides have been shown
+
+MSG_ON_AFTERLOAD=on afterLoad
+INFO_ON_AFTERLOAD=Triggers when slider has loaded

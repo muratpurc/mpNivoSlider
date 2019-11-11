@@ -6,9 +6,6 @@
  * Description:
  * CONTENIDO abstract module class for mpNivoSlider
  *
- * Requirements:
- * @con_php_req 5.0
- *
  * @package     CONTENIDO_Modules
  * @subpackage  mpNivoSlider
  * @author      Murat Purc <murat@purc.de>
