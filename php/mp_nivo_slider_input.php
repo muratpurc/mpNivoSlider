@@ -41,8 +41,8 @@ $aModuleConfiguration = array(
     'directionNav' => "CMS_VALUE[15]",
     'controlNav' => "CMS_VALUE[17]",
     'controlNavThumbs' => "CMS_VALUE[18]",
-    'controlNavThumbsWidthX' => "CMS_VALUE[20]",  // speacial treatment
-    'controlNavThumbsHeightX' => "CMS_VALUE[21]", // speacial treatment
+    'controlNavThumbsWidthX' => "CMS_VALUE[20]",  // special treatment
+    'controlNavThumbsHeightX' => "CMS_VALUE[21]", // special treatment
     'pauseOnHover' => "CMS_VALUE[23]",
     'manualAdvance' => "CMS_VALUE[24]",
     'prevText' => "CMS_VALUE[26]",
@@ -59,7 +59,10 @@ $aModuleConfiguration = array(
 $aModuleTranslations = module_mpNivoSlider_getModuleTranslations();
 
 // create mpNivoSlider module instance
-$oModule = new ModuleMpNivoSliderInput($aModuleConfiguration, $aModuleTranslations, $client);
+$client = cRegistry::getClientId();
+$oModule = new ModuleMpNivoSliderOutput(
+    $aModuleConfiguration, $aModuleTranslations, $client, cRegistry::getClientConfig($client), cRegistry::getLanguageId()
+);
 
 ?>
 
@@ -262,7 +265,7 @@ $oModule = new ModuleMpNivoSliderInput($aModuleConfiguration, $aModuleTranslatio
 <tr>
     <td valign="top" class="text_medium"><?php echo mi18n("MSG_ON_BEFORECHANGE") ?>:</td>
     <td class="text_medium">
-        <?php echo '<textarea name="CMS_VAR[28]" cols="80" rows="2" style="width:350;font-family:monospace;">' . $oModule->beforeChange . '</textarea>'; ?>
+        <?php echo '<textarea name="CMS_VAR[28]" cols="80" rows="2" style="width:350px;font-family:monospace;">' . $oModule->beforeChange . '</textarea>'; ?>
         <?php echo mi18n("INFO_ON_BEFORECHANGE") ?>
         <br />
     </td>
@@ -270,7 +273,7 @@ $oModule = new ModuleMpNivoSliderInput($aModuleConfiguration, $aModuleTranslatio
 <tr>
     <td valign="top" class="text_medium"><?php echo mi18n("MSG_ON_AFTERCHANGE") ?>:</td>
     <td class="text_medium">
-        <?php echo '<textarea name="CMS_VAR[29]" cols="80" rows="2" style="width:350;font-family:monospace;">' . $oModule->afterChange . '</textarea>'; ?>
+        <?php echo '<textarea name="CMS_VAR[29]" cols="80" rows="2" style="width:350px;font-family:monospace;">' . $oModule->afterChange . '</textarea>'; ?>
         <?php echo mi18n("INFO_ON_AFTERCHANGE") ?>
         <br />
     </td>
@@ -278,7 +281,7 @@ $oModule = new ModuleMpNivoSliderInput($aModuleConfiguration, $aModuleTranslatio
 <tr>
     <td valign="top" class="text_medium"><?php echo mi18n("MSG_ON_SLIDESHOWEND") ?>:</td>
     <td class="text_medium">
-        <?php echo '<textarea name="CMS_VAR[30]" cols="80" rows="2" style="width:350;font-family:monospace;">' . $oModule->slideshowEnd . '</textarea>'; ?>
+        <?php echo '<textarea name="CMS_VAR[30]" cols="80" rows="2" style="width:350px;font-family:monospace;">' . $oModule->slideshowEnd . '</textarea>'; ?>
         <?php echo mi18n("INFO_ON_SLIDESHOWEND") ?>
         <br />
     </td>
@@ -286,7 +289,7 @@ $oModule = new ModuleMpNivoSliderInput($aModuleConfiguration, $aModuleTranslatio
 <tr>
     <td valign="top" class="text_medium"><?php echo mi18n("MSG_ON_LASTSLIDE") ?>:</td>
     <td class="text_medium">
-        <?php echo '<textarea name="CMS_VAR[31]" cols="80" rows="2" style="width:350;font-family:monospace;">' . $oModule->lastSlide . '</textarea>'; ?>
+        <?php echo '<textarea name="CMS_VAR[31]" cols="80" rows="2" style="width:350px;font-family:monospace;">' . $oModule->lastSlide . '</textarea>'; ?>
         <?php echo mi18n("INFO_ON_LASTSLIDE") ?>
         <br />
     </td>
@@ -294,7 +297,7 @@ $oModule = new ModuleMpNivoSliderInput($aModuleConfiguration, $aModuleTranslatio
 <tr>
     <td valign="top" class="text_medium"><?php echo mi18n("MSG_ON_AFTERLOAD") ?>:</td>
     <td class="text_medium">
-        <?php echo '<textarea name="CMS_VAR[32]" cols="80" rows="2" style="width:350;font-family:monospace;">' . $oModule->afterLoad . '</textarea>'; ?>
+        <?php echo '<textarea name="CMS_VAR[32]" cols="80" rows="2" style="width:350px;font-family:monospace;">' . $oModule->afterLoad . '</textarea>'; ?>
         <?php echo mi18n("INFO_ON_AFTERLOAD") ?>
         <br />
     </td>

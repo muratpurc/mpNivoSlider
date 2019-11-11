@@ -41,8 +41,8 @@ $aModuleConfiguration = array(
     'directionNav' => "CMS_VALUE[15]",
     'controlNav' => "CMS_VALUE[17]",
     'controlNavThumbs' => "CMS_VALUE[18]",
-    'controlNavThumbsWidthX' => "CMS_VALUE[20]",  // speacial treatment
-    'controlNavThumbsHeightX' => "CMS_VALUE[21]", // speacial treatment
+    'controlNavThumbsWidthX' => "CMS_VALUE[20]",  // special treatment
+    'controlNavThumbsHeightX' => "CMS_VALUE[21]", // special treatment
     'pauseOnHover' => "CMS_VALUE[23]",
     'manualAdvance' => "CMS_VALUE[24]",
     'prevText' => "CMS_VALUE[26]",
@@ -58,7 +58,10 @@ $aModuleConfiguration = array(
 $aModuleTranslations = module_mpNivoSlider_getModuleTranslations();
 
 // create mpNivoSlider module instance
-$oModule = new ModuleMpNivoSliderOutput($aModuleConfiguration, $aModuleTranslations, $client, $cfgClient[$client], $lang);
+$client = cRegistry::getClientId();
+$oModule = new ModuleMpNivoSliderOutput(
+    $aModuleConfiguration, $aModuleTranslations, $client, cRegistry::getClientConfig($client), cRegistry::getLanguageId()
+);
 
 // generate the slider
 $oModule->generateOutput();
