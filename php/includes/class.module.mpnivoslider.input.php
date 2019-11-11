@@ -8,10 +8,9 @@
  *
  * @package     CONTENIDO_Modules
  * @subpackage  mpNivoSlider
- * @author      Murat Purc <murat@purc.de>
- * @copyright   Copyright (c) 2011-2013 Murat Purc (http://www.purc.de)
+ * @author      Murat Purç <murat@purc.de>
+ * @copyright   Copyright (c) 2011-2019 Murat Purç (http://www.purc.de)
  * @license     http://www.gnu.org/licenses/gpl-2.0.html - GNU General Public License, version 2
- * @version     $Id: class.module.mpnivoslider.input.php 34 2013-11-14 19:53:12Z murat $
  */
 
 

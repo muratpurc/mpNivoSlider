@@ -16,8 +16,8 @@ BESCHREIBUNG
 
 Nivo Slider:
 ------------
-Nivo Slider (v3.2) ist ein Image-Slider basierend auf jQuery, mit vielen Features 
-wie Effekte, Tastatursteuerung, Verlinkung von Bildern, Themes, diverse Einstellungen, 
+Nivo Slider (v3.2) ist ein Image-Slider basierend auf jQuery, mit vielen Features
+wie Effekte, Tastatursteuerung, Verlinkung von Bildern, Themes, diverse Einstellungen,
 usw.
 
 Benötigt jQuery v1.7+ und unterstützt folgende Browser:
@@ -29,8 +29,8 @@ http://nivo.dev7studios.com/
 
 CONTENIDO Modul:
 ----------------
-Das Modul bietet diverse Einstellungsmöglichkeiten zur Steuerung des Nivo Sliders. 
-Unterstützt die Bildformate jpg, jpeg, png, und gif. Die Skalierung der Bilder 
+Das Modul bietet diverse Einstellungsmöglichkeiten zur Steuerung des Nivo Sliders.
+Unterstützt die Bildformate jpg, jpeg, png, und gif. Die Skalierung der Bilder
 ist von der installierten GD-Library oder ImageMagick abhängig.
 
 Konfigurationsmöglichkeiten des Moduls:
@@ -43,12 +43,12 @@ Konfigurationsmöglichkeiten des Moduls:
 ################################################################################
 INSTALLATION
 
-Die im Modulpackage enthaltenen Dateien/Sourcen sind wie im Folgenden beschrieben 
+Die im Modulpackage enthaltenen Dateien/Sourcen sind wie im Folgenden beschrieben
 zu installieren.
-Die Pfade zu den Sourcen (CSS, JS und Templates) können von Projekt zu Projekt 
-unterschiedlich sein und sind bei Bedarf anzupassen. 
-Bei der Installationsbeschreibung wird davon ausgegangen, dass CONTENIDO in das 
-DocumentRoot-Verzeichnis eines Webservers installiert wurde und das 
+Die Pfade zu den Sourcen (CSS, JS und Templates) können von Projekt zu Projekt
+unterschiedlich sein und sind bei Bedarf anzupassen.
+Bei der Installationsbeschreibung wird davon ausgegangen, dass CONTENIDO in das
+DocumentRoot-Verzeichnis eines Webservers installiert wurde und das
 Mandantenverzeichnis "cms/" ist.
 
 1.) Modul
@@ -58,7 +58,7 @@ Mandanten "cms/data/modules" kopieren.
 
 2.) Einbinden der JS- und CSS-Dateien:
 --------------------------------------
-Die JavaScript- und CSS-Dateien des Moduls sind im head-Bereich des Layouts 
+Die JavaScript- und CSS-Dateien des Moduls sind im head-Bereich des Layouts
 einzubinden:
 
 Beispiel:
@@ -89,9 +89,9 @@ TIPPS & TRICKS
 
 Bildergrößen:
 -------------
-Die Proportionen der Bilder, das Verhältnis zwischen Breite und Höhe der Bilder, 
+Die Proportionen der Bilder, das Verhältnis zwischen Breite und Höhe der Bilder,
 im gewählten Bilderordner sollten alle gleich sein. Das Modul rechnet zwar Bilder
-auf die Angegebenen Bildmaße herunter, aber eine Mischung aus verschiedenen 
+auf die Angegebenen Bildmaße herunter, aber eine Mischung aus verschiedenen
 Proportionen (4:3 und 16:9) erzeugt Bilder, die nicht alle die vorhandene Breite
 und Höhe der Slides füllt.
 
@@ -103,14 +103,14 @@ Zeile passen, werden die Thumbnails in mehreren Zeilen dargestellt.
 Themes:
 -------
 Als Standard wird das Theme "contenido" verwendet. Es stehen auch weitere Themes
-("bar", "dark", "default" und "light", siehe 
+("bar", "dark", "default" und "light", siehe
 cms/data/modules/mp_nivo_slider/vendor/nivo-slider/themes/) zur Verfügung.
 Zum Konfigurieren eines anderen Themes, z. B. bar, folgendes befolgen:
 Im head-Bereich die Zeile
 [code]
     <link rel="stylesheet" href="data/modules/mp_nivo_slider/vendor/nivo-slider/themes/contenido/contenido.css" type="text/css" media="screen" />
 [/code]
-gegen 
+gegen
 [code]
     <link rel="stylesheet" href="data/modules/mp_nivo_slider/vendor/nivo-slider/themes/bar/bar.css" type="text/css" media="screen" />
 [/code]
@@ -120,7 +120,7 @@ Im Modultemplate (cms/data/modules/mp_nivo_slider/template/mpNivoSlider.html) di
 [code]
     <div class="slider-wrapper theme-contenido">
 [/code]
-gegen 
+gegen
 [code]
     <div class="slider-wrapper theme-bar">
 [/code]
@@ -143,9 +143,9 @@ Maximal 10 Bilder sind ein guter Wert für die obere Grenze.
 
 Verwendung mit anderen JavaScript Frameworks:
 ---------------------------------------------
-Das Nivo Slider Modul basiert auf jQuery und jQuery bietet eigentlich auch die Option 
+Das Nivo Slider Modul basiert auf jQuery und jQuery bietet eigentlich auch die Option
 "jQuery.noConflict();", um mit anderen JavaScript-Frameworks zusammen zu funktionieren.
-Dies klappt nicht in Verbindung mit den Prototype.js Framework, es verursacht 
+Dies klappt nicht in Verbindung mit den Prototype.js Framework, es verursacht
 Konflikte unter IE und Opera.
 Daher ist es ratsam, im Layout nur jQuery einzubinden.
 
@@ -197,4 +197,4 @@ SCHLUSSBEMERKUNG
 
 Benutzung des Moduls auf eigene Gefahr!
 
-Murat Purc, murat@purc.de
+Murat Purç, murat@purc.de
