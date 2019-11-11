@@ -83,17 +83,11 @@
 <string><original>Navigation</original>
 <translation>Navigation</translation>
 </string>
-<string><original>Nur bei mouseover anzeigen</original>
-<translation>Show only at mouseover</translation>
-</string>
 <string><original>Erweiterte Navigation</original>
 <translation>Extended navigation (Control Nav)</translation>
 </string>
 <string><original>Thumbnailbreite in Pixel</original>
 <translation>Thumbnail width in pixel</translation>
-</string>
-<string><original>Tastaturnavigation</original>
-<translation>Keyboard navigation</translation>
 </string>
 <string><original>Anhalten bei mouseover</original>
 <translation>Stop at mouseover</translation>
@@ -103,9 +97,6 @@
 </string>
 <string><original>Manuelle Slides</original>
 <translation>Manual transitions</translation>
-</string>
-<string><original>CSS Opacity-Wert zwischen 0.1 - 1.0</original>
-<translation>CSS opacity value between 0.1 and 1.0</translation>
 </string>
 <string><original>on beforeChange</original>
 <translation>on beforeChange</translation>
@@ -161,9 +152,6 @@
 <string><original>Maximale H&amp;ouml;he der Bilder:</original>
 <translation>Max height of the images:</translation>
 </string>
-<string><original>JavaScript Einstellungen f&amp;uuml;r jQuery Nova Slide Plugin</original>
-<translation>JavaScript settings for jQuery Nova Slide plug in</translation>
-</string>
 <string><original>M&amp;ouml;gliche Werte</original>
 <translation>Feasible values</translation>
 </string>
@@ -185,14 +173,8 @@
 <string><original>Text f&amp;uuml;r n&amp;auml;chstes Element</original>
 <translation>Text for next element</translation>
 </string>
-<string><original>Steuerung &amp;uuml;ber 1,2,3...</original>
-<translation/>
-</string>
 <string><original>Thumbnailh&amp;ouml;he in Pixel</original>
 <translation>Thumbnail height in pixel</translation>
-</string>
-<string><original>Aktiviere Navigation &amp;uuml;ber Pfeiltasten (links/rechts)</original>
-<translation>Enable via left &amp;amp; right arrows</translation>
 </string>
 <string><original>Manuelle &amp;Uuml;berblendeffekte erzwingen</original>
 <translation>Force manual transitions</translation>
@@ -209,12 +191,6 @@
 <string><original>Wird ausgel&amp;ouml;st nachdem alle Slides gezeigt wurden</original>
 <translation>Triggers after all slides have been shown</translation>
 </string>
-<string><original>Wird ausgel&amp;ouml;st der letzte Slide angezeigt wird</original>
-<translation>Triggers when last slide is shown</translation>
-</string>
-<string><original>Wird ausgel&amp;ouml;st Nova Slider geladen wurde</original>
-<translation>Triggers when slider has loaded</translation>
-</string>
 <string><original>Millisekunden</original>
 <translation>milliseconds</translation>
 </string>
@@ -225,11 +201,26 @@ if any values for max width and height are defined)</translation>
 <string><original>Verwende Thumbnails f&amp;uuml;r die erweiterte Navigation</original>
 <translation>Use thumbnails for Control Nav</translation>
 </string>
-<string><original>Transparenz f&amp;uuml;r Bildunterschriften</original>
-<translation>Opacity for image captions</translation>
-</string>
 <string><original>(Gilt nur f&amp;uuml;r zu gro&amp;szlig;e Bilder, die herunter gerechnet wurden. F&amp;uuml;r unbegrenzte Dauer leer lassen.)</original>
 <translation>(Is valid for images being downscaled. Leave it empty for unlimited caching.)</translation>
+</string>
+<string><original>Qualit&amp;auml;t der Bilder:</original>
+<translation>Quality of the images:</translation>
+</string>
+<string><original>(Qualit&amp;auml;t f&amp;uuml;r heruntergerechnete JPEG-Bilder.)</original>
+<translation>(Quality for resized JPEG-images.)</translation>
+</string>
+<string><original>Erweiterte Navigation aktivieren (Steuerung &amp;uuml;ber grafische Listenpunkte)</original>
+<translation>Enable extended Navigation (Control via graphical Listitems)</translation>
+</string>
+<string><original>Wird ausgel&amp;ouml;st wenn der letzte Slide angezeigt wird</original>
+<translation>Triggers after all slides have been shown</translation>
+</string>
+<string><original>Wird ausgel&amp;ouml;st nachdem der Nivo Slider geladen wurde</original>
+<translation>Triggers when slider has loaded</translation>
+</string>
+<string><original>JavaScript Einstellungen f&amp;uuml;r jQuery Nivo Slider Plugin</original>
+<translation>JavaScript settings for jQuery Nivo Slider plug-in</translation>
 </string>
 </translation>
 </module>

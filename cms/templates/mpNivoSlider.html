@@ -1,8 +1,10 @@
 
+<script src="js/nivo-slider/jquery.nivo.slider.pack.js" type="text/javascript"></script>
+
 <div class="modMpNivoSlider{MODULE.CLASSNAME}" style="{MODULE.STYLE}">
-    <div class="slider-wrapper theme-default">
+    <div class="slider-wrapper theme-contenido{MODULE.SLIDER.WRAPPER.CLASSNAME}">
         <div class="ribbon"></div>
-        <div id="mpNivoSlider" class="nivoSlider">
+        <div class="nivoSlider mpNivoSlider_{MODULE.UID}">
             <!-- BEGIN:BLOCK -->
             <img src="{IMG.SRC}" alt="{IMG.ALT}" title="{IMG.TITLE}"{IMG.ATTRIBUTES} /><!-- END:BLOCK -->
         </div>
@@ -10,8 +12,10 @@
     </div>
 
     <script type="text/javascript">
-    jQuery(window).load(function() {
-        jQuery('#mpNivoSlider').nivoSlider({NIVO.OPTIONS});
-    });
+    (function($) {
+		$(document).ready(function() {
+			$('.mpNivoSlider_{MODULE.UID}').nivoSlider({NIVO.OPTIONS});
+		});
+	})(jQuery);
     </script>
 </div>

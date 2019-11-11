@@ -83,16 +83,10 @@
 <string><original>Navigation</original>
 <translation/>
 </string>
-<string><original>Nur bei mouseover anzeigen</original>
-<translation/>
-</string>
 <string><original>Erweiterte Navigation</original>
 <translation/>
 </string>
 <string><original>Thumbnailbreite in Pixel</original>
-<translation/>
-</string>
-<string><original>Tastaturnavigation</original>
 <translation/>
 </string>
 <string><original>Anhalten bei mouseover</original>
@@ -102,9 +96,6 @@
 <translation/>
 </string>
 <string><original>Manuelle Slides</original>
-<translation/>
-</string>
-<string><original>CSS Opacity-Wert zwischen 0.1 - 1.0</original>
 <translation/>
 </string>
 <string><original>on beforeChange</original>
@@ -161,9 +152,6 @@
 <string><original>Maximale H&amp;ouml;he der Bilder:</original>
 <translation/>
 </string>
-<string><original>JavaScript Einstellungen f&amp;uuml;r jQuery Nova Slide Plugin</original>
-<translation/>
-</string>
 <string><original>M&amp;ouml;gliche Werte</original>
 <translation/>
 </string>
@@ -185,13 +173,7 @@
 <string><original>Text f&amp;uuml;r n&amp;auml;chstes Element</original>
 <translation/>
 </string>
-<string><original>Steuerung &amp;uuml;ber 1,2,3...</original>
-<translation/>
-</string>
 <string><original>Thumbnailh&amp;ouml;he in Pixel</original>
-<translation/>
-</string>
-<string><original>Aktiviere Navigation &amp;uuml;ber Pfeiltasten (links/rechts)</original>
 <translation/>
 </string>
 <string><original>Manuelle &amp;Uuml;berblendeffekte erzwingen</original>
@@ -209,12 +191,6 @@
 <string><original>Wird ausgel&amp;ouml;st nachdem alle Slides gezeigt wurden</original>
 <translation/>
 </string>
-<string><original>Wird ausgel&amp;ouml;st der letzte Slide angezeigt wird</original>
-<translation/>
-</string>
-<string><original>Wird ausgel&amp;ouml;st Nova Slider geladen wurde</original>
-<translation/>
-</string>
 <string><original>Millisekunden</original>
 <translation/>
 </string>
@@ -227,7 +203,22 @@
 <string><original>Verwende Thumbnails f&amp;uuml;r die erweiterte Navigation</original>
 <translation/>
 </string>
-<string><original>Transparenz f&amp;uuml;r Bildunterschriften</original>
+<string><original>Qualit&amp;auml;t der Bilder:</original>
+<translation/>
+</string>
+<string><original>(Qualit&amp;auml;t f&amp;uuml;r heruntergerechnete JPEG-Bilder.)</original>
+<translation/>
+</string>
+<string><original>Erweiterte Navigation aktivieren (Steuerung &amp;uuml;ber grafische Listenpunkte)</original>
+<translation/>
+</string>
+<string><original>Wird ausgel&amp;ouml;st wenn der letzte Slide angezeigt wird</original>
+<translation/>
+</string>
+<string><original>Wird ausgel&amp;ouml;st nachdem der Nivo Slider geladen wurde</original>
+<translation/>
+</string>
+<string><original>JavaScript Einstellungen f&amp;uuml;r jQuery Nivo Slider Plugin</original>
 <translation/>
 </string>
 </translation>

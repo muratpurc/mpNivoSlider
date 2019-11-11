@@ -24,7 +24,7 @@
  * 
  * {@internal 
  *   created 2008-09-27, Murat Purc
- *   $Id:$
+ *   $Id: class.uploadmeta.php 1 2012-01-06 22:28:28Z murat $
  * }}
  * 
  */

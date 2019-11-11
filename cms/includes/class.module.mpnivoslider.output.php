@@ -12,9 +12,9 @@
  * @package     CONTENIDO_Modules
  * @subpackage  mpNivoSlider
  * @author      Murat Purc <murat@purc.de>
- * @copyright   Copyright (c) 2011 Murat Purc (http://www.purc.de)
+ * @copyright   Copyright (c) 2011-2012 Murat Purc (http://www.purc.de)
  * @license     http://www.gnu.org/licenses/gpl-2.0.html - GNU General Public License, version 2
- * @version     $Id: $
+ * @version     $Id: class.module.mpnivoslider.output.php 279 2012-09-07 13:53:45Z murat $
  */
 
 
@@ -92,11 +92,16 @@ class ModuleMpNivoSliderOutput extends ModuleMpNivoSliderAbstract
 
         // max allowed height of images. bigger ones will also be resized
         $this->maxHeight = (int) $this->maxHeight;
-        if ( $this->maxHeight <= 0) {
+        if ($this->maxHeight <= 0) {
             $this->maxHeight = '';
         }
 
-        // max cachetime in minutes 4 resized images
+		// quality of resized jpeg images
+		if ($this->imageQuality < 0 || $this->imageQuality > 100) {
+			$this->imageQuality = self::DEFAULT_QUALITY;
+		}
+
+		// max cachetime in minutes 4 resized images
         $this->maxCachetime = (int) $this->maxCachetime;
         if ($this->maxCachetime < 0) {
             $this->maxCachetime = self::DEFAULT_CACHETIME;
@@ -152,7 +157,6 @@ class ModuleMpNivoSliderOutput extends ModuleMpNivoSliderAbstract
         }
 
         $this->directionNav = trim($this->directionNav);
-        $this->directionNavHide = trim($this->directionNavHide);
 
         $this->controlNav = trim($this->controlNav);
         $this->controlNavThumbs = trim($this->controlNavThumbs);
@@ -167,16 +171,9 @@ class ModuleMpNivoSliderOutput extends ModuleMpNivoSliderAbstract
             }
         }
 
-        $this->keyboardNav = trim($this->keyboardNav);
-
         $this->pauseOnHover = trim($this->pauseOnHover);
 
         $this->manualAdvance = trim($this->manualAdvance);
-
-        $this->captionOpacity = (float) $this->captionOpacity;
-        if ($this->captionOpacity <= 0 || $this->captionOpacity > 1) {
-            $this->captionOpacity = 0.8;
-        }
 
         $this->prevText = trim($this->prevText);
         if ($this->prevText == '') {
@@ -193,7 +190,6 @@ class ModuleMpNivoSliderOutput extends ModuleMpNivoSliderAbstract
         $this->lastSlide = trim($this->lastSlide);
         $this->afterLoad = trim($this->afterLoad);
     }
-
 
     /**
      * Generates the mpNivoSlider or a message on any occured error.
@@ -220,7 +216,7 @@ class ModuleMpNivoSliderOutput extends ModuleMpNivoSliderAbstract
         // loop images array an fill template
         foreach ($aImages as $id => $image) {
             if ($this->controlNavThumbs && isset($image['thumb'])) {
-                $image['attr'] = ' rel="' . $image['thumb']['src'] . '"';
+                $image['attr'] = ' data-thumb="' . $image['thumb']['src'] . '"';
             }
 
             // store existing meta_description value in captions list
@@ -273,19 +269,13 @@ class ModuleMpNivoSliderOutput extends ModuleMpNivoSliderAbstract
             $jsVars['startSlide'] = $this->startSlide;
         }
         $jsVars['directionNav'] = (bool) $this->directionNav;
-        $jsVars['directionNavHide'] = (bool) $this->directionNavHide;
 
         $jsVars['controlNav'] = (bool) $this->controlNav;
         $jsVars['controlNavThumbs'] = (bool) $this->controlNavThumbs;
-        $jsVars['controlNavThumbsFromRel'] = (bool) $this->controlNavThumbs;
 
-        $jsVars['keyboardNav'] = (bool) $this->keyboardNav;
         $jsVars['pauseOnHover'] = (bool) $this->pauseOnHover;
         $jsVars['manualAdvance'] = (bool) $this->manualAdvance;
 
-        if ($this->captionOpacity) {
-            $jsVars['captionOpacity'] = $this->captionOpacity;
-        }
         if ($this->prevText) {
             $jsVars['prevText'] = $this->prevText;
         }
@@ -293,7 +283,7 @@ class ModuleMpNivoSliderOutput extends ModuleMpNivoSliderAbstract
             $jsVars['nextText'] = $this->nextText;
         }
 
-        // we need for js functions a special treatment, 
+        // we need a a special treatment for js functions
         $jsFuncs = array();
         if ($this->beforeChange) {
             $k = '#' . md5('beforeChange') . '#';
@@ -335,17 +325,11 @@ class ModuleMpNivoSliderOutput extends ModuleMpNivoSliderAbstract
         $oTemplate->set('s', 'NIVO.OPTIONS', $jsJson);
 
         // additional class names
-        $moduleClassName = '';
+        $cssClass = '';
         if ($this->darkImages) {
-            $moduleClassName .= ' mpNivoSliderDark';
+            $cssClass .= ' mpNivoSliderDark';
         }
-        if ($this->controlNav) {
-            $moduleClassName .= ' mpNivoSliderControlNav';
-        }
-        if ($this->controlNavThumbs) {
-            $moduleClassName .= ' mpNivoSliderControlNavThumbs';
-        }
-        $oTemplate->set('s', 'MODULE.CLASSNAME', $moduleClassName);
+        $oTemplate->set('s', 'MODULE.CLASSNAME', $cssClass);
 
         // additional styles
         $moduleStyle = '';
@@ -357,10 +341,17 @@ class ModuleMpNivoSliderOutput extends ModuleMpNivoSliderAbstract
         }
         $oTemplate->set('s', 'MODULE.STYLE', $moduleStyle);
 
+		// slider wrapper css class
+        $cssClass = '';
+        if ($this->controlNavThumbs) {
+            $cssClass .= ' controlnav-thumbs';
+        }
+        $oTemplate->set('s', 'MODULE.SLIDER.WRAPPER.CLASSNAME', $cssClass);
+
+        $oTemplate->set('s', 'MODULE.UID', $this->getUid());
 
         $oTemplate->generate('templates/mpNivoSlider.html', 0, 0);
     }
-
 
     /**
      * Builds the images query statement, executes it and returns found images.
@@ -426,11 +417,7 @@ class ModuleMpNivoSliderOutput extends ModuleMpNivoSliderAbstract
 
         if (count($aImages) > 0) {
             // now get description by language
-            $sWhere = '';
-            foreach ($aImages as $idUpl => $item) {
-                $sWhere .= ' idupl=' . $idUpl . ' OR ';
-            }
-            $sWhere = substr($sWhere, 0, -3) . ' AND idlang=' . $this->_lang;
+            $sWhere = 'idlang=' . $this->_lang . ' AND idupl IN(' . implode(', ', array_keys($aImages)) . ')';
             $oUploadMetaColl = new UploadMetaCollection();
             $oUploadMetaColl->select($sWhere, '', '');
 
@@ -471,7 +458,7 @@ class ModuleMpNivoSliderOutput extends ModuleMpNivoSliderAbstract
 
             // bigger images have 2 be resized
             $file = capiImgScale(
-                $file, $maxWidth, $maxHeight, false, false, $this->maxCachetime
+                $file, $maxWidth, $maxHeight, false, false, $this->maxCachetime, $this->imageQuality
             );
             if (!$file) {
                 return null;
@@ -517,7 +504,6 @@ class ModuleMpNivoSliderOutput extends ModuleMpNivoSliderAbstract
         }
         return $size;
     }
-
 
     /**
      * Composes css definition 2 center a image horizontally and returns it back.

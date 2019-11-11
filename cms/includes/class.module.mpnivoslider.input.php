@@ -12,9 +12,9 @@
  * @package     CONTENIDO_Modules
  * @subpackage  mpNivoSlider
  * @author      Murat Purc <murat@purc.de>
- * @copyright   Copyright (c) 2011 Murat Purc (http://www.purc.de)
+ * @copyright   Copyright (c) 2011-2012 Murat Purc (http://www.purc.de)
  * @license     http://www.gnu.org/licenses/gpl-2.0.html - GNU General Public License, version 2
- * @version     $Id: $
+ * @version     $Id: class.module.mpnivoslider.input.php 279 2012-09-07 13:53:45Z murat $
  */
 
 
@@ -50,7 +50,6 @@ class ModuleMpNivoSliderInput extends ModuleMpNivoSliderAbstract
         }
         return $opt;
     }
-
 
     /**
      * Generates and returns option items of the order select box.
@@ -88,6 +87,10 @@ class ModuleMpNivoSliderInput extends ModuleMpNivoSliderAbstract
         if ($this->maxHeight <= 0) {
             $this->maxHeight = '';
         }
+
+		if ($this->imageQuality < 0 || $this->imageQuality > 100) {
+			$this->imageQuality = self::DEFAULT_QUALITY;
+		}
 
         $this->maxCachetime = (int) $this->maxCachetime;
         if ($this->maxCachetime < 0) {
@@ -130,7 +133,6 @@ class ModuleMpNivoSliderInput extends ModuleMpNivoSliderAbstract
         }
 
         $this->directionNav = trim($this->directionNav);
-        $this->directionNavHide = trim($this->directionNavHide);
         $this->controlNav = trim($this->controlNav);
         $this->controlNavThumbs = trim($this->controlNavThumbs);
 
@@ -143,16 +145,9 @@ class ModuleMpNivoSliderInput extends ModuleMpNivoSliderAbstract
             $this->controlNavThumbsHeightX = '';
         }
 
-        $this->keyboardNav = trim($this->keyboardNav);
-
         $this->pauseOnHover = trim($this->pauseOnHover);
 
         $this->manualAdvance = trim($this->manualAdvance);
-
-        $this->captionOpacity = (float) $this->captionOpacity;
-        if ($this->captionOpacity <= 0 || $this->captionOpacity > 1) {
-            $this->captionOpacity = 0.8;
-        }
 
         $this->prevText = trim($this->prevText);
         $this->nextText = trim($this->nextText);

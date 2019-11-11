@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <module><name>mpNivoSlider</name>
 <description>Module:
-Nivo Slider (v2.6) ist ein Image-Slider basierend auf jQuery, mit vielen Features 
+Nivo Slider (v3.1) ist ein Image-Slider basierend auf jQuery, mit vielen Features 
 wie Effekte, Tastatursteuerung, Verlinkung von Bildern, Themes, diverse Einstellungen, 
 usw.
 
@@ -26,7 +26,7 @@ Version: 0.1rc</description>
 <type>Content</type>
 <input>?&gt;&lt;?php
 /**
- * Module-Input: mpNivoSlider 0.1rc
+ * Module-Input: mpNivoSlider
  *
  * Based on Nivo Slider, a jQuery based image slider
  * See http://nivo.dev7studios.com/
@@ -34,25 +34,26 @@ Version: 0.1rc</description>
  * @package     CONTENIDO_Modules
  * @subpackage  mpNivoSlider
  * @author      Murat Purc &lt;murat@purc.de&gt;
- * @copyright   Copyright (c) 2011 Murat Purc (http://www.purc.de)
+ * @copyright   Copyright (c) 2011-2012 Murat Purc (http://www.purc.de)
  * @license     http://www.gnu.org/licenses/gpl-2.0.html - GNU General Public License, version 2
- * @version     $Id: $
+ * @version     $Id: mpNivoSlider_input.php 279 2012-09-07 13:53:45Z murat $
  */
 
-
+cInclude('frontend', 'includes/functions.mpnivoslider.php');
 cInclude('frontend', 'includes/class.module.mpnivoslider.input.php');
 cInclude('classes', 'class.upload.php');
 
 // module configuration
 $aModuleConfiguration = array(
-    'selectedDirname'      =&gt; &quot;CMS_VALUE[1]&quot;,
-    'useSubdirectories'    =&gt; &quot;CMS_VALUE[2]&quot;,
-    'maxImages'            =&gt; &quot;CMS_VALUE[3]&quot;,
-    'maxWidth'             =&gt; &quot;CMS_VALUE[4]&quot;,
-    'maxHeight'            =&gt; &quot;CMS_VALUE[5]&quot;,
-    'maxCachetime'         =&gt; &quot;CMS_VALUE[6]&quot;,
-    'selectedOrder'        =&gt; &quot;CMS_VALUE[7]&quot;,
-    'darkImages'           =&gt; &quot;CMS_VALUE[33]&quot;,
+    'selectedDirname' =&gt; &quot;CMS_VALUE[1]&quot;,
+    'useSubdirectories' =&gt; &quot;CMS_VALUE[2]&quot;,
+    'maxImages' =&gt; &quot;CMS_VALUE[3]&quot;,
+    'maxWidth' =&gt; &quot;CMS_VALUE[4]&quot;,
+    'maxHeight' =&gt; &quot;CMS_VALUE[5]&quot;,
+    'maxCachetime' =&gt; &quot;CMS_VALUE[6]&quot;,
+    'selectedOrder' =&gt; &quot;CMS_VALUE[7]&quot;,
+    'darkImages' =&gt; &quot;CMS_VALUE[33]&quot;,
+    'imageQuality' =&gt; &quot;CMS_VALUE[34]&quot;,
 
     // Nivo Slider specific configuration
     'effect' =&gt; &quot;CMS_VALUE[8]&quot;,
@@ -63,15 +64,12 @@ $aModuleConfiguration = array(
     'pauseTime' =&gt; &quot;CMS_VALUE[13]&quot;,
     'startSlide' =&gt; &quot;CMS_VALUE[14]&quot;,
     'directionNav' =&gt; &quot;CMS_VALUE[15]&quot;,
-    'directionNavHide' =&gt; &quot;CMS_VALUE[16]&quot;,
     'controlNav' =&gt; &quot;CMS_VALUE[17]&quot;,
     'controlNavThumbs' =&gt; &quot;CMS_VALUE[18]&quot;,
     'controlNavThumbsWidthX' =&gt; &quot;CMS_VALUE[20]&quot;,  // speacial treatment
     'controlNavThumbsHeightX' =&gt; &quot;CMS_VALUE[21]&quot;, // speacial treatment
-    'keyboardNav' =&gt; &quot;CMS_VALUE[22]&quot;,
     'pauseOnHover' =&gt; &quot;CMS_VALUE[23]&quot;,
     'manualAdvance' =&gt; &quot;CMS_VALUE[24]&quot;,
-    'captionOpacity' =&gt; &quot;CMS_VALUE[25]&quot;,
     'prevText' =&gt; &quot;CMS_VALUE[26]&quot;,
     'nextText' =&gt; &quot;CMS_VALUE[27]&quot;,
     'beforeChange' =&gt; &quot;CMS_VALUE[28]&quot;,
@@ -84,21 +82,21 @@ $aModuleConfiguration = array(
 
 // module translation
 $aModuleTranslations = array(
-    'random'            =&gt; mi18n(&quot;Zuf&amp;auml;llig&quot;),
-    'filename_asc'      =&gt; mi18n(&quot;Dateiname aufsteigend&quot;),
-    'filename_desc'     =&gt; mi18n(&quot;Dateiname absteigend&quot;),
-    'size_asc'          =&gt; mi18n(&quot;Dateigr&amp;ouml;&amp;szlig;e aufsteigend&quot;),
-    'size_desc'         =&gt; mi18n(&quot;Dateigr&amp;ouml;&amp;szlig;e absteigend&quot;),
-    'filetype_asc'      =&gt; mi18n(&quot;Dateityp aufsteigend&quot;),
-    'filetype_desc'     =&gt; mi18n(&quot;Dateityp absteigend&quot;),
-    'created_asc'       =&gt; mi18n(&quot;Erstellungsdatum aufsteigend&quot;),
-    'created_esc'       =&gt; mi18n(&quot;Erstellungsdatum absteigend&quot;),
-    'id_asc'            =&gt; mi18n(&quot;Id aufsteigend&quot;),
-    'id_desc'           =&gt; mi18n(&quot;Id absteigend&quot;),
+    'random' =&gt; mi18n(&quot;Zuf&amp;auml;llig&quot;),
+    'filename_asc' =&gt; mi18n(&quot;Dateiname aufsteigend&quot;),
+    'filename_desc' =&gt; mi18n(&quot;Dateiname absteigend&quot;),
+    'size_asc' =&gt; mi18n(&quot;Dateigr&amp;ouml;&amp;szlig;e aufsteigend&quot;),
+    'size_desc' =&gt; mi18n(&quot;Dateigr&amp;ouml;&amp;szlig;e absteigend&quot;),
+    'filetype_asc' =&gt; mi18n(&quot;Dateityp aufsteigend&quot;),
+    'filetype_desc' =&gt; mi18n(&quot;Dateityp absteigend&quot;),
+    'created_asc' =&gt; mi18n(&quot;Erstellungsdatum aufsteigend&quot;),
+    'created_esc' =&gt; mi18n(&quot;Erstellungsdatum absteigend&quot;),
+    'id_asc' =&gt; mi18n(&quot;Id aufsteigend&quot;),
+    'id_desc' =&gt; mi18n(&quot;Id absteigend&quot;),
     '__select_folder__' =&gt; mi18n(&quot;-- Ordner ausw&amp;auml;hlen --&quot;),
-    '__select_order__'  =&gt; mi18n(&quot;-- Sortierung ausw&amp;auml;hlen --&quot;),
-    'previous'          =&gt; mi18n(&quot;zur&amp;uuml;ck&quot;),
-    'next'              =&gt; mi18n(&quot;vor&quot;),
+    '__select_order__' =&gt; mi18n(&quot;-- Sortierung ausw&amp;auml;hlen --&quot;),
+    'previous' =&gt; mi18n(&quot;zur&amp;uuml;ck&quot;),
+    'next' =&gt; mi18n(&quot;vor&quot;),
 );
 
 // create mpNivoSlider module instance
@@ -117,7 +115,8 @@ $oModule = new ModuleMpNivoSliderInput($aModuleConfiguration, $aModuleTranslatio
         &lt;/select&gt;&lt;br /&gt;
         &lt;small&gt;&lt;?php echo mi18n(&quot;(Der ausgew&amp;auml;hlte Ordner sollte nur Bilder enthalten)&quot;) ?&gt;&lt;/small&gt;&lt;br /&gt;
         &lt;br /&gt;
-        &lt;input type=&quot;checkbox&quot; class=&quot;text_medium&quot; name=&quot;CMS_VAR[2]&quot; value=&quot;1&quot;&lt;?php echo $oModule-&gt;getCheckedAttribute('useSubdirectories') ?&gt; /&gt; &lt;?php echo mi18n(&quot;Vorhandene Unterordner auch verwenden&quot;) ?&gt;&lt;br /&gt;
+        &lt;input type=&quot;checkbox&quot; class=&quot;text_medium&quot; name=&quot;CMS_VAR[2]&quot; id=&quot;&lt;?php echo $oModule-&gt;getIdValue('useSubdirectories') ?&gt;&quot; value=&quot;1&quot;&lt;?php echo $oModule-&gt;getCheckedAttribute('useSubdirectories') ?&gt; /&gt;
+		&lt;label for=&quot;&lt;?php echo $oModule-&gt;getIdValue('useSubdirectories') ?&gt;&quot;&gt;&lt;?php echo mi18n(&quot;Vorhandene Unterordner auch verwenden&quot;) ?&gt;&lt;/label&gt;&lt;br /&gt;
         &lt;small&gt;&lt;?php echo mi18n(&quot;(Alle Bilder auch in vorhandenen Unterordnen verwenden)&quot;) ?&gt;&lt;/small&gt;&lt;br /&gt;
         &lt;br /&gt;
     &lt;/td&gt;
@@ -125,7 +124,8 @@ $oModule = new ModuleMpNivoSliderInput($aModuleConfiguration, $aModuleTranslatio
 &lt;tr&gt;
     &lt;td valign=&quot;top&quot; class=&quot;text_medium&quot;&gt;&lt;?php echo mi18n(&quot;Helligkeit der Bilder:&quot;) ?&gt;&lt;/td&gt;
     &lt;td class=&quot;text_medium&quot;&gt;
-        &lt;input type=&quot;checkbox&quot; class=&quot;text_medium&quot; name=&quot;CMS_VAR[33]&quot; value=&quot;1&quot;&lt;?php echo $oModule-&gt;getCheckedAttribute('darkImages') ?&gt; /&gt; &lt;?php echo mi18n(&quot;Die Bilder sind in der Regel dunkel&quot;) ?&gt;&lt;br /&gt;
+        &lt;input type=&quot;checkbox&quot; class=&quot;text_medium&quot; name=&quot;CMS_VAR[33]&quot; id=&quot;&lt;?php echo $oModule-&gt;getIdValue('darkImages') ?&gt;&quot; value=&quot;1&quot;&lt;?php echo $oModule-&gt;getCheckedAttribute('darkImages') ?&gt; /&gt;
+		&lt;label for=&quot;&lt;?php echo $oModule-&gt;getIdValue('darkImages') ?&gt;&quot;&gt;&lt;?php echo mi18n(&quot;Die Bilder sind in der Regel dunkel&quot;) ?&gt;&lt;/label&gt;&lt;br /&gt;
         &lt;small&gt;&lt;?php echo mi18n(&quot;(Bei dunklen Bildern werden helle Navigationspfeile und Bildunterschriften mit hellem Hintergrund ausgegeben, bei hellen Bildern umgekehrt)&quot;) ?&gt;&lt;/small&gt;&lt;br /&gt;
         &lt;br /&gt;
     &lt;/td&gt;
@@ -153,6 +153,14 @@ $oModule = new ModuleMpNivoSliderInput($aModuleConfiguration, $aModuleTranslatio
     &lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
+    &lt;td valign=&quot;top&quot; class=&quot;text_medium&quot;&gt;&lt;?php echo mi18n(&quot;Qualit&amp;auml;t der Bilder:&quot;) ?&gt;&lt;/td&gt;
+    &lt;td class=&quot;text_medium&quot;&gt;
+        &lt;input type=&quot;text&quot; class=&quot;text_medium&quot; name=&quot;CMS_VAR[34]&quot; value=&quot;&lt;?php echo $oModule-&gt;imageQuality ?&gt;&quot; /&gt; %&lt;br /&gt;
+        &lt;small&gt;&lt;?php echo mi18n(&quot;(Qualit&amp;auml;t f&amp;uuml;r heruntergerechnete JPEG-Bilder.)&quot;) ?&gt;&lt;/small&gt;&lt;br /&gt;
+        &lt;br /&gt;
+    &lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
     &lt;td valign=&quot;top&quot; class=&quot;text_medium&quot;&gt;&lt;?php echo mi18n(&quot;Maximale Cachedauer der Bilder:&quot;) ?&gt;&lt;/td&gt;
     &lt;td class=&quot;text_medium&quot;&gt;
         &lt;input type=&quot;text&quot; class=&quot;text_medium&quot; name=&quot;CMS_VAR[6]&quot; value=&quot;&lt;?php echo $oModule-&gt;maxCachetime ?&gt;&quot; /&gt; &lt;?php echo mi18n(&quot;Minuten&quot;) ?&gt;&lt;br /&gt;
@@ -171,7 +179,7 @@ $oModule = new ModuleMpNivoSliderInput($aModuleConfiguration, $aModuleTranslatio
 &lt;tr&gt;
     &lt;td valign=&quot;top&quot; colspan=&quot;2&quot; class=&quot;text_medium&quot;&gt;
         &lt;hr /&gt;&lt;br /&gt;
-        &lt;b&gt;&lt;?php echo mi18n(&quot;JavaScript Einstellungen f&amp;uuml;r jQuery Nova Slide Plugin&quot;) ?&gt;&lt;/b&gt;
+        &lt;b&gt;&lt;?php echo mi18n(&quot;JavaScript Einstellungen f&amp;uuml;r jQuery Nivo Slider Plugin&quot;) ?&gt;&lt;/b&gt;
     &lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
@@ -237,9 +245,8 @@ $oModule = new ModuleMpNivoSliderInput($aModuleConfiguration, $aModuleTranslatio
 &lt;tr&gt;
     &lt;td valign=&quot;top&quot; class=&quot;text_medium&quot;&gt;&lt;?php echo mi18n(&quot;Navigation&quot;) ?&gt;:&lt;/td&gt;
     &lt;td class=&quot;text_medium&quot;&gt;
-        &lt;input type=&quot;checkbox&quot; class=&quot;text_medium&quot; name=&quot;CMS_VAR[15]&quot; value=&quot;1&quot;&lt;?php echo $oModule-&gt;getCheckedAttribute('directionNav') ?&gt; /&gt; &lt;?php echo mi18n(&quot;Navigation aktivieren (vor und zur&amp;uuml;ck)&quot;) ?&gt;&lt;br /&gt;
-        &lt;br /&gt;
-        &lt;input type=&quot;checkbox&quot; class=&quot;text_medium&quot; name=&quot;CMS_VAR[16]&quot; value=&quot;1&quot;&lt;?php echo $oModule-&gt;getCheckedAttribute('directionNavHide') ?&gt; /&gt; &lt;?php echo mi18n(&quot;Nur bei mouseover anzeigen&quot;) ?&gt;&lt;br /&gt;
+        &lt;input type=&quot;checkbox&quot; class=&quot;text_medium&quot; name=&quot;CMS_VAR[15]&quot; id=&quot;&lt;?php echo $oModule-&gt;getIdValue('directionNav') ?&gt;&quot; value=&quot;1&quot;&lt;?php echo $oModule-&gt;getCheckedAttribute('directionNav') ?&gt; /&gt;
+		&lt;label for=&quot;&lt;?php echo $oModule-&gt;getIdValue('directionNav') ?&gt;&quot;&gt;&lt;?php echo mi18n(&quot;Navigation aktivieren (vor und zur&amp;uuml;ck)&quot;) ?&gt;&lt;/label&gt;&lt;br /&gt;
         &lt;br /&gt;
         &lt;input type=&quot;text&quot; class=&quot;text_medium&quot; name=&quot;CMS_VAR[26]&quot; value=&quot;&lt;?php echo $oModule-&gt;prevText ?&gt;&quot; /&gt; &lt;?php echo mi18n(&quot;Text f&amp;uuml;r vorheriges Element&quot;) ?&gt;&lt;br /&gt;
         &lt;br /&gt;
@@ -250,9 +257,13 @@ $oModule = new ModuleMpNivoSliderInput($aModuleConfiguration, $aModuleTranslatio
 &lt;tr&gt;
     &lt;td valign=&quot;top&quot; class=&quot;text_medium&quot;&gt;&lt;?php echo mi18n(&quot;Erweiterte Navigation&quot;) ?&gt;:&lt;/td&gt;
     &lt;td class=&quot;text_medium&quot;&gt;
-        &lt;input type=&quot;checkbox&quot; class=&quot;text_medium&quot; name=&quot;CMS_VAR[17]&quot; value=&quot;1&quot;&lt;?php echo $oModule-&gt;getCheckedAttribute('controlNav') ?&gt; /&gt; &lt;?php echo mi18n(&quot;Steuerung &amp;uuml;ber 1,2,3...&quot;) ?&gt;&lt;br /&gt;
+        &lt;input type=&quot;checkbox&quot; class=&quot;text_medium&quot; name=&quot;CMS_VAR[17]&quot; id=&quot;&lt;?php echo $oModule-&gt;getIdValue('controlNav') ?&gt;&quot; value=&quot;1&quot;&lt;?php echo $oModule-&gt;getCheckedAttribute('controlNav') ?&gt; /&gt;
+		&lt;label for=&quot;&lt;?php echo $oModule-&gt;getIdValue('controlNav') ?&gt;&quot;&gt;&lt;?php echo mi18n(&quot;Erweiterte Navigation aktivieren (Steuerung &amp;uuml;ber grafische Listenpunkte)&quot;) ?&gt;&lt;/label&gt;&lt;br /&gt;
         &lt;br /&gt;
-        &lt;input type=&quot;checkbox&quot; class=&quot;text_medium&quot; name=&quot;CMS_VAR[18]&quot; value=&quot;1&quot;&lt;?php echo $oModule-&gt;getCheckedAttribute('controlNavThumbs') ?&gt; /&gt; &lt;?php echo mi18n(&quot;Verwende Thumbnails f&amp;uuml;r die erweiterte Navigation&quot;) ?&gt;&lt;br /&gt;
+        &lt;div style=&quot;padding-left:20px;&quot;&gt;
+			&lt;input type=&quot;checkbox&quot; class=&quot;text_medium&quot; name=&quot;CMS_VAR[18]&quot; id=&quot;&lt;?php echo $oModule-&gt;getIdValue('controlNavThumbs') ?&gt;&quot; value=&quot;1&quot;&lt;?php echo $oModule-&gt;getCheckedAttribute('controlNavThumbs') ?&gt; /&gt;
+			&lt;label for=&quot;&lt;?php echo $oModule-&gt;getIdValue('controlNavThumbs') ?&gt;&quot;&gt;&lt;?php echo mi18n(&quot;Verwende Thumbnails f&amp;uuml;r die erweiterte Navigation&quot;) ?&gt;&lt;/label&gt;&lt;br /&gt;
+		&lt;/div&gt;
         &lt;br /&gt;
         &lt;input type=&quot;text&quot; class=&quot;text_medium&quot; name=&quot;CMS_VAR[20]&quot; value=&quot;&lt;?php echo $oModule-&gt;controlNavThumbsWidthX ?&gt;&quot; /&gt; &lt;?php echo mi18n(&quot;Thumbnailbreite in Pixel&quot;) ?&gt;&lt;br /&gt;
         &lt;br /&gt;
@@ -260,30 +271,19 @@ $oModule = new ModuleMpNivoSliderInput($aModuleConfiguration, $aModuleTranslatio
     &lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-    &lt;td valign=&quot;top&quot; class=&quot;text_medium&quot;&gt;&lt;?php echo mi18n(&quot;Tastaturnavigation&quot;) ?&gt;:&lt;/td&gt;
-    &lt;td class=&quot;text_medium&quot;&gt;
-        &lt;input type=&quot;checkbox&quot; class=&quot;text_medium&quot; name=&quot;CMS_VAR[22]&quot; value=&quot;1&quot;&lt;?php echo $oModule-&gt;getCheckedAttribute('keyboardNav') ?&gt; /&gt; &lt;?php echo mi18n(&quot;Aktiviere Navigation &amp;uuml;ber Pfeiltasten (links/rechts)&quot;) ?&gt;&lt;br /&gt;
-        &lt;br /&gt;
-    &lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
     &lt;td valign=&quot;top&quot; class=&quot;text_medium&quot;&gt;&lt;?php echo mi18n(&quot;Anhalten bei mouseover&quot;) ?&gt;:&lt;/td&gt;
     &lt;td class=&quot;text_medium&quot;&gt;
-        &lt;input type=&quot;checkbox&quot; class=&quot;text_medium&quot; name=&quot;CMS_VAR[23]&quot; value=&quot;1&quot;&lt;?php echo $oModule-&gt;getCheckedAttribute('pauseOnHover') ?&gt; /&gt; &lt;?php echo mi18n(&quot;Animationen bei mouseover anhalten&quot;) ?&gt;&lt;br /&gt;
+        &lt;input type=&quot;checkbox&quot; class=&quot;text_medium&quot; name=&quot;CMS_VAR[23]&quot; id=&quot;&lt;?php echo $oModule-&gt;getIdValue('pauseOnHover') ?&gt;&quot; value=&quot;1&quot;&lt;?php echo $oModule-&gt;getCheckedAttribute('pauseOnHover') ?&gt; /&gt;
+		&lt;label for=&quot;&lt;?php echo $oModule-&gt;getIdValue('pauseOnHover') ?&gt;&quot;&gt;&lt;?php echo mi18n(&quot;Animationen bei mouseover anhalten&quot;) ?&gt;&lt;/label&gt;&lt;br /&gt;
         &lt;br /&gt;
     &lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
     &lt;td valign=&quot;top&quot; class=&quot;text_medium&quot;&gt;&lt;?php echo mi18n(&quot;Manuelle Slides&quot;) ?&gt;:&lt;/td&gt;
     &lt;td class=&quot;text_medium&quot;&gt;
-        &lt;input type=&quot;checkbox&quot; class=&quot;text_medium&quot; name=&quot;CMS_VAR[24]&quot; value=&quot;1&quot;&lt;?php echo $oModule-&gt;getCheckedAttribute('manualAdvance') ?&gt; /&gt; &lt;?php echo mi18n(&quot;Manuelle &amp;Uuml;berblendeffekte erzwingen&quot;) ?&gt;&lt;br /&gt;
+        &lt;input type=&quot;checkbox&quot; class=&quot;text_medium&quot; name=&quot;CMS_VAR[24]&quot; id=&quot;&lt;?php echo $oModule-&gt;getIdValue('manualAdvance') ?&gt;&quot; value=&quot;1&quot;&lt;?php echo $oModule-&gt;getCheckedAttribute('manualAdvance') ?&gt; /&gt;
+		&lt;label for=&quot;&lt;?php echo $oModule-&gt;getIdValue('manualAdvance') ?&gt;&quot;&gt;&lt;?php echo mi18n(&quot;Manuelle &amp;Uuml;berblendeffekte erzwingen&quot;) ?&gt;&lt;/label&gt;&lt;br /&gt;
         &lt;br /&gt;
-    &lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-    &lt;td valign=&quot;top&quot; class=&quot;text_medium&quot;&gt;&lt;?php echo mi18n(&quot;Transparenz f&amp;uuml;r Bildunterschriften&quot;) ?&gt;:&lt;/td&gt;
-    &lt;td class=&quot;text_medium&quot;&gt;
-        &lt;input type=&quot;text&quot; class=&quot;text_medium&quot; name=&quot;CMS_VAR[25]&quot; value=&quot;&lt;?php echo $oModule-&gt;captionOpacity ?&gt;&quot; /&gt; &lt;?php echo mi18n(&quot;CSS Opacity-Wert zwischen 0.1 - 1.0&quot;) ?&gt;&lt;br /&gt;
     &lt;/td&gt;
 &lt;/tr&gt;
 &lt;!-- javascript event handler --&gt;
@@ -318,7 +318,7 @@ $oModule = new ModuleMpNivoSliderInput($aModuleConfiguration, $aModuleTranslatio
     &lt;td valign=&quot;top&quot; class=&quot;text_medium&quot;&gt;&lt;?php echo mi18n(&quot;on lastSlide&quot;) ?&gt;:&lt;/td&gt;
     &lt;td class=&quot;text_medium&quot;&gt;
         &lt;?php echo '&lt;textarea name=&quot;CMS_VAR[31]&quot; cols=&quot;80&quot; rows=&quot;2&quot; style=&quot;width:350;font-family:monospace;&quot;&gt;' . $oModule-&gt;lastSlide . '&lt;/textarea&gt;'; ?&gt;
-        &lt;?php echo mi18n(&quot;Wird ausgel&amp;ouml;st der letzte Slide angezeigt wird&quot;) ?&gt;
+        &lt;?php echo mi18n(&quot;Wird ausgel&amp;ouml;st wenn der letzte Slide angezeigt wird&quot;) ?&gt;
         &lt;br /&gt;
     &lt;/td&gt;
 &lt;/tr&gt;
@@ -326,7 +326,7 @@ $oModule = new ModuleMpNivoSliderInput($aModuleConfiguration, $aModuleTranslatio
     &lt;td valign=&quot;top&quot; class=&quot;text_medium&quot;&gt;&lt;?php echo mi18n(&quot;on afterLoad&quot;) ?&gt;:&lt;/td&gt;
     &lt;td class=&quot;text_medium&quot;&gt;
         &lt;?php echo '&lt;textarea name=&quot;CMS_VAR[32]&quot; cols=&quot;80&quot; rows=&quot;2&quot; style=&quot;width:350;font-family:monospace;&quot;&gt;' . $oModule-&gt;afterLoad . '&lt;/textarea&gt;'; ?&gt;
-        &lt;?php echo mi18n(&quot;Wird ausgel&amp;ouml;st Nova Slider geladen wurde&quot;) ?&gt;
+        &lt;?php echo mi18n(&quot;Wird ausgel&amp;ouml;st nachdem der Nivo Slider geladen wurde&quot;) ?&gt;
         &lt;br /&gt;
     &lt;/td&gt;
 &lt;/tr&gt;
@@ -338,7 +338,7 @@ $oModule = new ModuleMpNivoSliderInput($aModuleConfiguration, $aModuleTranslatio
 unset($oModule, $aModuleConfiguration, $aModuleTranslations);</input>
 <output>&lt;?php
 /**
- * Module-Output: mpNivoSlider 0.1rc
+ * Module-Output: mpNivoSlider
  *
  * Based on Nivo Slider, a jQuery based image slider
  * See http://nivo.dev7studios.com/
@@ -346,11 +346,12 @@ unset($oModule, $aModuleConfiguration, $aModuleTranslations);</input>
  * @package     CONTENIDO_Modules
  * @subpackage  mpNivoSlider
  * @author      Murat Purc &lt;murat@purc.de&gt;
- * @copyright   Copyright (c) 2011 Murat Purc (http://www.purc.de)
+ * @copyright   Copyright (c) 2011-2012 Murat Purc (http://www.purc.de)
  * @license     http://www.gnu.org/licenses/gpl-2.0.html - GNU General Public License, version 2
- * @version     $Id: $
+ * @version     $Id: mpNivoSlider_output.php 279 2012-09-07 13:53:45Z murat $
  */
 
+cInclude('frontend', 'includes/functions.mpnivoslider.php');
 cInclude('frontend', 'includes/class.module.mpnivoslider.output.php');
 cInclude('classes', 'class.upload.php');
 cInclude('frontend', 'includes/class.uploadmeta.php');
@@ -358,14 +359,15 @@ cInclude('includes', 'functions.api.images.php');
 
 // module configuration
 $aModuleConfiguration = array(
-    'selectedDirname'      =&gt; &quot;CMS_VALUE[1]&quot;,
-    'useSubdirectories'    =&gt; &quot;CMS_VALUE[2]&quot;,
-    'maxImages'            =&gt; &quot;CMS_VALUE[3]&quot;,
-    'maxWidth'             =&gt; &quot;CMS_VALUE[4]&quot;,
-    'maxHeight'            =&gt; &quot;CMS_VALUE[5]&quot;,
-    'maxCachetime'         =&gt; &quot;CMS_VALUE[6]&quot;,
-    'selectedOrder'        =&gt; &quot;CMS_VALUE[7]&quot;,
-    'darkImages'           =&gt; &quot;CMS_VALUE[33]&quot;,
+    'selectedDirname' =&gt; &quot;CMS_VALUE[1]&quot;,
+    'useSubdirectories' =&gt; &quot;CMS_VALUE[2]&quot;,
+    'maxImages' =&gt; &quot;CMS_VALUE[3]&quot;,
+    'maxWidth' =&gt; &quot;CMS_VALUE[4]&quot;,
+    'maxHeight' =&gt; &quot;CMS_VALUE[5]&quot;,
+    'maxCachetime' =&gt; &quot;CMS_VALUE[6]&quot;,
+    'selectedOrder' =&gt; &quot;CMS_VALUE[7]&quot;,
+    'darkImages' =&gt; &quot;CMS_VALUE[33]&quot;,
+    'imageQuality' =&gt; &quot;CMS_VALUE[34]&quot;,
 
     // Nivo Slider specific configuration
     'effect' =&gt; &quot;CMS_VALUE[8]&quot;,
@@ -376,15 +378,12 @@ $aModuleConfiguration = array(
     'pauseTime' =&gt; &quot;CMS_VALUE[13]&quot;,
     'startSlide' =&gt; &quot;CMS_VALUE[14]&quot;,
     'directionNav' =&gt; &quot;CMS_VALUE[15]&quot;,
-    'directionNavHide' =&gt; &quot;CMS_VALUE[16]&quot;,
     'controlNav' =&gt; &quot;CMS_VALUE[17]&quot;,
     'controlNavThumbs' =&gt; &quot;CMS_VALUE[18]&quot;,
     'controlNavThumbsWidthX' =&gt; &quot;CMS_VALUE[20]&quot;,  // speacial treatment
     'controlNavThumbsHeightX' =&gt; &quot;CMS_VALUE[21]&quot;, // speacial treatment
-    'keyboardNav' =&gt; &quot;CMS_VALUE[22]&quot;,
     'pauseOnHover' =&gt; &quot;CMS_VALUE[23]&quot;,
     'manualAdvance' =&gt; &quot;CMS_VALUE[24]&quot;,
-    'captionOpacity' =&gt; &quot;CMS_VALUE[25]&quot;,
     'prevText' =&gt; &quot;CMS_VALUE[26]&quot;,
     'nextText' =&gt; &quot;CMS_VALUE[27]&quot;,
     'beforeChange' =&gt; &quot;CMS_VALUE[28]&quot;,
@@ -396,21 +395,21 @@ $aModuleConfiguration = array(
 
 // module translation
 $aModuleTranslations = array(
-    'random'            =&gt; mi18n(&quot;Zuf&amp;auml;llig&quot;),
-    'filename_asc'      =&gt; mi18n(&quot;Dateiname aufsteigend&quot;),
-    'filename_desc'     =&gt; mi18n(&quot;Dateiname absteigend&quot;),
-    'size_asc'          =&gt; mi18n(&quot;Dateigr&amp;ouml;&amp;szlig;e aufsteigend&quot;),
-    'size_desc'         =&gt; mi18n(&quot;Dateigr&amp;ouml;&amp;szlig;e absteigend&quot;),
-    'filetype_asc'      =&gt; mi18n(&quot;Dateityp aufsteigend&quot;),
-    'filetype_desc'     =&gt; mi18n(&quot;Dateityp absteigend&quot;),
-    'created_asc'       =&gt; mi18n(&quot;Erstellungsdatum aufsteigend&quot;),
-    'created_esc'       =&gt; mi18n(&quot;Erstellungsdatum absteigend&quot;),
-    'id_asc'            =&gt; mi18n(&quot;Id aufsteigend&quot;),
-    'id_desc'           =&gt; mi18n(&quot;Id absteigend&quot;),
+    'random' =&gt; mi18n(&quot;Zuf&amp;auml;llig&quot;),
+    'filename_asc' =&gt; mi18n(&quot;Dateiname aufsteigend&quot;),
+    'filename_desc' =&gt; mi18n(&quot;Dateiname absteigend&quot;),
+    'size_asc' =&gt; mi18n(&quot;Dateigr&amp;ouml;&amp;szlig;e aufsteigend&quot;),
+    'size_desc' =&gt; mi18n(&quot;Dateigr&amp;ouml;&amp;szlig;e absteigend&quot;),
+    'filetype_asc' =&gt; mi18n(&quot;Dateityp aufsteigend&quot;),
+    'filetype_desc' =&gt; mi18n(&quot;Dateityp absteigend&quot;),
+    'created_asc' =&gt; mi18n(&quot;Erstellungsdatum aufsteigend&quot;),
+    'created_esc' =&gt; mi18n(&quot;Erstellungsdatum absteigend&quot;),
+    'id_asc' =&gt; mi18n(&quot;Id aufsteigend&quot;),
+    'id_desc' =&gt; mi18n(&quot;Id absteigend&quot;),
     '__select_folder__' =&gt; mi18n(&quot;-- Ordner ausw&amp;auml;hlen --&quot;),
-    '__select_order__'  =&gt; mi18n(&quot;-- Sortierung ausw&amp;auml;hlen --&quot;),
-    'previous'          =&gt; mi18n(&quot;zur&amp;uuml;ck&quot;),
-    'next'              =&gt; mi18n(&quot;vor&quot;),
+    '__select_order__' =&gt; mi18n(&quot;-- Sortierung ausw&amp;auml;hlen --&quot;),
+    'previous' =&gt; mi18n(&quot;zur&amp;uuml;ck&quot;),
+    'next' =&gt; mi18n(&quot;vor&quot;),
 );
 
 // create mpNivoSlider module instance

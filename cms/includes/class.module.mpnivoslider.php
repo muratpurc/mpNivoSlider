@@ -12,9 +12,9 @@
  * @package     CONTENIDO_Modules
  * @subpackage  mpNivoSlider
  * @author      Murat Purc <murat@purc.de>
- * @copyright   Copyright (c) 2011 Murat Purc (http://www.purc.de)
+ * @copyright   Copyright (c) 2011-2012 Murat Purc (http://www.purc.de)
  * @license     http://www.gnu.org/licenses/gpl-2.0.html - GNU General Public License, version 2
- * @version     $Id: $
+ * @version     $Id: class.module.mpnivoslider.php 281 2012-09-07 14:40:40Z murat $
  */
 
 
@@ -32,6 +32,12 @@ abstract class ModuleMpNivoSliderAbstract
      * @var  int
      */
     const DEFAULT_CACHETIME = 0;
+
+    /**
+     * Default quality for downsized jpeg images
+     * @var  int
+     */
+    const DEFAULT_QUALITY = 85;
 
     /**
      * Default image width
@@ -85,6 +91,12 @@ abstract class ModuleMpNivoSliderAbstract
      */
     protected $_i18n = array();
 
+	/**
+	 * Unique module id
+	 * @var  string
+	 */
+	 protected $_uid;
+
     /**
      * Module configuration structure
      * @var  array
@@ -97,6 +109,8 @@ abstract class ModuleMpNivoSliderAbstract
         'maxHeight' => '',
         'maxCachetime' => '',
         'selectedOrder' => '',
+		'darkImages' => '',
+		'imageQuality' => '',
 
         'effect' => '',
         'slices' => '',
@@ -106,16 +120,12 @@ abstract class ModuleMpNivoSliderAbstract
         'pauseTime' => '',
         'startSlide' => '',
         'directionNav' => '',
-        'directionNavHide' => '',
         'controlNav' => '',
         'controlNavThumbs' => '',
-        'controlNavThumbsFromRel' => '',
         'controlNavThumbsWidthX' => '',
         'controlNavThumbsHeightX' => '',
-        'keyboardNav' => '',
         'pauseOnHover' => '',
         'manualAdvance' => '',
-        'captionOpacity' => '',
         'prevText' => '',
         'nextText' => '',
         'beforeChange' => '',
@@ -152,6 +162,7 @@ abstract class ModuleMpNivoSliderAbstract
         $this->_client         = $clientId;
         $this->_lang           = $iLangId;
         $this->_i18n           = $aTranslations;
+		$this->_uid            = uniqid();
         $this->_sHtmlPath      = $aClientCfg['path']['htmlpath'];
         $this->_sUploadDir     = $aClientCfg['upl']['frontendpath'];
         $this->_sAbsUploadPath = $aClientCfg['upl']['path'];
@@ -201,9 +212,9 @@ abstract class ModuleMpNivoSliderAbstract
         }
     }
 
-
     /**
      * Sets module translations
+	 *
      * @param  array  $translations  Assoziative translations list
      */
     public function setMi18n(array $aTranslations)
@@ -215,7 +226,6 @@ abstract class ModuleMpNivoSliderAbstract
      * Validates module configuration
      */
     abstract protected function _validate();
-
 
     /**
      * Returns the checked attribute sub string usable for checkboxes.
@@ -231,5 +241,26 @@ abstract class ModuleMpNivoSliderAbstract
             return '';
         }
     }
+
+    /**
+     * Returns the id attribute value by concatenating passed name with the module uid.
+     *
+     * @param string $name
+     * @return string
+     */
+    public function getIdValue($name)
+    {
+		return $name . '_' . $this->getUid();
+    }
+
+    /**
+     * Returns the module uid.
+     *
+     * @return string
+     */
+	public function getUid()
+	{
+		return $this->_uid;
+	}
 
 }
