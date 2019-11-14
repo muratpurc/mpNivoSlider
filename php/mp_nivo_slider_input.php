@@ -23,7 +23,7 @@ $aModuleConfiguration = array(
     'maxImages' => "CMS_VALUE[3]",
     'maxWidth' => "CMS_VALUE[4]",
     'maxHeight' => "CMS_VALUE[5]",
-    'maxCachetime' => "CMS_VALUE[6]",
+    'maxCacheTime' => "CMS_VALUE[6]",
     'selectedOrder' => "CMS_VALUE[7]",
     'darkImages' => "CMS_VALUE[33]",
     'imageQuality' => "CMS_VALUE[34]",
@@ -124,7 +124,7 @@ $oModule = new ModuleMpNivoSliderInput(
 <tr>
     <td valign="top" class="text_medium"><?php echo mi18n("MSG_CACHETIME_IMAGES") ?></td>
     <td class="text_medium">
-        <input type="text" class="text_medium" name="CMS_VAR[6]" value="<?php echo $oModule->maxCachetime ?>" /> <?php echo mi18n("MINUTES") ?><br />
+        <input type="text" class="text_medium" name="CMS_VAR[6]" value="<?php echo $oModule->maxCacheTime ?>" /> <?php echo mi18n("MINUTES") ?><br />
         <small><?php echo mi18n("INFO_CACHETIME_IMAGES") ?></small>
     </td>
 </tr>

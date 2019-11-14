@@ -19,7 +19,39 @@ if (!defined('CON_FRAMEWORK')) {
 }
 
 /**
- * CONTENIDO abstract module class for mpNivoSlider
+ * CONTENIDO abstract module class for mpNivoSlider.
+ *
+ * @property mixed|null afterChange
+ * @property mixed|null afterLoad
+ * @property mixed|null animSpeed
+ * @property mixed|null beforeChange
+ * @property mixed|null boxCols
+ * @property mixed|null boxRows
+ * @property mixed|null controlNav
+ * @property mixed|null controlNavThumbs
+ * @property mixed|null controlNavThumbsHeightX
+ * @property mixed|null controlNavThumbsWidthX
+ * @property mixed|null darkImages
+ * @property mixed|null directionNav
+ * @property mixed|null effect
+ * @property int imageQuality
+ * @property mixed|null lastSlide
+ * @property mixed|null manualAdvance
+ * @property mixed|null maxCacheTime
+ * @property mixed|null maxHeight
+ * @property mixed|null maxImages
+ * @property mixed|null maxWidth
+ * @property mixed|null nextText
+ * @property mixed|null pauseOnHover
+ * @property mixed|null pauseTime
+ * @property mixed|null prevText
+ * @property mixed|null responsiveMode
+ * @property mixed|string|null selectedDirname
+ * @property mixed|null selectedOrder
+ * @property mixed|null slices
+ * @property mixed|null slideshowEnd
+ * @property mixed|null startSlide
+ * @property mixed|null useSubdirectories
  */
 abstract class ModuleMpNivoSliderAbstract
 {
@@ -27,7 +59,7 @@ abstract class ModuleMpNivoSliderAbstract
      * Default cache time of resized images in minutes (0 = no limit)
      * @var  int
      */
-    const DEFAULT_CACHETIME = 0;
+    const DEFAULT_CACHE_TIME = 0;
 
     /**
      * Default quality for downsized jpeg images
@@ -82,6 +114,30 @@ abstract class ModuleMpNivoSliderAbstract
     protected $_client;
 
     /**
+     * Language id
+     * @var  int
+     */
+    protected $_lang;
+
+    /**
+     * Client HTML path
+     * @var  string
+     */
+    protected $_sHtmlPath;
+
+    /**
+     * Client upload directory
+     * @var  string
+     */
+    protected $_sUploadDir;
+
+    /**
+     * Absolute path to client upload directory
+     * @var  string
+     */
+    protected $_sAbsUploadPath;
+
+    /**
      * Module translations
      * @var  array
      */
@@ -103,7 +159,7 @@ abstract class ModuleMpNivoSliderAbstract
         'maxImages' => '',
         'maxWidth' => '',
         'maxHeight' => '',
-        'maxCachetime' => '',
+        'maxCacheTime' => '',
         'selectedOrder' => '',
 		'darkImages' => '',
 		'imageQuality' => '',
@@ -144,16 +200,14 @@ abstract class ModuleMpNivoSliderAbstract
      */
     public function __construct(array $aConfig, array $aTranslations, $clientId = null, array $aClientCfg = array(), $iLangId = null)
     {
-        global $cfgClient, $client, $lang;
-
         if ((int) $clientId <= 0) {
-            $clientId = (int) $client;
+            $clientId = (int) cRegistry::getClientId();
         }
         if (empty($aClientCfg)) {
-            $aClientCfg = $cfgClient[$client];
+            $aClientCfg = cRegistry::getClientConfig(cRegistry::getClientId());
         }
         if ((int) $iLangId <= 0) {
-            $iLangId = (int) $lang;
+            $iLangId = (int) cRegistry::getLanguageId();
         }
 
         $this->_client         = $clientId;
@@ -222,7 +276,94 @@ abstract class ModuleMpNivoSliderAbstract
     /**
      * Validates module configuration
      */
-    abstract protected function _validate();
+    protected function _validate() {
+        $this->useSubdirectories = trim($this->useSubdirectories);
+
+        // number of max images to display
+        $this->maxImages = (int) $this->maxImages;
+        if ($this->maxImages <= 1) {
+            $this->maxImages = '';
+        }
+
+        // max allowed width of images. bigger ones will be resized
+        $this->maxWidth = (int) $this->maxWidth;
+        if ($this->maxWidth <= 0) {
+            $this->maxWidth = '';
+        }
+
+        // max allowed height of images. bigger ones will also be resized
+        $this->maxHeight = (int) $this->maxHeight;
+        if ($this->maxHeight <= 0) {
+            $this->maxHeight = '';
+        }
+
+        // quality of resized jpeg images
+        if ($this->imageQuality < 0 || $this->imageQuality > 100) {
+            $this->imageQuality = self::DEFAULT_QUALITY;
+        }
+
+        // responsive mode flag
+        $this->responsiveMode = (int) $this->responsiveMode;
+        if ($this->responsiveMode < 0) {
+            $this->responsiveMode = '';
+        }
+
+        // max cachetime in minutes 4 resized images
+        $this->maxCacheTime = (int) $this->maxCacheTime;
+        if ($this->maxCacheTime < 0) {
+            $this->maxCacheTime = self::DEFAULT_CACHE_TIME;
+        }
+
+        $this->effect = trim($this->effect);
+        if ($this->effect == '') {
+            $this->effect = 'random';
+        }
+
+        $this->slices = (int) $this->slices;
+        if ($this->slices <= 0) {
+            $this->slices = 15;
+        }
+
+        $this->boxCols = (int) $this->boxCols;
+        if ($this->boxCols <= 0) {
+            $this->boxCols = 8;
+        }
+
+        $this->boxRows = (int) $this->boxRows;
+        if ($this->boxRows <= 0) {
+            $this->boxRows = 4;
+        }
+
+        $this->animSpeed = (int) $this->animSpeed;
+        if ($this->animSpeed <= 0) {
+            $this->animSpeed = 500;
+        }
+
+        $this->pauseTime = (int) $this->pauseTime;
+        if ($this->pauseTime <= 0) {
+            $this->pauseTime = 5000;
+        }
+
+        $this->startSlide = (int) $this->startSlide;
+        if ($this->startSlide <= 0) {
+            $this->startSlide = '';
+        }
+
+        $this->directionNav = trim($this->directionNav);
+        $this->controlNav = trim($this->controlNav);
+        $this->controlNavThumbs = trim($this->controlNavThumbs);
+        $this->controlNavThumbsWidthX = (int) $this->controlNavThumbsWidthX;
+        $this->controlNavThumbsHeightX = (int) $this->controlNavThumbsHeightX;
+        $this->pauseOnHover = trim($this->pauseOnHover);
+        $this->manualAdvance = trim($this->manualAdvance);
+        $this->prevText = trim($this->prevText);
+        $this->nextText = trim($this->nextText);
+        $this->beforeChange = trim($this->beforeChange);
+        $this->afterChange = trim($this->afterChange);
+        $this->slideshowEnd = trim($this->slideshowEnd);
+        $this->lastSlide = trim($this->lastSlide);
+        $this->afterLoad = trim($this->afterLoad);
+    }
 
     /**
      * Returns the checked attribute sub string usable for checkboxes.

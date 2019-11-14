@@ -1,0 +1,23 @@
+{
+    "name": "purcaholic/mp-nivo-slider",
+    "type": "contenido-cms-module",
+    "description": "Nivo Slider module for CONTENIDO CMS",
+    "keywords": [
+        "CONTENIDO",
+        "module",
+        "Nivo Slider",
+        "image slider",
+        "JavaScript"
+    ],
+    "homepage": "http://www.purc.de",
+    "authors": [
+        {
+            "name": "Murat Purç",
+            "role": "Developer"
+        }
+    ],
+    "license": ["GPL-2.0-or-later"],
+    "require-dev": {
+        "phpcompatibility/php-compatibility": "^9.3"
+    }
+}

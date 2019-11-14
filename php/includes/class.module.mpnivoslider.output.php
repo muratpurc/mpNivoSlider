@@ -23,38 +23,17 @@ include_once('class.module.mpnivoslider.php');
 
 /**
  * CONTENIDO module output class for mpNivoSlider
+ *
+ * @property mixed _iCalculatedMaxHeight
+ * @property mixed _iCalculatedMaxWidth
  */
 class ModuleMpNivoSliderOutput extends ModuleMpNivoSliderAbstract
 {
     /**
-     * To store occured errors
+     * To store occurred errors
      * @var  string
      */
     protected $_sError = '';
-
-    /**
-     * Language id
-     * @var  int
-     */
-    protected $_lang;
-
-    /**
-     * Client HTML path
-     * @var  string
-     */
-    protected $_sHtmlPath;
-
-    /**
-     * Client upload directory
-     * @var  string
-     */
-    protected $_sUploadDir;
-
-    /**
-     * Absolute path to client upload directory
-     * @var  string
-     */
-    protected $_sAbsUploadPath;
 
 
     /**
@@ -72,48 +51,6 @@ class ModuleMpNivoSliderOutput extends ModuleMpNivoSliderAbstract
             return;
         }
 
-        $this->useSubdirectories = trim($this->useSubdirectories);
-
-        // number of max images to display
-        $this->maxImages = (int) $this->maxImages;
-        if ($this->maxImages <= 1) {
-            $this->maxImages = '';
-        }
-
-        // max allowed width of images. bigger ones will be resized
-        $this->maxWidth = (int) $this->maxWidth;
-        if ($this->maxWidth <= 0) {
-            $this->maxWidth = '';
-        }
-
-        // max allowed height of images. bigger ones will also be resized
-        $this->maxHeight = (int) $this->maxHeight;
-        if ($this->maxHeight <= 0) {
-            $this->maxHeight = '';
-        }
-
-		// quality of resized jpeg images
-		if ($this->imageQuality < 0 || $this->imageQuality > 100) {
-			$this->imageQuality = self::DEFAULT_QUALITY;
-		}
-
-		// responsive mode flag
-        $this->responsiveMode = (int) $this->responsiveMode;
-		if ($this->responsiveMode < 0) {
-			$this->responsiveMode = '';
-		}
-
-		// max cachetime in minutes 4 resized images
-        $this->maxCachetime = (int) $this->maxCachetime;
-        if ($this->maxCachetime < 0) {
-            $this->maxCachetime = self::DEFAULT_CACHETIME;
-        }
-
-        // selected order type
-        if (!isset($this->_aOrder[$this->selectedOrder])) {
-            $this->selectedOrder = 'filename:ASC';
-        }
-
         $allowedEffects = ',' . self::EFFECTS . ',';
         $configuredEffects = explode(',', trim($this->effect));
         $cleanedEffects = array();
@@ -123,46 +60,14 @@ class ModuleMpNivoSliderOutput extends ModuleMpNivoSliderAbstract
             }
         }
         $this->effect = implode(',', $cleanedEffects);
-        if (empty($this->effect)) {
-            $this->effect = 'random';
+
+        parent::_validate();
+
+        // selected order type
+        if (!isset($this->_aOrder[$this->selectedOrder])) {
+            $this->selectedOrder = 'filename:ASC';
         }
 
-        $this->slices = (int) $this->slices;
-        if ($this->slices <= 0) {
-            $this->slices = 15;
-        }
-
-        $this->boxCols = (int) $this->boxCols;
-        if ($this->boxCols <= 0) {
-            $this->boxCols = 4;
-        }
-
-        $this->boxRows = (int) $this->boxRows;
-        if ($this->boxRows <= 0) {
-            $this->boxRows = 4;
-        }
-
-        $this->animSpeed = (int) $this->animSpeed;
-        if ($this->animSpeed <= 0) {
-            $this->animSpeed = 500;
-        }
-
-        $this->pauseTime = (int) $this->pauseTime;
-        if ($this->pauseTime <= 0) {
-            $this->pauseTime = 5000;
-        }
-
-        $this->startSlide = (int) $this->startSlide;
-        if ($this->startSlide < 0) {
-            $this->startSlide = 0;
-        }
-
-        $this->directionNav = trim($this->directionNav);
-
-        $this->controlNav = trim($this->controlNav);
-        $this->controlNavThumbs = trim($this->controlNavThumbs);
-        $this->controlNavThumbsHeightX = (int) $this->controlNavThumbsHeightX;
-        $this->controlNavThumbsWidthX = (int) $this->controlNavThumbsWidthX;
         if ($this->controlNavThumbs) {
             if ($this->controlNavThumbsHeightX <= 0) {
                 $this->controlNavThumbsHeightX = 50;
@@ -172,47 +77,37 @@ class ModuleMpNivoSliderOutput extends ModuleMpNivoSliderAbstract
             }
         }
 
-        $this->pauseOnHover = trim($this->pauseOnHover);
-
-        $this->manualAdvance = trim($this->manualAdvance);
-
-        $this->prevText = trim($this->prevText);
         if ($this->prevText == '') {
             $this->prevText = $this->_i18n['previous'];
         }
-        $this->nextText = trim($this->nextText);
         if ($this->nextText == '') {
             $this->nextText = $this->_i18n['next'];
         }
-
-        $this->beforeChange = trim($this->beforeChange);
-        $this->afterChange = trim($this->afterChange);
-        $this->slideshowEnd = trim($this->slideshowEnd);
-        $this->lastSlide = trim($this->lastSlide);
-        $this->afterLoad = trim($this->afterLoad);
     }
 
     /**
-     * Generates the mpNivoSlider or a message on any occured error.
+     * Generates the view data.
+     * @return stdClass
      */
-    public function generateOutput()
+    public function getViewData()
     {
-        if ($this->_sError !== '') {
-            print $this->_sError;
-            return;
-        }
+        $viewData = new stdClass();
 
-        $oTemplate = new cTemplate();
+        if ($this->_sError !== '') {
+            $viewData->error = $this->_sError;
+            return $viewData;
+        }
 
         // get images
         $aImages = $this->_getImages();
         if (count($aImages) == 0) {
-            print "mpNivoSlider: No images found in defined image folder!";
-            return;
+            $viewData->error = 'mpNivoSlider: No images found in defined image folder!';
+            return $viewData;
         }
 
-        // list of image captions
-        $aCaptions = array();
+        // list of images and image captions
+        $dataImages = [];
+        $dataCaptions = [];
 
         // loop images array an fill template
         foreach ($aImages as $id => $image) {
@@ -223,28 +118,22 @@ class ModuleMpNivoSliderOutput extends ModuleMpNivoSliderAbstract
             // store existing meta_description value in captions list
             if ($image['meta_description']) {
                 $image['title'] = '#caption_' . $id;
-                $aCaptions['caption_' . $id] = $image['meta_description'];
+                $dataCaptions[] = [
+                    'id' => 'caption_' . $id,
+                    'text' => $image['meta_description']
+                ];
             }
 
-            $oTemplate->set('d', 'IMG.SRC', $image['src']);
-            $oTemplate->set('d', 'IMG.ALT', htmlspecialchars($image['alt']));
-            $oTemplate->set('d', 'IMG.TITLE', $image['title']);
-            $oTemplate->set('d', 'IMG.ATTRIBUTES', $image['attr']);
-            $oTemplate->next();
+            $dataImages[] = [
+                'src' => $image['src'],
+                'alt' => $image['alt'],
+                'title' => $image['title'],
+                'attributes' => $image['attr']
+            ];
         }
 
-        // create captions markup
-        $captions = '';
-        if (!empty($aCaptions)) {
-            $oCaptionsTpl = new cTemplate();
-            foreach ($aCaptions as $id => $text) {
-                $oCaptionsTpl->set('d', 'ID', $id);
-                $oCaptionsTpl->set('d', 'TEXT', $text);
-                $oCaptionsTpl->next();
-            }
-            $captions = $oCaptionsTpl->generate(self::CAPTIONS_TPL, 1, 0);
-        }
-        $oTemplate->set('s', 'CAPTIONS', $captions);
+        $viewData->images = $dataImages;
+        $viewData->captions = $dataCaptions;
 
         // js variables
         $jsVars = array();
@@ -323,14 +212,14 @@ class ModuleMpNivoSliderOutput extends ModuleMpNivoSliderAbstract
             $jsJson = '';
         }
 
-        $oTemplate->set('s', 'NIVO.OPTIONS', $jsJson);
+        $viewData->nivoOptions = $jsJson;
 
         // additional class names
         $cssClass = '';
         if ($this->darkImages) {
             $cssClass .= ' mpNivoSliderDark';
         }
-        $oTemplate->set('s', 'MODULE.CLASSNAME', $cssClass);
+        $viewData->cssClassName = $cssClass;
 
         // additional styles
         $moduleStyle = '';
@@ -343,16 +232,62 @@ class ModuleMpNivoSliderOutput extends ModuleMpNivoSliderAbstract
                 $moduleStyle .= 'height:' . $this->maxHeight . 'px;';
             }
         }
-        $oTemplate->set('s', 'MODULE.STYLE', $moduleStyle);
+        $viewData->styles = $moduleStyle;
 
-		// slider wrapper css class
+        // slider wrapper css class
         $cssClass = '';
         if ($this->controlNavThumbs) {
             $cssClass .= ' controlnav-thumbs';
         }
-        $oTemplate->set('s', 'MODULE.SLIDER.WRAPPER.CLASSNAME', $cssClass);
+        $viewData->sliderWrapperCssClassName = $cssClass;
 
-        $oTemplate->set('s', 'MODULE.UID', $this->getUid());
+        $viewData->uid = $this->getUid();
+
+        return $viewData;
+    }
+
+    /**
+     * Generates the mpNivoSlider or a message on any occurred error.
+     * @deprecated Since 0.3.0, Use getViewData() and render it in module output!
+     */
+    public function generateOutput()
+    {
+        $viewData = $this->getViewData();
+
+        if (!empty($viewData->error)) {
+            print $viewData->error;
+            return;
+        }
+
+        $oTemplate = new cTemplate();
+
+        // loop images array an fill template
+        foreach ($viewData->images as $image) {
+            $oTemplate->set('d', 'IMG.SRC', $image['src']);
+            $oTemplate->set('d', 'IMG.ALT', htmlspecialchars($image['alt']));
+            $oTemplate->set('d', 'IMG.TITLE', $image['title']);
+            $oTemplate->set('d', 'IMG.ATTRIBUTES', $image['attributes']);
+            $oTemplate->next();
+        }
+
+        // create captions markup
+        $captions = '';
+        if (count($viewData->captions) > 0) {
+            $oCaptionsTpl = new cTemplate();
+            foreach ($viewData->captions as $caption) {
+                $oCaptionsTpl->set('d', 'ID', $caption['id']);
+                $oCaptionsTpl->set('d', 'TEXT', $caption['text']);
+                $oCaptionsTpl->next();
+            }
+            $captions = $oCaptionsTpl->generate(self::CAPTIONS_TPL, 1, 0);
+        }
+        $oTemplate->set('s', 'CAPTIONS', $captions);
+
+        $oTemplate->set('s', 'NIVO.OPTIONS', $viewData->nivoOptions);
+        $oTemplate->set('s', 'MODULE.CLASSNAME', $viewData->cssClassName);
+        $oTemplate->set('s', 'MODULE.STYLE',  $viewData->styles);
+        $oTemplate->set('s', 'MODULE.SLIDER.WRAPPER.CLASSNAME', $viewData->sliderWrapperCssClassName);
+        $oTemplate->set('s', 'MODULE.UID', $viewData->uid);
 
         $oTemplate->generate('mpNivoSlider.html', 0, 0);
     }
@@ -364,12 +299,14 @@ class ModuleMpNivoSliderOutput extends ModuleMpNivoSliderAbstract
      */
     protected function _getImages()
     {
+        $oUploadColl = new cApiUploadCollection();
+
         // where statement with selected dir and supported filetypes
         $aWhere = array();
         if ($this->useSubdirectories) {
-            $aWhere[] = 'dirname LIKE "' . $this->selectedDirname . '%"';
+            $aWhere[] = 'dirname LIKE "' . $oUploadColl->escape($this->selectedDirname) . '%"';
         } else {
-            $aWhere[] = 'dirname="' . $this->selectedDirname . '"';
+            $aWhere[] = 'dirname="' . $oUploadColl->escape($this->selectedDirname) . '"';
         }
         $aWhere[] = 'AND';
         $aWhere[] = 'LOWER(filetype) IN(' . self::FILE_TYPES . ')';
@@ -377,10 +314,10 @@ class ModuleMpNivoSliderOutput extends ModuleMpNivoSliderAbstract
 
         // order settings
         if (strpos($this->selectedOrder, ':') > 0) {
-            list($sort, $sortdir) = explode(':', $this->selectedOrder);
-            $sOrder = $sort . ' ' . $sortdir;
+            list($sort, $sortDir) = explode(':', $this->selectedOrder);
+            $sOrder = $oUploadColl->escape($sort) . ' ' . $oUploadColl->escape($sortDir);
         } else {
-            $sOrder = $this->selectedOrder;
+            $sOrder = $oUploadColl->escape($this->selectedOrder);
         }
 
         // limit
@@ -391,7 +328,6 @@ class ModuleMpNivoSliderOutput extends ModuleMpNivoSliderAbstract
         }
 
         // run the statement
-        $oUploadColl = new cApiUploadCollection();
         $oUploadColl->select($sWhere, '', $sOrder, $sLimit);
 
         $aImages = array();
@@ -441,6 +377,7 @@ class ModuleMpNivoSliderOutput extends ModuleMpNivoSliderAbstract
      * @param  string|int  $maxWidth  Max width, if bigger image has to be downsized
      * @param  string|int  $maxHeight  Max height, if bigger image has to be downsized
      * @param  object  Upload item object
+     * @return array
      */
     protected function _getImageData($file, $maxWidth, $maxHeight, $oUploadItem)
     {
@@ -467,7 +404,7 @@ class ModuleMpNivoSliderOutput extends ModuleMpNivoSliderAbstract
 
             // bigger images have 2 be resized
             $file = capiImgScale(
-                $file, $maxWidth, $maxHeight, false, false, $this->maxCachetime, $this->imageQuality
+                $file, $maxWidth, $maxHeight, false, false, $this->maxCacheTime, $this->imageQuality
             );
             if (!$file) {
                 return null;
@@ -498,7 +435,7 @@ class ModuleMpNivoSliderOutput extends ModuleMpNivoSliderAbstract
      * existing images.
      *
      * @param string Image file to ger size array for
-     * @return array Returnvalue of getimagesize() function
+     * @return array Return value of getimagesize() function
      */
     protected function _getImageSize($file)
     {
@@ -517,7 +454,7 @@ class ModuleMpNivoSliderOutput extends ModuleMpNivoSliderAbstract
     /**
      * Composes css definition 2 center a image horizontally and returns it back.
      *
-     * @param mixed Array including image size imnformations (result of getimagesize())
+     * @param mixed Array including image size information (result of getimagesize())
      * @return string Composed css definition
      */
     protected function _css2centerImageHorizontal($size)
