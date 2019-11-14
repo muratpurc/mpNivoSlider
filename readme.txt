@@ -1,4 +1,4 @@
-CONTENIDO Nivo Slider Modul mpNivoSlider 0.3.0 für CONTENIDO 4.9.x
+CONTENIDO CMS Nivo Slider Modul mpNivoSlider zum Generieren eines Image-Sliders
 
 ################################################################################
 TOC (Table of contents)
