@@ -59,7 +59,7 @@ $aModuleTranslations = module_mpNivoSlider_getModuleTranslations();
 
 // create mpNivoSlider module instance
 $client = cRegistry::getClientId();
-$oModule = new ModuleMpNivoSliderOutput(
+$oModule = new ModuleMpNivoSliderInput(
     $aModuleConfiguration, $aModuleTranslations, $client, cRegistry::getClientConfig($client), cRegistry::getLanguageId()
 );
 
@@ -158,19 +158,12 @@ $oModule = new ModuleMpNivoSliderOutput(
     <td class="text_medium">
         <input type="text" class="text_medium" name="CMS_VAR[8]" value="<?php echo $oModule->effect ?>" /> <small><?php echo mi18n("INFO_EFFECT") ?></small> <br />
         <?php
-        $tmp = explode(',', ModuleMpNivoSliderInput::EFFECTS);
-        $tmp2 = '';
-        foreach ($tmp as $p => $v) {
-            $tmp2 .= $v . ', ';
-            if ($p > 0 && $p % 5 == 0) {
-                $tmp2 .= '<br />';
-            }
-        }
+        $effects = implode(', ', explode(',', ModuleMpNivoSliderInput::EFFECTS)) . '.';
         ?>
         <span style="text-decoration:underline"><?php echo mi18n("INFO2_EFFECT") ?>:</span><br />
-        <?php echo $tmp2 ?>
+        <?php echo $effects ?>
         <?php
-        unset($tmp, $tmp2);
+        unset($effects);
         ?>
     </td>
 </tr>

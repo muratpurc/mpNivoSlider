@@ -13,6 +13,7 @@ __SELECT_FOLDER__=-- Select folder --
 __SELECT_ORDER__=-- Select order --
 PREVIOUS=previous
 NEXT=next
+EFFECT=Effect
 
 PIXEL=pixel
 MINUTES=minutes
