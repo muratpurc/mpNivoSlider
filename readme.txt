@@ -65,8 +65,8 @@ Beispiel:
 [code]
 ...
 <head>
-    <link rel="stylesheet" href="data/modules/mp_nivo_slider/vendor/nivo-slider/nivo-slider.css" type="text/css" media="screen" />
-    <link rel="stylesheet" href="data/modules/mp_nivo_slider/vendor/nivo-slider/themes/contenido/contenido.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="data/modules/mp_nivo_slider/lib/nivo-slider/nivo-slider.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="data/modules/mp_nivo_slider/lib/nivo-slider/themes/contenido/contenido.css" type="text/css" media="screen" />
 
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js" type="text/javascript"></script>
 </head>
@@ -79,7 +79,7 @@ nicht im head-Bereich. Da muss man nichts machen, aber bei Bedarf kann man das a
 in den head-Bereich auslagern.
 [code]
 ...
-<script src="data/modules/mp_nivo_slider/vendor/nivo-slider/jquery.nivo.slider.pack.js" type="text/javascript"></script>
+<script src="data/modules/mp_nivo_slider/lib/nivo-slider/jquery.nivo.slider.pack.js" type="text/javascript"></script>
 ...
 [/code]
 
@@ -104,15 +104,15 @@ Themes:
 -------
 Als Standard wird das Theme "contenido" verwendet. Es stehen auch weitere Themes
 ("bar", "dark", "default" und "light", siehe
-cms/data/modules/mp_nivo_slider/vendor/nivo-slider/themes/) zur Verfügung.
+cms/data/modules/mp_nivo_slider/lib/nivo-slider/themes/) zur Verfügung.
 Zum Konfigurieren eines anderen Themes, z. B. bar, folgendes befolgen:
 Im head-Bereich die Zeile
 [code]
-    <link rel="stylesheet" href="data/modules/mp_nivo_slider/vendor/nivo-slider/themes/contenido/contenido.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="data/modules/mp_nivo_slider/lib/nivo-slider/themes/contenido/contenido.css" type="text/css" media="screen" />
 [/code]
 gegen
 [code]
-    <link rel="stylesheet" href="data/modules/mp_nivo_slider/vendor/nivo-slider/themes/bar/bar.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="data/modules/mp_nivo_slider/lib/nivo-slider/themes/bar/bar.css" type="text/css" media="screen" />
 [/code]
 ersetzen.
 
