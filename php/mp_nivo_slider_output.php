@@ -18,6 +18,10 @@ cInclude('includes', 'functions.api.images.php');
 
 // module configuration
 $aModuleConfiguration = array(
+    'name' => 'mpNivoSlider',
+    'idmod' => $cCurrentModule,
+    'container' => $cCurrentContainer,
+
     'selectedDirname' => "CMS_VALUE[1]",
     'useSubdirectories' => "CMS_VALUE[2]",
     'maxImages' => "CMS_VALUE[3]",
@@ -63,9 +67,12 @@ $oModule = new ModuleMpNivoSliderOutput(
 );
 
 // generate the slider
-$oModule->generateOutput();
+$viewData = $oModule->getViewData();
+$tpl = cSmartyFrontend::getInstance();
+$tpl->assign('viewData', $viewData);
+$tpl->display('get.tpl');
 
 // save memory
-unset($oModule, $aModuleConfiguration, $aModuleTranslations);
+unset($oModule, $aModuleConfiguration, $aModuleTranslations, $viewData);
 
 ?>

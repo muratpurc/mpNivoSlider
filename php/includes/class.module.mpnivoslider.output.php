@@ -87,21 +87,25 @@ class ModuleMpNivoSliderOutput extends ModuleMpNivoSliderAbstract
 
     /**
      * Generates the view data.
-     * @return stdClass
+     * @return array
      */
     public function getViewData()
     {
-        $viewData = new stdClass();
+        $viewData = [];
+        $viewData['error'] = '';
 
         if ($this->_sError !== '') {
-            $viewData->error = $this->_sError;
+            $viewData['error'] = $this->_sError;
             return $viewData;
         }
+
+        $cApiModule = new cApiModule($this->idmod);
+        $viewData['modulePath'] = $this->_sModulePath . $cApiModule->get('alias');
 
         // get images
         $aImages = $this->_getImages();
         if (count($aImages) == 0) {
-            $viewData->error = 'mpNivoSlider: No images found in defined image folder!';
+            $viewData['error'] = 'mpNivoSlider: No images found in defined image folder!';
             return $viewData;
         }
 
@@ -132,8 +136,8 @@ class ModuleMpNivoSliderOutput extends ModuleMpNivoSliderAbstract
             ];
         }
 
-        $viewData->images = $dataImages;
-        $viewData->captions = $dataCaptions;
+        $viewData['images'] = $dataImages;
+        $viewData['captions'] = $dataCaptions;
 
         // js variables
         $jsVars = array();
@@ -212,14 +216,14 @@ class ModuleMpNivoSliderOutput extends ModuleMpNivoSliderAbstract
             $jsJson = '';
         }
 
-        $viewData->nivoOptions = $jsJson;
+        $viewData['nivoOptions'] = $jsJson;
 
         // additional class names
         $cssClass = '';
         if ($this->darkImages) {
             $cssClass .= ' mpNivoSliderDark';
         }
-        $viewData->cssClassName = $cssClass;
+        $viewData['cssClassName'] = $cssClass;
 
         // additional styles
         $moduleStyle = '';
@@ -232,64 +236,18 @@ class ModuleMpNivoSliderOutput extends ModuleMpNivoSliderAbstract
                 $moduleStyle .= 'height:' . $this->maxHeight . 'px;';
             }
         }
-        $viewData->styles = $moduleStyle;
+        $viewData['styles'] = $moduleStyle;
 
         // slider wrapper css class
         $cssClass = '';
         if ($this->controlNavThumbs) {
             $cssClass .= ' controlnav-thumbs';
         }
-        $viewData->sliderWrapperCssClassName = $cssClass;
+        $viewData['sliderWrapperCssClassName'] = $cssClass;
 
-        $viewData->uid = $this->getUid();
+        $viewData['uid'] = $this->getUid();
 
         return $viewData;
-    }
-
-    /**
-     * Generates the mpNivoSlider or a message on any occurred error.
-     * @deprecated Since 0.3.0, Use getViewData() and render it in module output!
-     */
-    public function generateOutput()
-    {
-        $viewData = $this->getViewData();
-
-        if (!empty($viewData->error)) {
-            print $viewData->error;
-            return;
-        }
-
-        $oTemplate = new cTemplate();
-
-        // loop images array an fill template
-        foreach ($viewData->images as $image) {
-            $oTemplate->set('d', 'IMG.SRC', $image['src']);
-            $oTemplate->set('d', 'IMG.ALT', htmlspecialchars($image['alt']));
-            $oTemplate->set('d', 'IMG.TITLE', $image['title']);
-            $oTemplate->set('d', 'IMG.ATTRIBUTES', $image['attributes']);
-            $oTemplate->next();
-        }
-
-        // create captions markup
-        $captions = '';
-        if (count($viewData->captions) > 0) {
-            $oCaptionsTpl = new cTemplate();
-            foreach ($viewData->captions as $caption) {
-                $oCaptionsTpl->set('d', 'ID', $caption['id']);
-                $oCaptionsTpl->set('d', 'TEXT', $caption['text']);
-                $oCaptionsTpl->next();
-            }
-            $captions = $oCaptionsTpl->generate(self::CAPTIONS_TPL, 1, 0);
-        }
-        $oTemplate->set('s', 'CAPTIONS', $captions);
-
-        $oTemplate->set('s', 'NIVO.OPTIONS', $viewData->nivoOptions);
-        $oTemplate->set('s', 'MODULE.CLASSNAME', $viewData->cssClassName);
-        $oTemplate->set('s', 'MODULE.STYLE',  $viewData->styles);
-        $oTemplate->set('s', 'MODULE.SLIDER.WRAPPER.CLASSNAME', $viewData->sliderWrapperCssClassName);
-        $oTemplate->set('s', 'MODULE.UID', $viewData->uid);
-
-        $oTemplate->generate('mpNivoSlider.html', 0, 0);
     }
 
     /**

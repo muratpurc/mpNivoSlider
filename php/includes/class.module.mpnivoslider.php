@@ -27,6 +27,7 @@ if (!defined('CON_FRAMEWORK')) {
  * @property mixed|null beforeChange
  * @property mixed|null boxCols
  * @property mixed|null boxRows
+ * @property mixed|null container
  * @property mixed|null controlNav
  * @property mixed|null controlNavThumbs
  * @property mixed|null controlNavThumbsHeightX
@@ -34,6 +35,7 @@ if (!defined('CON_FRAMEWORK')) {
  * @property mixed|null darkImages
  * @property mixed|null directionNav
  * @property mixed|null effect
+ * @property int idmod
  * @property int imageQuality
  * @property mixed|null lastSlide
  * @property mixed|null manualAdvance
@@ -41,6 +43,7 @@ if (!defined('CON_FRAMEWORK')) {
  * @property mixed|null maxHeight
  * @property mixed|null maxImages
  * @property mixed|null maxWidth
+ * @property string name
  * @property mixed|null nextText
  * @property mixed|null pauseOnHover
  * @property mixed|null pauseTime
@@ -92,16 +95,6 @@ abstract class ModuleMpNivoSliderAbstract
     const EFFECTS = 'sliceDown,sliceDownLeft,sliceUp,sliceUpLeft,sliceUpDown,sliceUpDownLeft,fold,fade,random,slideInRight,slideInLeft,boxRandom,boxRain,boxRainReverse,boxRainGrow,boxRainGrowReverse';
 
     /**
-     * Template for image captions
-     * @var  string
-     */
-    const CAPTIONS_TPL = '
-<!-- BEGIN:BLOCK -->
-<div id="{ID}" class="nivo-html-caption">
-    {TEXT}
-</div><!-- END:BLOCK -->';
-
-    /**
      * Associative order array
      * @var  array
      */
@@ -138,6 +131,12 @@ abstract class ModuleMpNivoSliderAbstract
     protected $_sAbsUploadPath;
 
     /**
+     * Html path of current module
+     * @var  string
+     */
+    protected $_sModulePath;
+
+    /**
      * Module translations
      * @var  array
      */
@@ -154,6 +153,10 @@ abstract class ModuleMpNivoSliderAbstract
      * @var  array
      */
     protected $_cmsData = array(
+        'name' => '',
+        'idmod' => 0,
+        'container' => 0,
+
         'selectedDirname' => '',
         'useSubdirectories' => '',
         'maxImages' => '',
@@ -217,6 +220,7 @@ abstract class ModuleMpNivoSliderAbstract
         $this->_sHtmlPath      = $aClientCfg['path']['htmlpath'];
         $this->_sUploadDir     = $aClientCfg['upl']['frontendpath'];
         $this->_sAbsUploadPath = $aClientCfg['upl']['path'];
+        $this->_sModulePath    = $aClientCfg['module']['frontendpath'];
 
         foreach ($aConfig as $k => $v) {
             $this->$k = $v;

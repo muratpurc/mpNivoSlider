@@ -18,6 +18,10 @@ cInclude('module', 'includes/class.module.mpnivoslider.input.php');
 
 // module configuration
 $aModuleConfiguration = array(
+    'name' => 'mpNivoSlider',
+    'idmod' => $cCurrentModule,
+    'container' => $cCurrentContainer,
+
     'selectedDirname' => "CMS_VALUE[1]",
     'useSubdirectories' => "CMS_VALUE[2]",
     'maxImages' => "CMS_VALUE[3]",
