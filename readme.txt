@@ -167,7 +167,7 @@ CHANGELOG
 2019-11-15 mpNivoSlider Modul 0.4.0 (für CONTENIDO 4.9.x - 4.10.x)
     * change: Quellcode überarbeitet
     * change: Support für PHP < 5.2 entfernt
-    * change: Modul-Templates in ein Smarty-Template portiert
+    * change: Modul-Template in ein Smarty-Template portiert
     * change: Ordner "vendor" in "lib" umbenannt
 
 2013-03-23 mpNivoSlider Modul 0.3.0 (für CONTENIDO 4.8.x)
