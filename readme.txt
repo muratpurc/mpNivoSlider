@@ -24,7 +24,7 @@ Benötigt jQuery v1.7+ und unterstützt folgende Browser:
 Internet Explorer v7+, Firefox v3+, Google Chrome v4+, Safari v4+, Opera v10+
 
 Webseite von Nivo Slider:
-http://nivo.dev7studios.com/
+https://themeisle.com/plugins/nivo-slider/ (ehemals http://nivo.dev7studios.com/)
 
 
 CONTENIDO Modul:
@@ -68,20 +68,26 @@ Beispiel:
     <link rel="stylesheet" href="data/modules/mp_nivo_slider/lib/nivo-slider/nivo-slider.css" type="text/css" media="screen" />
     <link rel="stylesheet" href="data/modules/mp_nivo_slider/lib/nivo-slider/themes/contenido/contenido.css" type="text/css" media="screen" />
 
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js" type="text/javascript"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js" type="text/javascript"></script>
 </head>
 ...
 [/code]
 
-Hinweis:
-Die Nivo Slider JavaScript-Datei ist schom im Modul-Template eingebunden,
+Hinweise:
+Die Nivo Slider JavaScript-Datei ist schon im Modul-Template eingebunden,
 nicht im head-Bereich. Da muss man nichts machen, aber bei Bedarf kann man das auch
-in den head-Bereich auslagern.
+in den head-Bereich oder vor dem schließenden body-Tag (</body>) auslagern.
 [code]
 ...
 <script src="data/modules/mp_nivo_slider/lib/nivo-slider/jquery.nivo.slider.pack.js" type="text/javascript"></script>
 ...
 [/code]
+
+Beim Einbinden der JavaScript-Dateien muss man auf die Reihenfolge acht geben,
+die sollte wie folgt sein:
+- jQuery (jquery.min.js)
+- Nivo Slider JavaScript-Datei (jquery.nivo.slider.pack.js)
+- JavaScript-Code im Modul-Template, das den Slider initialisiert
 
 
 ################################################################################
@@ -141,20 +147,28 @@ Das Modul ist nicht darauf ausgelegt, eine große Anzahl von Bildern im Slider z
 Je mehr Bilder angezeigt werden sollen, desto länger dauert die Initialisierung des Sliders.
 Maximal 10 Bilder sind ein guter Wert für die obere Grenze.
 
-Verwendung mit anderen JavaScript Frameworks:
----------------------------------------------
-Das Nivo Slider Modul basiert auf jQuery und jQuery bietet eigentlich auch die Option
-"jQuery.noConflict();", um mit anderen JavaScript-Frameworks zusammen zu funktionieren.
-Dies klappt nicht in Verbindung mit den Prototype.js Framework, es verursacht
-Konflikte unter IE und Opera.
-Daher ist es ratsam, im Layout nur jQuery einzubinden.
+Ausgeben der JavaScript-Sourcen am Ende der Seite:
+--------------------------------------------------
+Idealerweise sollten JavaScript-Dateien am Ende der Seite ausgegeben werden,
+damit das Laden von JavaScript die initiale Anzeige der Seite nicht allzu sehr
+verzögert.
+Man kann die Nivo Slider JavaScript-Datei auch vor dem schließenden body-Tag
+(</body>) einbinden. Danach sollte der JavaScript-Code im Modul-Template, das
+den Nivo-Slider initialisiert, ausgegeben werden.
+Um das zu realisieren, kann man die Ausgabe des JavaScript Codes zum Initialisieren
+des Sliders in einer Variable speichern, um es am Ende der Seite in einem
+Modul auszugeben. In Smarty kann man z. B. mit "capture" die Ausgabe speichern,
+um es später auszugeben.
 
 
 ################################################################################
 CHANGELOG
 
-2013-11-15 mpNivoSlider Modul 0.3.0 (für CONTENIDO 4.9.x)
-    * Erste Veröffentlichung des mpNivoSlider Moduls für CONTENIDO 4.9.x
+2019-11-15 mpNivoSlider Modul 0.4.0 (für CONTENIDO 4.9.x - 4.10.x)
+    * change: Quellcode überarbeitet
+    * change: Support für PHP < 5.2 entfernt
+    * change: Modul-Templates in ein Smarty-Template portiert
+    * change: Ordner "vendor" in "lib" umbenannt
 
 2013-03-23 mpNivoSlider Modul 0.3.0 (für CONTENIDO 4.8.x)
     * new: Update auf Nivo Slider v3.2
@@ -171,7 +185,7 @@ CHANGELOG
     * change: jQuery Nivo Slider Plugins im separaten Scope um Probleme mit anderen
 	  JS-Frameworks zu vermeiden
     * change: Entfernen diverser Nivo Slider Optionen,
-	  siehe http://nivo.dev7studios.com/2012/05/30/the-nivo-slider-is-responsive/
+	  siehe https://nivo.dev7studios.com/2012/05/30/the-nivo-slider-is-responsive/
 
 2011-11-22 mpNivoSlider Modul 0.13rc (für CONTENIDO 4.8.x)
     * new: Erweitert auf mehrfachen Einsatz innerhalb einer Seite
@@ -183,13 +197,16 @@ CHANGELOG
 
 
 ################################################################################
-MPNIVOSLIDER MODUL THEMEN IM CONTENIDO FORUM
+MPNIVOSLIDER MODUL LINKS
 
-mpNivoSlider: Nivo Slider Image-Gallery Modul für CONTENIDO 4.9.x:
-http://forum.contenido.org/viewtopic.php?f=89&t=34705
+CONTENIDO Forum unter "CONTENIDO 4.10 -> Module und Plugins":
+https://forum.contenido.org/viewtopic.php?t=43782
 
-mpNivoSlider: Nivo Slider Image-Gallery Modul für CONTENIDO 4.8:
-http://forum.contenido.org/viewtopic.php?f=60&t=31601
+CONTENIDO Forum unter "CONTENIDO 4.9 -> Module und Plugins":
+https://forum.contenido.org/viewtopic.php?t=34705
+
+CONTENIDO Forum unter "CONTENIDO 4.8 -> Module und Plugins":
+https://forum.contenido.org/viewtopic.php?t=31601
 
 
 ################################################################################

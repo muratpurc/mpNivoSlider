@@ -5,7 +5,7 @@ It requires jQuery v1.7+ and supports following browsers:&#13;
 Internet Explorer v7+, Firefox v3+, Google Chrome v4+, Safari v4+, Opera v10+&#13;
 &#13;
 Website of Nivo Slider:&#13;
-http://nivo.dev7studios.com/&#13;
+https://themeisle.com/plugins/nivo-slider/ (formerly http://nivo.dev7studios.com/)&#13;
 &#13;
 This module provides some options to control the Nivo Slider, it supports also jpg, jpeg, png, and gif images.&#13;
 Scaling of the images depends on installed GD-Library or ImageMagick.&#13;
@@ -17,4 +17,4 @@ Module setting:&#13;
 * A lot of Nivo Slider options&#13;
 &#13;
 Author: Murat Purç &lt;murat@purc.de&gt;&#13;
-Version: 0.3.0</description><type/><alias>mp_nivo_slider</alias></module>
+Version: 0.4.0</description><type/><alias>mp_nivo_slider</alias></module>
