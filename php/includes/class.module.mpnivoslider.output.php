@@ -304,9 +304,9 @@ class ModuleMpNivoSliderOutput extends ModuleMpNivoSliderAbstract
         // where statement with selected dir and supported filetypes
         $aWhere = array();
         if ($this->useSubdirectories) {
-            $aWhere[] = 'dirname LIKE "' . $oUploadColl->escape($this->selectedDirname) . '%"';
+            $aWhere[] = "dirname LIKE '" . $oUploadColl->escape($this->selectedDirname) . "%'";
         } else {
-            $aWhere[] = 'dirname="' . $oUploadColl->escape($this->selectedDirname) . '"';
+            $aWhere[] = "dirname='" . $oUploadColl->escape($this->selectedDirname) . "'";
         }
         $aWhere[] = 'AND';
         $aWhere[] = 'LOWER(filetype) IN(' . self::FILE_TYPES . ')';
