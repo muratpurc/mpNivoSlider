@@ -116,7 +116,7 @@ gegen
 [/code]
 ersetzen.
 
-Im Modultemplate (cms/data/modules/mp_nivo_slider/template/mpNivoSlider.html) die Zeile
+Im Modultemplate (cms/data/modules/mp_nivo_slider/template/get.tpl) die Zeile
 [code]
     <div class="slider-wrapper theme-contenido">
 [/code]
