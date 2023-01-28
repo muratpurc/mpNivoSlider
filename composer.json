@@ -1,5 +1,5 @@
 {
-    "name": "purcaholic/mp-nivo-slider",
+    "name": "purc/mp-nivo-slider",
     "type": "contenido-cms-module",
     "description": "Nivo Slider module for CONTENIDO CMS",
     "keywords": [
@@ -9,7 +9,7 @@
         "image slider",
         "JavaScript"
     ],
-    "homepage": "http://www.purc.de",
+    "homepage": "https://www.purc.de",
     "authors": [
         {
             "name": "Murat Purç",
