@@ -12,6 +12,11 @@
  * @license     http://www.gnu.org/licenses/gpl-2.0.html - GNU General Public License, version 2
  */
 
+/**
+ * @var int $cCurrentModule
+ * @var int $cCurrentContainer
+ */
+
 // Includes
 cInclude('module', 'includes/functions.mpnivoslider.php');
 cInclude('module', 'includes/class.module.mpnivoslider.input.php');
@@ -21,6 +26,7 @@ $aModuleConfiguration = array(
     'name' => 'mpNivoSlider',
     'idmod' => $cCurrentModule,
     'container' => $cCurrentContainer,
+    'isBackend' => cSecurity::toBoolean(cRegistry::getBackendSessionId()),
 
     'selectedDirname' => "CMS_VALUE[1]",
     'useSubdirectories' => "CMS_VALUE[2]",
