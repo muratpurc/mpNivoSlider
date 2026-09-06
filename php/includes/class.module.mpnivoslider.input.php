@@ -1,4 +1,11 @@
 <?php
+
+namespace Purc\Module\MpNivoSlider;
+
+use cApiUploadCollection;
+use cDbException;
+use cException;
+
 /**
  * Project:
  * CONTENIDO Content Management System
@@ -13,31 +20,28 @@
  * @license     http://www.gnu.org/licenses/gpl-2.0.html - GNU General Public License, version 2
  */
 
+defined('CON_FRAMEWORK') || die('Illegal call!');
 
-if (!defined('CON_FRAMEWORK')) {
-    die('Illegal call');
-}
-
-include_once('class.module.mpnivoslider.php');
-
+include_once __DIR__ . '/class.module.mpnivoslider.baseabstract.php';
 
 /**
  * CONTENIDO module input class for mpNivoSlider
  */
-class ModuleMpNivoSliderInput extends ModuleMpNivoSliderAbstract
+class Input extends BaseAbstract
 {
 
     /**
      * Generates and returns option items of the dirname select box.
      *
-     * @return  string  Composed option items.
+     * @return string Composed option items.
+     * @throws cDbException|cException
      */
-    public function generateDirSelectOptions()
+    public function generateDirSelectOptions(): string
     {
         $oUploadColl = new cApiUploadCollection();
-        $oUploadColl->flexSelect('dirname', '', 'idclient=' . $this->_client, 'dirname');
+        $oUploadColl->flexSelect('dirname', '', '`idclient` = ' . $this->client, 'dirname');
 
-        $opt = '<option value="">' . $this->_i18n['__select_folder__'] . '</option>' . "\n";
+        $opt = '<option value="">' . $this->i18n['__select_folder__'] . '</option>' . "\n";
         while ($oUploadItem = $oUploadColl->next()) {
             $dirname = $oUploadItem->get('dirname');
 
@@ -52,10 +56,10 @@ class ModuleMpNivoSliderInput extends ModuleMpNivoSliderAbstract
      *
      * @return string Composed option items.
      */
-    public function generateOrderSelectOptions()
+    public function generateOrderSelectOptions(): string
     {
-        $opt = '<option value="">' . $this->_i18n['__select_order__'] . '</option>' . "\n";
-        foreach ($this->_aOrder as $key => $value) {
+        $opt = '<option value="">' . $this->i18n['__select_order__'] . '</option>' . "\n";
+        foreach ($this->order as $key => $value) {
             $sel = ($key == $this->selectedOrder) ? ' selected="selected"' : '';
             $opt .= '<option value="' . $key . '"' . $sel . '>' . $value . '</option>' . "\n";
         }
@@ -65,9 +69,9 @@ class ModuleMpNivoSliderInput extends ModuleMpNivoSliderAbstract
     /**
      * {@inheritdoc}
      */
-    protected function _validate()
+    protected function validate(): void
     {
-        parent::_validate();
+        parent::validate();
 
         if ($this->controlNavThumbsWidthX <= 0) {
             $this->controlNavThumbsWidthX = '';

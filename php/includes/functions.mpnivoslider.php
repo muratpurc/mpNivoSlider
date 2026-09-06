@@ -1,4 +1,7 @@
 <?php
+
+namespace Purc\Module\MpNivoSlider;
+
 /**
  * Project:
  * CONTENIDO Content Management System
@@ -13,20 +16,18 @@
  * @license     http://www.gnu.org/licenses/gpl-2.0.html - GNU General Public License, version 2
  */
 
-
-if (!defined('CON_FRAMEWORK')) {
-    die('Illegal call');
-}
-
+defined('CON_FRAMEWORK') || die('Illegal call!');
 
 /**
- * Returns modules translations
- * NOTE: Has to run in modules context, because mi18n() works with current modules id!
- * @return array
+ * Returns module translations.
+ *
+ * NOTE:
+ * Has to run in module context, because mi18n() works with current modules' id!
  */
-function module_mpNivoSlider_getModuleTranslations() {
+function getModuleTranslations(): array
+{
     // Return module translation
-    return array(
+    return [
         'random' => mi18n("RANDOM"),
         'filename_asc' => mi18n("FILENAME_ASC"),
         'filename_desc' => mi18n("FILENAME_DESC"),
@@ -42,5 +43,5 @@ function module_mpNivoSlider_getModuleTranslations() {
         '__select_order__' => mi18n("__SELECT_ORDER__"),
         'previous' => mi18n("PREVIOUS"),
         'next' => mi18n("NEXT"),
-    );
+    ];
 }

@@ -1,108 +1,63 @@
-RANDOM=Zufällig
-FILENAME_ASC=Dateiname aufsteigend
-FILENAME_DESC=Dateiname absteigend
-SIZE_ASC=Dateigröße aufsteigend
-SIZE_DESC=Dateigröße absteigend
-FILETYPE_ASC=Dateityp aufsteigend
-FILETYPE_DESC=Dateityp absteigend
-CREATED_ASC=Erstellungsdatum aufsteigend
-CREATED_ESC=Erstellungsdatum absteigend
-ID_ASC=Id aufsteigend
-ID_DESC=Id absteigend
-__SELECT_FOLDER__=-- Ordner auswählen --
-__SELECT_ORDER__=-- Sortierung auswählen --
-PREVIOUS=zurück
-NEXT=vor
 EFFECT=Effekt
-
-PIXEL=Pixel
-MINUTES=Minuten
-MILLISECONDS=Millisekunden
-
-MSG_SELECT_IMAGE_FOLDER=Bilderordner für Nivo Slider wählen:
-INFO_SELECT_IMAGE_FOLDER=(Der ausgewählte Ordner sollte nur Bilder enthalten)
-
-MSG_USE_SUBDIRS=Vorhandene Unterordner auch verwenden
-INFO_USE_SUBDIRS=(Alle Bilder auch in vorhandenen Unterordnen verwenden)
-
-MSG_IMAGES_BRIGHTNESS=Helligkeit der Bilder:
-LBL_IMAGES_BRIGHTNESS=Die Bilder sind in der Regel dunkel
-INFO_IMAGES_BRIGHTNESS=(Bei dunklen Bildern werden helle Navigationspfeile und Bildunterschriften mit hellem Hintergrund ausgegeben, bei hellen Bildern umgekehrt)
-
-MSG_MAX_NUM_IMAGES=Maximale Anzahl der Bilder:
-INFO_MAX_NUM_IMAGES=(Leer lassen, wenn alle Bilder im ausgewählten Verzeichnis ausgegeben werden sollen)
-
-MSG_MAX_WIDTH_IMAGES=Maximale Breite der Bilder:
-
-MSG_MAX_HEIGHT_IMAGES=Maximale Höhe der Bilder:
-INFO_MAX_HEIGHT_IMAGES=(Sind Werte für maximale Breite und/oder Höhe angegeben, werden große Bilder herunter gerechnet.)
-
-MSG_QUALITY_IMAGES=Qualität der Bilder:
-INFO_QUALITY_IMAGES=(Qualität für heruntergerechnete JPEG-Bilder.)
-
-MSG_CACHETIME_IMAGES=Maximale Cachedauer der Bilder:
-INFO_CACHETIME_IMAGES=(Gilt nur für zu große Bilder, die herunter gerechnet wurden. Für unbegrenzte Dauer leer lassen.)
-
-MSG_SORT_TYPE=Sortierung der Bilder im Nivo Slider:
-
-MSG_RESPONSIVE_MODE=Responsive Modus:
-LBL_RESPONSIVE_MODE=Responsive Modus aktivieren
-INFO_RESPONSIVE_MODE=(Bei Bildern werden Breite und Höhe nicht ausgegeben und der Modulcontainer hat auch keine Angaben für Breite und Höhe!)
-
-MSG_NIVO_SLIDER_SETTINGS=JavaScript Einstellungen für jQuery Nivo Slider Plugin
-
-MSG_EFFECT=Effekt
-INFO_EFFECT=(Standardwert: 'random', Sets: 'fold,fade,sliceDown')
 INFO2_EFFECT=Mögliche Werte
-
-MSG_NUM_SLIDES=Anzahl der Slices
-INFO_NUM_SLIDES=Für Slice Animationen
-
-MSG_NUM_COLS=Anzahl der Spalten
-INFO_NUM_COLS=Für Box Animationen
-
-MSG_NUM_ROWS=Anzahl der Reihen
-INFO_NUM_ROWS=Für Box Animationen
-
-MSG_ANIM_SPEED=Geschwindigkeit der Animation
 INFO_ANIM_SPEED=(Für den Überblendeffekt)
-
-MSG_TIME_BETWEEN_SLIDES=Zeit zwischen zwei Slides
-
-MSG_STARTPOS=Startposition
-MSG2_STARTPOS=0 (index)
-INFO_STARTPOS=(Beginn mit der Slideposition)
-
-MSG_NAVIGATION=Navigation
-LBL_ENABLE_NAVIGATION=Navigation aktivieren (vor und zurück)
-LBL_TEXT_PREVIOUS=Text für vorheriges Element
-LBL_TEXT_NEXT=Text für nächstes Element
-
-MSG_EXTENDED_NAVIGATION=Erweiterte Navigation
-LBL_ENABLE_EXTENDED_NAVIGATION=Erweiterte Navigation aktivieren (Steuerung über grafische Listenpunkte)
-LBL_USE_THUMBNAILS=Verwende Thumbnails für die erweiterte Navigation
-LBL_THUMBNAIL_WIDTH=Thumbnailbreite in Pixel
-LBL_THUMBNAIL_HEIGHT=Thumbnailhöhe in Pixel
-
-MSG_STOP_ON_MOUSEOVER=Anhalten bei mouseover
-LBL_STOP_ON_MOUSEOVER=Animationen bei mouseover anhalten
-
-MSG_MANUAL_SLIDES=Manuelle Slides
-LBL_MANUAL_SLIDES=Manuelle Überblendeffekte erzwingen
-
-MSG_NIVO_SLIDER_JS_EVENTS=JavaScript Code für Nivo Slider Events
-
-MSG_ON_BEFORECHANGE=on beforeChange
-INFO_ON_BEFORECHANGE=Wird vor dem Slide ausgelöst
-
-MSG_ON_AFTERCHANGE=on afterChange
+INFO_CACHETIME_IMAGES=(Gilt nur für zu große Bilder, die herunter gerechnet wurden. Für unbegrenzte Dauer leer lassen.)
+INFO_EFFECT=(Standardwert: 'random', Sets: 'fold,fade,sliceDown')
+INFO_IMAGES_BRIGHTNESS=(Bei dunklen Bildern werden helle Navigationspfeile und Bildunterschriften mit hellem Hintergrund ausgegeben, bei hellen Bildern umgekehrt)
+INFO_MAX_HEIGHT_IMAGES=(Sind Werte für maximale Breite und/oder Höhe angegeben, werden große Bilder herunter gerechnet.)
+INFO_MAX_NUM_IMAGES=(Leer lassen, wenn alle Bilder im ausgewählten Verzeichnis ausgegeben werden sollen)
+INFO_NUM_COLS=Für Box Animationen
+INFO_NUM_ROWS=Für Box Animationen
+INFO_NUM_SLIDES=Für Slice Animationen
 INFO_ON_AFTERCHANGE=Wird nach dem Slide ausgelöst
-
-MSG_ON_SLIDESHOWEND=on slideshowEnd
-INFO_ON_SLIDESHOWEND=Wird ausgelöst nachdem alle Slides gezeigt wurden
-
-MSG_ON_LASTSLIDE=on lastSlide
-INFO_ON_LASTSLIDE=Wird ausgelöst wenn der letzte Slide angezeigt wird
-
-MSG_ON_AFTERLOAD=on afterLoad
 INFO_ON_AFTERLOAD=Wird ausgelöst nachdem der Nivo Slider geladen wurde
+INFO_ON_BEFORECHANGE=Wird vor dem Slide ausgelöst
+INFO_ON_LASTSLIDE=Wird ausgelöst wenn der letzte Slide angezeigt wird
+INFO_ON_SLIDESHOWEND=Wird ausgelöst nachdem alle Slides gezeigt wurden
+INFO_QUALITY_IMAGES=(Qualität für heruntergerechnete JPEG-Bilder.)
+INFO_RESPONSIVE_MODE=(Bei Bildern werden Breite und Höhe nicht ausgegeben und der Modulcontainer hat auch keine Angaben für Breite und Höhe!)
+INFO_SELECT_IMAGE_FOLDER=(Der ausgewählte Ordner sollte nur Bilder enthalten)
+INFO_STARTPOS=(Beginn mit der Slideposition)
+INFO_USE_SUBDIRS=(Alle Bilder auch in vorhandenen Unterordnen verwenden)
+LBL_ENABLE_EXTENDED_NAVIGATION=Erweiterte Navigation aktivieren (Steuerung über grafische Listenpunkte)
+LBL_ENABLE_NAVIGATION=Navigation aktivieren (vor und zurück)
+LBL_IMAGES_BRIGHTNESS=Die Bilder sind in der Regel dunkel
+LBL_MANUAL_SLIDES=Manuelle Überblendeffekte erzwingen
+LBL_RESPONSIVE_MODE=Responsive Modus aktivieren
+LBL_STOP_ON_MOUSEOVER=Animationen bei mouseover anhalten
+LBL_TEXT_NEXT=Text für nächstes Element
+LBL_TEXT_PREVIOUS=Text für vorheriges Element
+LBL_THUMBNAIL_HEIGHT=Thumbnailhöhe in Pixel
+LBL_THUMBNAIL_WIDTH=Thumbnailbreite in Pixel
+LBL_USE_THUMBNAILS=Verwende Thumbnails für die erweiterte Navigation
+MILLISECONDS=Millisekunden
+MINUTES=Minuten
+MSG2_STARTPOS=0 (index)
+MSG_ANIM_SPEED=Geschwindigkeit der Animation
+MSG_CACHETIME_IMAGES=Maximale Cachedauer der Bilder:
+MSG_EXTENDED_NAVIGATION=Erweiterte Navigation
+MSG_IMAGES_BRIGHTNESS=Helligkeit der Bilder:
+MSG_MANUAL_SLIDES=Manuelle Slides
+MSG_MAX_HEIGHT_IMAGES=Maximale Höhe der Bilder:
+MSG_MAX_NUM_IMAGES=Maximale Anzahl der Bilder:
+MSG_MAX_WIDTH_IMAGES=Maximale Breite der Bilder:
+MSG_NAVIGATION=Navigation
+MSG_NIVO_SLIDER_JS_EVENTS=JavaScript Code für Nivo Slider Events
+MSG_NIVO_SLIDER_SETTINGS=JavaScript Einstellungen für jQuery Nivo Slider Plugin
+MSG_NUM_COLS=Anzahl der Spalten
+MSG_NUM_ROWS=Anzahl der Reihen
+MSG_NUM_SLIDES=Anzahl der Slices
+MSG_ON_AFTERCHANGE=on afterChange
+MSG_ON_AFTERLOAD=on afterLoad
+MSG_ON_BEFORECHANGE=on beforeChange
+MSG_ON_LASTSLIDE=on lastSlide
+MSG_ON_SLIDESHOWEND=on slideshowEnd
+MSG_QUALITY_IMAGES=Qualität der Bilder:
+MSG_RESPONSIVE_MODE=Responsive Modus:
+MSG_SELECT_IMAGE_FOLDER=Bilderordner für Nivo Slider wählen:
+MSG_SORT_TYPE=Sortierung der Bilder im Nivo Slider:
+MSG_STARTPOS=Startposition
+MSG_STOP_ON_MOUSEOVER=Anhalten bei mouseover
+MSG_TIME_BETWEEN_SLIDES=Zeit zwischen zwei Slides
+MSG_USE_SUBDIRS=Vorhandene Unterordner auch verwenden
+PIXEL=Pixel

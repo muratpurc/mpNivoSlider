@@ -1,4 +1,15 @@
 <?php
+
+namespace Purc\Module\MpNivoSlider;
+
+use cApiModule;
+use cApiUpload;
+use cApiUploadCollection;
+use cApiUploadMetaCollection;
+use cDbException;
+use cException;
+use cInvalidArgumentException;
+
 /**
  * Project:
  * CONTENIDO Content Management System
@@ -13,57 +24,53 @@
  * @license     http://www.gnu.org/licenses/gpl-2.0.html - GNU General Public License, version 2
  */
 
+defined('CON_FRAMEWORK') || die('Illegal call!');
 
-if (!defined('CON_FRAMEWORK')) {
-    die('Illegal call');
-}
-
-include_once('class.module.mpnivoslider.php');
-
+include_once __DIR__ . '/class.module.mpnivoslider.baseabstract.php';
 
 /**
  * CONTENIDO module output class for mpNivoSlider
  *
- * @property mixed _iCalculatedMaxHeight
- * @property mixed _iCalculatedMaxWidth
+ * @property mixed calculatedMaxHeight
+ * @property mixed calculatedMaxWidth
  */
-class ModuleMpNivoSliderOutput extends ModuleMpNivoSliderAbstract
+class Output extends BaseAbstract
 {
+
     /**
      * To store occurred errors
      */
-    protected $_sError = '';
-
+    protected string $error = '';
 
     /**
      * {@inheritdoc}
      */
-    protected function _validate()
+    protected function validate(): void
     {
-        // directory including images 4 the slider
+        // Directory including images 4 the slider
         $this->selectedDirname = trim($this->selectedDirname);
         if ($this->selectedDirname == '') {
-            $this->_sError = "mpNivoSlider: No image folder selected!";
+            $this->error = "mpNivoSlider: No image folder selected!";
             return;
-        } elseif (!is_dir($this->_sUploadDir . $this->selectedDirname)) {
-            $this->_sError = "mpNivoSlider: Selected image folder doesn't exists anymore!";
+        } elseif (!is_dir($this->uploadDir . $this->selectedDirname)) {
+            $this->error = "mpNivoSlider: Selected image folder doesn't exists anymore!";
             return;
         }
 
         $allowedEffects = ',' . self::EFFECTS . ',';
         $configuredEffects = explode(',', trim($this->effect));
-        $cleanedEffects = array();
+        $cleanedEffects = [];
         foreach ($configuredEffects as $effect) {
-            if (strpos($allowedEffects, ',' . $effect . ',') !== false) {
+            if (str_contains($allowedEffects, ',' . $effect . ',')) {
                 $cleanedEffects[] = $effect;
             }
         }
         $this->effect = implode(',', $cleanedEffects);
 
-        parent::_validate();
+        parent::validate();
 
-        // selected order type
-        if (!isset($this->_aOrder[$this->selectedOrder])) {
+        // Selected order type
+        if (!isset($this->order[$this->selectedOrder])) {
             $this->selectedOrder = 'filename:ASC';
         }
 
@@ -77,47 +84,64 @@ class ModuleMpNivoSliderOutput extends ModuleMpNivoSliderAbstract
         }
 
         if ($this->prevText == '') {
-            $this->prevText = $this->_i18n['previous'];
+            $this->prevText = $this->i18n['previous'];
         }
         if ($this->nextText == '') {
-            $this->nextText = $this->_i18n['next'];
+            $this->nextText = $this->i18n['next'];
         }
     }
 
     /**
      * Generates the view data.
      */
-    public function getViewData()
+    public function getViewData(): array
     {
         $viewData = [];
         $viewData['error'] = '';
 
-        if ($this->_sError !== '') {
-            $viewData['error'] = $this->_sError;
+        if ($this->error !== '') {
+            $viewData['error'] = $this->error;
             return $viewData;
         }
 
-        $cApiModule = new cApiModule($this->idmod);
-        $viewData['modulePath'] = $this->_sModulePath . $cApiModule->get('alias');
-
-        // get images
-        $aImages = $this->_getImages();
-        if (count($aImages) == 0) {
+        try {
+            $cApiModule = new cApiModule($this->idmod);
+        } catch (cDbException|cException $e) {
+            cError(__CLASS__ . ': Could not get view data: ' . $e->getMessage());
             $viewData['error'] = 'mpNivoSlider: No images found in defined image folder!';
             return $viewData;
         }
 
-        // list of images and image captions
+        if ($this->isBackend) {
+            $viewData['modulePath'] = $this->clientCfg['path']['htmlpath'] . $this->modulePath . $cApiModule->get('alias');
+        } else {
+            $viewData['modulePath'] = $this->modulePath . $cApiModule->get('alias');
+        }
+
+        // Get images
+        try {
+            $images = $this->getImages();
+        } catch (cDbException|cException $e) {
+            cError(__CLASS__ . ': Could not get view data: ' . $e->getMessage());
+            $viewData['error'] = 'mpNivoSlider: No images found in defined image folder!';
+            return $viewData;
+        }
+        if (count($images) == 0) {
+            $viewData['error'] = 'mpNivoSlider: No images found in defined image folder!';
+            return $viewData;
+        }
+
+        // List of images and image captions
         $dataImages = [];
         $dataCaptions = [];
 
-        // loop images array an fill template
-        foreach ($aImages as $id => $image) {
+        // Loop images array and fill template
+        foreach ($images as $id => $image) {
             if ($this->controlNavThumbs && isset($image['thumb'])) {
                 $image['attr'] = ' data-thumb="' . $image['thumb']['src'] . '"';
             }
 
-            // store existing meta_description value in captions list
+            // Store existing meta_description value in captions list
             if ($image['meta_description']) {
                 $image['title'] = '#caption_' . $id;
                 $dataCaptions[] = [
@@ -137,8 +161,8 @@ class ModuleMpNivoSliderOutput extends ModuleMpNivoSliderAbstract
         $viewData['images'] = $dataImages;
         $viewData['captions'] = $dataCaptions;
 
-        // js variables
-        $jsVars = array();
+        // JavaScript variables
+        $jsVars = [];
         if ($this->effect) {
             $jsVars['effect'] = $this->effect;
         }
@@ -160,13 +184,13 @@ class ModuleMpNivoSliderOutput extends ModuleMpNivoSliderAbstract
         if (!empty($this->startSlide)) {
             $jsVars['startSlide'] = $this->startSlide;
         }
-        $jsVars['directionNav'] = (bool) $this->directionNav;
+        $jsVars['directionNav'] = (bool)$this->directionNav;
 
-        $jsVars['controlNav'] = (bool) $this->controlNav;
-        $jsVars['controlNavThumbs'] = (bool) $this->controlNavThumbs;
+        $jsVars['controlNav'] = (bool)$this->controlNav;
+        $jsVars['controlNavThumbs'] = (bool)$this->controlNavThumbs;
 
-        $jsVars['pauseOnHover'] = (bool) $this->pauseOnHover;
-        $jsVars['manualAdvance'] = (bool) $this->manualAdvance;
+        $jsVars['pauseOnHover'] = (bool)$this->pauseOnHover;
+        $jsVars['manualAdvance'] = (bool)$this->manualAdvance;
 
         if ($this->prevText) {
             $jsVars['prevText'] = $this->prevText;
@@ -175,15 +199,15 @@ class ModuleMpNivoSliderOutput extends ModuleMpNivoSliderAbstract
             $jsVars['nextText'] = $this->nextText;
         }
 
-        // we need a a special treatment for js functions
-        $jsFuncs = array();
+        // We need a special treatment for js functions
+        $jsFuncs = [];
         if ($this->beforeChange) {
             $k = '#' . md5('beforeChange') . '#';
             $jsFuncs[$k] = 'function(){' . $this->beforeChange . '}';
             $jsVars['beforeChange'] = $k;
         }
         if ($this->afterChange) {
-            $k = '#'. md5('afterChange') . '#';
+            $k = '#' . md5('afterChange') . '#';
             $jsFuncs[$k] = 'function(){' . $this->afterChange . '}';
             $jsVars['afterChange'] = $k;
         }
@@ -216,17 +240,17 @@ class ModuleMpNivoSliderOutput extends ModuleMpNivoSliderAbstract
 
         $viewData['nivoOptions'] = $jsJson;
 
-        // additional class names
+        // Additional class names
         $cssClass = '';
         if ($this->darkImages) {
             $cssClass .= ' mpNivoSliderDark';
         }
         $viewData['cssClassName'] = $cssClass;
 
-        // additional styles
+        // Additional styles
         $moduleStyle = '';
         if (!$this->responsiveMode) {
-            // add module dimensions only if responsive mode is off
+            // Add module dimensions only if responsive mode is off
             if (is_numeric($this->maxWidth)) {
                 $moduleStyle .= 'width:' . $this->maxWidth . 'px;';
             }
@@ -236,7 +260,7 @@ class ModuleMpNivoSliderOutput extends ModuleMpNivoSliderAbstract
         }
         $viewData['styles'] = $moduleStyle;
 
-        // slider wrapper css class
+        // Slider wrapper css class
         $cssClass = '';
         if ($this->controlNavThumbs) {
             $cssClass .= ' controlnav-thumbs';
@@ -249,159 +273,172 @@ class ModuleMpNivoSliderOutput extends ModuleMpNivoSliderAbstract
     }
 
     /**
-     * Builds the image query statement, executes it, and returns found images.
-     *
-     * @return array List of found images
-     */
-    protected function _getImages()
-    {
-        $oUploadColl = new cApiUploadCollection();
-
-        // where statement with selected dir and supported filetypes
-        $aWhere = array();
-        if ($this->useSubdirectories) {
-            $aWhere[] = "dirname LIKE '" . $oUploadColl->escape($this->selectedDirname) . "%'";
-        } else {
-            $aWhere[] = "dirname='" . $oUploadColl->escape($this->selectedDirname) . "'";
-        }
-        $aWhere[] = 'AND';
-        $aWhere[] = 'LOWER(filetype) IN(' . self::FILE_TYPES . ')';
-        $sWhere = implode(' ', $aWhere);
-
-        // order settings
-        if (strpos($this->selectedOrder, ':') > 0) {
-            list($sort, $sortDir) = explode(':', $this->selectedOrder);
-            $sOrder = $oUploadColl->escape($sort) . ' ' . $oUploadColl->escape($sortDir);
-        } else {
-            $sOrder = $oUploadColl->escape($this->selectedOrder);
-        }
-
-        // limit
-        if ((int) $this->maxImages > 0) {
-            $sLimit = '0, ' . $this->maxImages;
-        } else {
-            $sLimit = '';
-        }
-
-        // run the statement
-        $oUploadColl->select($sWhere, '', $sOrder, $sLimit);
-
-        $aImages = array();
-
-        // iterate thru upload collection 2 store data in array
-        while ($oUploadItem = $oUploadColl->next()) {
-            // some checks
-            $sImageFile = $this->_sAbsUploadPath . $oUploadItem->get('dirname') . $oUploadItem->get('filename');
-            if (!is_file($sImageFile) || !is_readable($sImageFile)) {
-                continue;
-            }
-
-            $aImgData = $this->_getImageData($sImageFile, $this->maxWidth, $this->maxHeight, $oUploadItem);
-            if (!$aImgData) {
-                continue;
-            }
-            if ($this->controlNavThumbs) {
-                $aThumbData = $this->_getImageData($sImageFile, $this->controlNavThumbsWidthX, $this->controlNavThumbsHeightX, $oUploadItem);
-                if ($aThumbData) {
-                    $aImgData['thumb'] = $aThumbData;
-                }
-            }
-
-            // add new images array item
-            $aImages[$oUploadItem->get('idupl')] = $aImgData;
-        }
-
-        if (count($aImages) > 0) {
-            // now get description by language
-            $sWhere = 'idlang=' . $this->_lang . ' AND idupl IN(' . implode(', ', array_keys($aImages)) . ')';
-            $oUploadMetaColl = new cApiUploadMetaCollection();
-            $oUploadMetaColl->select($sWhere, '', '');
-
-            // iterate upload meta collection 2 store description in images array
-            while ($oItem = $oUploadMetaColl->next()) {
-                $aImages[$oItem->get('idupl')]['meta_description'] = $oItem->get('description');
-            }
-        }
-
-        return $aImages;
-    }
-
-    /**
      * Returns image data structure. Resizes the image if needed.
      *
-     * @param  string  $file  Path and file name
-     * @param  string|int  $maxWidth  Max width, if bigger image has to be downsized
-     * @param  string|int  $maxHeight  Max height, if bigger image has to be downsized
-     * @param  object  Upload item object
-     * @return array
+     * @param string $file Path and file name
+     * @param string|int $maxWidth Max width, if bigger image has to be downsized
+     * @param string|int $maxHeight Max height, if bigger image has to be downsized
+     * @param cApiUpload $uploadItem Upload item object
      */
-    protected function _getImageData($file, $maxWidth, $maxHeight, $oUploadItem)
+    protected function getImageData(string $file, mixed $maxWidth, mixed $maxHeight, cApiUpload $uploadItem): array
     {
         if (is_numeric($maxWidth) && is_numeric($maxHeight)) {
-            // get dimensions
-            $size = $this->_getImageSize($file);
+            // Get dimensions
+            $size = $this->getImageSize($file);
 
-            // detect if images has to be downsized to a specific width or height
-            // calculate also the downsize factor
+            // Detect if images have to be downsized to a specific width or height
+            // calculate also the downsized factor
             if ($size[0] / $size[1] > $maxWidth / $maxHeight) {
                 $downsizeFactor = $maxWidth / $size[0];
             } else {
                 $downsizeFactor = $maxHeight / $size[1];
             }
 
-            // prevent scalip up of small images
+            // Prevent scaling up of small images
             if ($downsizeFactor > 1) {
                 $downsizeFactor = 1;
             }
 
-            // calculate dimensions
+            // Calculate dimensions
             $maxWidth = round($size[0] * $downsizeFactor);
             $maxHeight = round($size[1] * $downsizeFactor);
 
-            // bigger images have 2 be resized
-            $file = capiImgScale(
-                $file, $maxWidth, $maxHeight, false, false, $this->maxCacheTime, $this->imageQuality
-            );
+            // Bigger images have 2 be resized
+            try {
+                $file = capiImgScale(
+                    $file,
+                    $maxWidth,
+                    $maxHeight,
+                    false,
+                    false,
+                    $this->maxCacheTime,
+                    $this->imageQuality
+                );
+            } catch (cDbException|cInvalidArgumentException|cException $e) {
+                cError(__CLASS__ . ': Could not scale image: ' . $e->getMessage());
+                return [];
+            }
             if (!$file) {
                 return [];
             }
-            $file = str_replace($this->_sHtmlPath, '', $file);
+            $file = str_replace($this->htmlPath, '', $file);
         } else {
-            // use original image file
-            $file = $this->_sUploadDir . $oUploadItem->get('dirname') . $oUploadItem->get('filename');
+            // Use original image file
+            $file = $this->uploadDir . $uploadItem->get('dirname') . $uploadItem->get('filename');
         }
 
-        // get'n store image dimensions, but save width/height attributes only for disabled responsive mode
-        $size = $this->_getImageSize($file);
+        // Get'n'store image dimensions, but save width/height attributes only for disabled responsive mode
+        $size = $this->getImageSize($file);
         $attr = (is_array($size) && !$this->responsiveMode) ? ' ' . $size[3] : '';
 
-        // add new images array item
-        return array(
-            'size'  => $size,
-            'src'   => $file,
-            'alt'   => '',
+        // Add new images array item
+        return [
+            'size' => $size,
+            'src' => $file,
+            'alt' => '',
             'title' => '',
-            'attr'  => $attr,
+            'attr' => $attr,
             'meta_description' => '',
-        );
+        ];
+    }
+
+    /**
+     * Builds the image query statement, executes it, and returns found images.
+     *
+     * @return array List of found images
+     * @throws cDbException|cException
+     */
+    protected function getImages(): array
+    {
+        $uploadColl = new cApiUploadCollection();
+
+        // WHERE statement with selected dir and supported filetypes
+        $where = [];
+        if ($this->useSubdirectories) {
+            $where[] = "`dirname` LIKE '" . $uploadColl->escape($this->selectedDirname) . "%'";
+        } else {
+            $where[] = "`dirname` = '" . $uploadColl->escape($this->selectedDirname) . "'";
+        }
+        $where[] = 'AND';
+        $where[] = 'LOWER(`filetype`) IN(' . self::FILE_TYPES . ')';
+        $where = implode(' ', $where);
+
+        // Order settings
+        if (strpos($this->selectedOrder, ':') > 0) {
+            list($sort, $sortDir) = explode(':', $this->selectedOrder);
+            $sOrder = $uploadColl->escape($sort) . ' ' . $uploadColl->escape($sortDir);
+        } else {
+            $sOrder = $uploadColl->escape($this->selectedOrder);
+        }
+
+        // Limit
+        $limit = ((int)$this->maxImages > 0) ? '0, ' . $this->maxImages : '';
+
+        // Run the statement
+        $uploadColl->select($where, '', $sOrder, $limit);
+
+        $images = [];
+
+        // Iterate through upload collection 2 store data in array
+        while ($uploadItem = $uploadColl->next()) {
+            // Some checks
+            $sImageFile = $this->absUploadPath . $uploadItem->get('dirname') . $uploadItem->get('filename');
+            if (!is_file($sImageFile) || !is_readable($sImageFile)) {
+                continue;
+            }
+
+            $aImgData = $this->getImageData($sImageFile, $this->maxWidth, $this->maxHeight, $uploadItem);
+            if (!$aImgData) {
+                continue;
+            }
+            if ($this->controlNavThumbs) {
+                $aThumbData = $this->getImageData(
+                    $sImageFile,
+                    $this->controlNavThumbsWidthX,
+                    $this->controlNavThumbsHeightX,
+                    $uploadItem
+                );
+                if ($aThumbData) {
+                    $aImgData['thumb'] = $aThumbData;
+                }
+            }
+
+            // Add new images array item
+            $images[$uploadItem->get('idupl')] = $aImgData;
+        }
+
+        if (count($images) > 0) {
+            // Now get description by language
+            $uploadMetaColl = new cApiUploadMetaCollection();
+            $uploadMetaColl->select(
+                '`idlang` = ' . $this->lang . ' AND `idupl` IN(' . implode(', ', array_keys($images)) . ')'
+            );
+
+            // Iterate through upload meta collection 2 store description in images array
+            while ($oItem = $uploadMetaColl->next()) {
+                $images[$oItem->get('idupl')]['meta_description'] = $oItem->get('description');
+            }
+        }
+
+        return $images;
     }
 
     /**
      * Returns value of getimagesize function and also stores the maximum width / height of
      * existing images.
      *
-     * @param string Image file to ger size array for
-     * @return array Return value of getimagesize() function
+     * @param string $file Image file to get the size array for
+     * @return array|false Return value of getimagesize() function
      */
-    protected function _getImageSize($file)
+    protected function getImageSize(string $file): bool|array
     {
         $size = @getimagesize($file);
         if (is_array($size)) {
-            if ($this->_iCalculatedMaxWidth < $size[0]) {
-                $this->_iCalculatedMaxWidth = $size[0];
+            if ($this->calculatedMaxWidth < $size[0]) {
+                $this->calculatedMaxWidth = $size[0];
             }
-            if ($this->_iCalculatedMaxHeight < $size[1]) {
-                $this->_iCalculatedMaxHeight = $size[1];
+            if ($this->calculatedMaxHeight < $size[1]) {
+                $this->calculatedMaxHeight = $size[1];
             }
         }
         return $size;
@@ -410,16 +447,15 @@ class ModuleMpNivoSliderOutput extends ModuleMpNivoSliderAbstract
     /**
      * Composes css definition 2 center an image horizontally and returns it back.
      *
-     * @param mixed Array including image size information (result of getimagesize())
+     * @param mixed $size Array including image size information (result of getimagesize())
      * @return string Composed css definition
      */
-    protected function _css2centerImageHorizontal($size)
+    protected function css2centerImageHorizontal(mixed $size): string
     {
-        if (!is_array($size) || $this->_iCalculatedMaxHeight == 0 || ($size[1] == $this->_iCalculatedMaxHeight)) {
+        if (!is_array($size) || $this->calculatedMaxHeight == 0 || ($size[1] == $this->calculatedMaxHeight)) {
             return '';
         }
-        $css = 'margin-top:' . (($this->_iCalculatedMaxHeight - $size[1]) / 2) . 'px';
-        return $css;
+        return 'margin-top:' . (($this->calculatedMaxHeight - $size[1]) / 2) . 'px';
     }
 
 }

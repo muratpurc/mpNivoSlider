@@ -1,4 +1,7 @@
 <?php
+
+namespace Purc\Module\MpNivoSlider;
+
 /**
  * Project:
  * CONTENIDO Content Management System
@@ -13,10 +16,7 @@
  * @license     http://www.gnu.org/licenses/gpl-2.0.html - GNU General Public License, version 2
  */
 
-
-if (!defined('CON_FRAMEWORK')) {
-    die('Illegal call');
-}
+defined('CON_FRAMEWORK') || die('Illegal call!');
 
 /**
  * CONTENIDO abstract module class for mpNivoSlider.
@@ -59,8 +59,9 @@ if (!defined('CON_FRAMEWORK')) {
  * @property mixed|null $startSlide
  * @property mixed|null $useSubdirectories
  */
-abstract class ModuleMpNivoSliderAbstract
+abstract class BaseAbstract
 {
+
     /**
      * Default cache time of resized images in minutes (0 = no limit)
      * @var  int
@@ -100,57 +101,58 @@ abstract class ModuleMpNivoSliderAbstract
     /**
      * Associative order array
      */
-    protected $_aOrder;
+    protected array $order;
 
     /**
      * Client id
      */
-    protected $_client;
+    protected int $client;
 
     /**
      * Language id
      */
-    protected $_lang;
+    protected int $lang;
 
     /**
      * Client HTML path
      */
-    protected $_sHtmlPath;
+    protected string $htmlPath;
 
     /**
      * Client upload directory
      */
-    protected $_sUploadDir;
+    protected string $uploadDir;
 
     /**
      * Absolute path to the client upload directory
      */
-    protected $_sAbsUploadPath;
+    protected string $absUploadPath;
 
     /**
      * HTML path of the current module
      */
-    protected $_sModulePath;
+    protected string $modulePath;
 
     /**
      * Module translations
      * @var string[]
      */
-    protected $_i18n = array();
+    protected array $i18n = [];
 
-	/**
-	 * Unique module id
-	 * @var  string
-	 */
-	 protected $_uid;
+    /**
+     * Unique module id
+     */
+    protected string $uid;
 
     /**
      * Module configuration structure
      */
-    protected $_cmsData = array(
+    protected array $cmsData = [
         'name' => '',
         'idmod' => 0,
         'container' => 0,
+        'isBackend' => false,
+        'clientCfg' => [],
 
         'selectedDirname' => '',
         'useSubdirectories' => '',
@@ -159,9 +161,9 @@ abstract class ModuleMpNivoSliderAbstract
         'maxHeight' => '',
         'maxCacheTime' => '',
         'selectedOrder' => '',
-		'darkImages' => '',
-		'imageQuality' => '',
-		'responsiveMode' => '',
+        'darkImages' => '',
+        'imageQuality' => '',
+        'responsiveMode' => '',
 
         'effect' => '',
         'slices' => '',
@@ -184,133 +186,116 @@ abstract class ModuleMpNivoSliderAbstract
         'slideshowEnd' => '',
         'lastSlide' => '',
         'afterLoad' => '',
-    );
-
+    ];
 
     /**
      * Constructor sets some properties
      *
-     * @param  array  $aConfig  Module configuration
-     * @param  array  $aTranslations  Associative translations list
-     * @param  int    $clientId   Client id
-     * @param  array  $aClientCfg  Client configuration
-     * @param  int    $iLangId  Language id
+     * @param array $properties Module properties
      */
-    public function __construct(array $aConfig, array $aTranslations, $clientId = null, array $aClientCfg = array(), $iLangId = null)
+    public function __construct(array $properties)
     {
-        if ((int) $clientId <= 0) {
-            $clientId = (int) cRegistry::getClientId();
-        }
-        if (empty($aClientCfg)) {
-            $aClientCfg = cRegistry::getClientConfig(cRegistry::getClientId());
-        }
-        if ((int) $iLangId <= 0) {
-            $iLangId = (int) cRegistry::getLanguageId();
-        }
-
-        $this->_client         = $clientId;
-        $this->_lang           = $iLangId;
-        $this->_i18n           = $aTranslations;
-		$this->_uid            = uniqid();
-        $this->_sHtmlPath      = $aClientCfg['path']['htmlpath'];
-        $this->_sUploadDir     = $aClientCfg['upl']['frontendpath'];
-        $this->_sAbsUploadPath = $aClientCfg['upl']['path'];
-        $this->_sModulePath    = $aClientCfg['module']['frontendpath'];
-
-        foreach ($aConfig as $k => $v) {
+        foreach ($properties as $k => $v) {
             $this->$k = $v;
         }
 
-        $this->_aOrder = array(
-            'RAND()'         => $this->_i18n['random'],
-            'filename:ASC'   => $this->_i18n['filename_asc'],
-            'filename:DESC'  => $this->_i18n['filename_desc'],
-            'size:ASC'       => $this->_i18n['size_asc'],
-            'size:DESC'      => $this->_i18n['filename_desc'],
-            'filetype:ASC'   => $this->_i18n['filetype_asc'],
-            'filetype:DESC'  => $this->_i18n['filetype_desc'],
-            'created:ASC'    => $this->_i18n['created_asc'],
-            'created:esc'    => $this->_i18n['created_esc'],
-            'idupl:ASC'      => $this->_i18n['id_asc'],
-            'idupl:DESC'     => $this->_i18n['id_desc']
-        );
+        $this->uid = uniqid();
+        $this->htmlPath = $this->clientCfg['path']['htmlpath'];
+        $this->uploadDir = $this->clientCfg['upl']['frontendpath'];
+        $this->absUploadPath = $this->clientCfg['upl']['path'];
+        $this->modulePath = $this->clientCfg['module']['frontendpath'];
 
-        $this->_validate();
+        $this->order = [
+            'RAND()' => $this->i18n['random'],
+            'filename:ASC' => $this->i18n['filename_asc'],
+            'filename:DESC' => $this->i18n['filename_desc'],
+            'size:ASC' => $this->i18n['size_asc'],
+            'size:DESC' => $this->i18n['filename_desc'],
+            'filetype:ASC' => $this->i18n['filetype_asc'],
+            'filetype:DESC' => $this->i18n['filetype_desc'],
+            'created:ASC' => $this->i18n['created_asc'],
+            'created:esc' => $this->i18n['created_esc'],
+            'idupl:ASC' => $this->i18n['id_asc'],
+            'idupl:DESC' => $this->i18n['id_desc']
+        ];
+
+        $this->validate();
     }
 
     public function __get($name)
     {
-        return (isset($this->_cmsData[$name])) ? $this->_cmsData[$name] : null;
+        return (isset($this->cmsData[$name])) ? $this->cmsData[$name] : null;
     }
 
     public function __set($name, $value)
     {
-        if (isset($this->_cmsData[$name])) {
-            $this->_cmsData[$name] = $value;
+        if (isset($this->cmsData[$name])) {
+            $this->cmsData[$name] = $value;
         }
     }
 
     public function __isset($name)
     {
-        return (isset($this->_cmsData[$name]));
+        return (isset($this->cmsData[$name]));
     }
 
     public function __unset($name)
     {
-        if (isset($this->_cmsData[$name])) {
-            unset($this->_cmsData[$name]);
+        if (isset($this->cmsData[$name])) {
+            unset($this->cmsData[$name]);
         }
     }
 
     /**
      * Sets module translations
-	 *
-     * @param  array  $translations  Associative translations list
+     *
+     * @param array $translations Associative translations list
      */
     public function setMi18n(array $translations): void
     {
-        $this->_i18n = array_merge($this->_i18n, $translations);
+        $this->i18n = array_merge($this->i18n, $translations);
     }
 
     /**
      * Validates module configuration
      */
-    protected function _validate() {
+    protected function validate(): void
+    {
         $this->useSubdirectories = trim($this->useSubdirectories);
 
-        // number of max images to display
-        $this->maxImages = (int) $this->maxImages;
+        // Number of max images to display
+        $this->maxImages = (int)$this->maxImages;
         if ($this->maxImages <= 1) {
             $this->maxImages = '';
         }
 
-        // max allowed width of images. bigger ones will be resized
-        $this->maxWidth = (int) $this->maxWidth;
+        // Max allowed width of images. bigger ones will be resized
+        $this->maxWidth = (int)$this->maxWidth;
         if ($this->maxWidth <= 0) {
             $this->maxWidth = '';
         }
 
-        // max allowed height of images. bigger ones will also be resized
-        $this->maxHeight = (int) $this->maxHeight;
+        // Max allowed height of images. bigger ones will also be resized
+        $this->maxHeight = (int)$this->maxHeight;
         if ($this->maxHeight <= 0) {
             $this->maxHeight = '';
         }
 
-        // quality of resized jpeg images
+        // Quality of resized jpeg images
         if ($this->imageQuality < 0 || $this->imageQuality > 100) {
-            $this->imageQuality = self::DEFAULT_QUALITY;
+            $this->imageQuality = BaseAbstract::DEFAULT_QUALITY;
         }
 
-        // responsive mode flag
-        $this->responsiveMode = (int) $this->responsiveMode;
+        // Responsive mode flag
+        $this->responsiveMode = (int)$this->responsiveMode;
         if ($this->responsiveMode < 0) {
             $this->responsiveMode = '';
         }
 
-        // max cachetime in minutes 4 resized images
-        $this->maxCacheTime = (int) $this->maxCacheTime;
+        // Max cache time in minutes 4 resized images
+        $this->maxCacheTime = (int)$this->maxCacheTime;
         if ($this->maxCacheTime < 0) {
-            $this->maxCacheTime = self::DEFAULT_CACHE_TIME;
+            $this->maxCacheTime = BaseAbstract::DEFAULT_CACHE_TIME;
         }
 
         $this->effect = trim($this->effect);
@@ -318,32 +303,32 @@ abstract class ModuleMpNivoSliderAbstract
             $this->effect = 'random';
         }
 
-        $this->slices = (int) $this->slices;
+        $this->slices = (int)$this->slices;
         if ($this->slices <= 0) {
             $this->slices = 15;
         }
 
-        $this->boxCols = (int) $this->boxCols;
+        $this->boxCols = (int)$this->boxCols;
         if ($this->boxCols <= 0) {
             $this->boxCols = 8;
         }
 
-        $this->boxRows = (int) $this->boxRows;
+        $this->boxRows = (int)$this->boxRows;
         if ($this->boxRows <= 0) {
             $this->boxRows = 4;
         }
 
-        $this->animSpeed = (int) $this->animSpeed;
+        $this->animSpeed = (int)$this->animSpeed;
         if ($this->animSpeed <= 0) {
             $this->animSpeed = 500;
         }
 
-        $this->pauseTime = (int) $this->pauseTime;
+        $this->pauseTime = (int)$this->pauseTime;
         if ($this->pauseTime <= 0) {
             $this->pauseTime = 5000;
         }
 
-        $this->startSlide = (int) $this->startSlide;
+        $this->startSlide = (int)$this->startSlide;
         if ($this->startSlide <= 0) {
             $this->startSlide = '';
         }
@@ -351,8 +336,8 @@ abstract class ModuleMpNivoSliderAbstract
         $this->directionNav = trim($this->directionNav);
         $this->controlNav = trim($this->controlNav);
         $this->controlNavThumbs = trim($this->controlNavThumbs);
-        $this->controlNavThumbsWidthX = (int) $this->controlNavThumbsWidthX;
-        $this->controlNavThumbsHeightX = (int) $this->controlNavThumbsHeightX;
+        $this->controlNavThumbsWidthX = (int)$this->controlNavThumbsWidthX;
+        $this->controlNavThumbsHeightX = (int)$this->controlNavThumbsHeightX;
         $this->pauseOnHover = trim($this->pauseOnHover);
         $this->manualAdvance = trim($this->manualAdvance);
         $this->prevText = trim($this->prevText);
@@ -369,7 +354,7 @@ abstract class ModuleMpNivoSliderAbstract
      *
      * @param string $name Configuration item name
      */
-    public function getCheckedAttribute($name)
+    public function getCheckedAttribute(string $name): string
     {
         if (isset($this->$name) && '' !== $this->$name) {
             return ' checked="checked"';
@@ -381,17 +366,17 @@ abstract class ModuleMpNivoSliderAbstract
     /**
      * Returns the id attribute value by concatenating the passed name with the module uid.
      */
-    public function getIdValue($name)
+    public function getIdValue(string $name): string
     {
-		return $name . '_' . $this->getUid();
+        return $name . '_' . $this->getUid();
     }
 
     /**
      * Returns the module uid.
      */
-	public function getUid()
-	{
-		return $this->_uid;
-	}
+    public function getUid(): string
+    {
+        return $this->uid;
+    }
 
 }

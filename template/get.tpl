@@ -19,6 +19,10 @@
 
 {else}
 
+    <link rel="stylesheet" href="{$viewData.modulePath}/lib/nivo-slider/nivo-slider.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="{$viewData.modulePath}/lib/nivo-slider/themes/contenido/contenido.css" type="text/css" media="screen" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js" type="text/javascript"></script>
+
     <script src="{$viewData.modulePath}/lib/nivo-slider/jquery.nivo.slider.pack.js" type="text/javascript"></script>
 
     <div class="modMpNivoSlider{$viewData.cssClassName}" style="{$viewData.styles}">
