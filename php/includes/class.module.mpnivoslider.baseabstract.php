@@ -21,40 +21,43 @@ if (!defined('CON_FRAMEWORK')) {
 /**
  * CONTENIDO abstract module class for mpNivoSlider.
  *
- * @property mixed|null afterChange
- * @property mixed|null afterLoad
- * @property mixed|null animSpeed
- * @property mixed|null beforeChange
- * @property mixed|null boxCols
- * @property mixed|null boxRows
- * @property mixed|null container
- * @property mixed|null controlNav
- * @property mixed|null controlNavThumbs
- * @property mixed|null controlNavThumbsHeightX
- * @property mixed|null controlNavThumbsWidthX
- * @property mixed|null darkImages
- * @property mixed|null directionNav
- * @property mixed|null effect
- * @property int idmod
- * @property int imageQuality
- * @property mixed|null lastSlide
- * @property mixed|null manualAdvance
- * @property mixed|null maxCacheTime
- * @property mixed|null maxHeight
- * @property mixed|null maxImages
- * @property mixed|null maxWidth
- * @property string name
- * @property mixed|null nextText
- * @property mixed|null pauseOnHover
- * @property mixed|null pauseTime
- * @property mixed|null prevText
- * @property mixed|null responsiveMode
- * @property mixed|string|null selectedDirname
- * @property mixed|null selectedOrder
- * @property mixed|null slices
- * @property mixed|null slideshowEnd
- * @property mixed|null startSlide
- * @property mixed|null useSubdirectories
+ * @property string $name
+ * @property int $idmod
+ * @property mixed|null $container
+ * @property bool $isBackend
+ * @property array $clientCfg
+ *
+ * @property mixed|null $afterChange
+ * @property mixed|null $afterLoad
+ * @property mixed|null $animSpeed
+ * @property mixed|null $beforeChange
+ * @property mixed|null $boxCols
+ * @property mixed|null $boxRows
+ * @property mixed|null $controlNav
+ * @property mixed|null $controlNavThumbs
+ * @property mixed|null $controlNavThumbsHeightX
+ * @property mixed|null $controlNavThumbsWidthX
+ * @property mixed|null $darkImages
+ * @property mixed|null $directionNav
+ * @property mixed|null $effect
+ * @property int $imageQuality
+ * @property mixed|null $lastSlide
+ * @property mixed|null $manualAdvance
+ * @property mixed|null $maxCacheTime
+ * @property mixed|null $maxHeight
+ * @property mixed|null $maxImages
+ * @property mixed|null $maxWidth
+ * @property mixed|null $nextText
+ * @property mixed|null $pauseOnHover
+ * @property mixed|null $pauseTime
+ * @property mixed|null $prevText
+ * @property mixed|null $responsiveMode
+ * @property mixed|string|null $selectedDirname
+ * @property mixed|null $selectedOrder
+ * @property mixed|null $slices
+ * @property mixed|null $slideshowEnd
+ * @property mixed|null $startSlide
+ * @property mixed|null $useSubdirectories
  */
 abstract class ModuleMpNivoSliderAbstract
 {
@@ -62,83 +65,76 @@ abstract class ModuleMpNivoSliderAbstract
      * Default cache time of resized images in minutes (0 = no limit)
      * @var  int
      */
-    const DEFAULT_CACHE_TIME = 0;
+    public const DEFAULT_CACHE_TIME = 0;
 
     /**
      * Default quality for downsized jpeg images
      * @var  int
      */
-    const DEFAULT_QUALITY = 90;
+    public const DEFAULT_QUALITY = 90;
 
     /**
      * Default image width
      * @var  string
      */
-    const DEFAULT_WIDTH = '100%';
+    public const DEFAULT_WIDTH = '100%';
 
     /**
      * Default image height
      * @var  string
      */
-    const DEFAULT_HEIGHT = '100%';
+    public const DEFAULT_HEIGHT = '100%';
 
     /**
      * Supported filetypes for the slideshow
      * @var  string
      */
-    const FILE_TYPES = "'jpg','jpeg','png','gif'";
+    public const FILE_TYPES = "'jpg','jpeg','png','gif'";
 
     /**
      * Comma separated list of allowed effects
      * @var  string
      */
-    const EFFECTS = 'sliceDown,sliceDownLeft,sliceUp,sliceUpLeft,sliceUpDown,sliceUpDownLeft,fold,fade,random,slideInRight,slideInLeft,boxRandom,boxRain,boxRainReverse,boxRainGrow,boxRainGrowReverse';
+    public const EFFECTS = 'sliceDown,sliceDownLeft,sliceUp,sliceUpLeft,sliceUpDown,sliceUpDownLeft,fold,fade,random,slideInRight,slideInLeft,boxRandom,boxRain,boxRainReverse,boxRainGrow,boxRainGrowReverse';
 
     /**
      * Associative order array
-     * @var  array
      */
     protected $_aOrder;
 
     /**
      * Client id
-     * @var  int
      */
     protected $_client;
 
     /**
      * Language id
-     * @var  int
      */
     protected $_lang;
 
     /**
      * Client HTML path
-     * @var  string
      */
     protected $_sHtmlPath;
 
     /**
      * Client upload directory
-     * @var  string
      */
     protected $_sUploadDir;
 
     /**
-     * Absolute path to client upload directory
-     * @var  string
+     * Absolute path to the client upload directory
      */
     protected $_sAbsUploadPath;
 
     /**
-     * Html path of current module
-     * @var  string
+     * HTML path of the current module
      */
     protected $_sModulePath;
 
     /**
      * Module translations
-     * @var  array
+     * @var string[]
      */
     protected $_i18n = array();
 
@@ -150,7 +146,6 @@ abstract class ModuleMpNivoSliderAbstract
 
     /**
      * Module configuration structure
-     * @var  array
      */
     protected $_cmsData = array(
         'name' => '',
@@ -272,7 +267,7 @@ abstract class ModuleMpNivoSliderAbstract
 	 *
      * @param  array  $translations  Associative translations list
      */
-    public function setMi18n(array $translations)
+    public function setMi18n(array $translations): void
     {
         $this->_i18n = array_merge($this->_i18n, $translations);
     }
@@ -370,10 +365,9 @@ abstract class ModuleMpNivoSliderAbstract
     }
 
     /**
-     * Returns the checked attribute sub string usable for checkboxes.
+     * Returns the checked attribute substring usable for checkboxes.
      *
      * @param string $name Configuration item name
-     * @return string
      */
     public function getCheckedAttribute($name)
     {
@@ -385,10 +379,7 @@ abstract class ModuleMpNivoSliderAbstract
     }
 
     /**
-     * Returns the id attribute value by concatenating passed name with the module uid.
-     *
-     * @param string $name
-     * @return string
+     * Returns the id attribute value by concatenating the passed name with the module uid.
      */
     public function getIdValue($name)
     {
@@ -397,8 +388,6 @@ abstract class ModuleMpNivoSliderAbstract
 
     /**
      * Returns the module uid.
-     *
-     * @return string
      */
 	public function getUid()
 	{

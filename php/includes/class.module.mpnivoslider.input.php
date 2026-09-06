@@ -50,7 +50,7 @@ class ModuleMpNivoSliderInput extends ModuleMpNivoSliderAbstract
     /**
      * Generates and returns option items of the order select box.
      *
-     * @return  string  Composed option items.
+     * @return string Composed option items.
      */
     public function generateOrderSelectOptions()
     {

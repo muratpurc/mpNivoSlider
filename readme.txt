@@ -164,6 +164,9 @@ um es später auszugeben.
 ################################################################################
 CHANGELOG
 
+2026-09-06 mpNivoSlider Modul 0.4.1 (für CONTENIDO 4.10.2-dev)
+    * change: Auf PHP 8.0 und CONTENIDO 4.10.2-dev aktualisiert
+
 2019-11-15 mpNivoSlider Modul 0.4.0 (für CONTENIDO 4.9.x - 4.10.x)
     * change: Quellcode überarbeitet
     * change: Support für PHP < 5.2 entfernt
@@ -183,9 +186,9 @@ CHANGELOG
     * new: Konfiguration für die Qualität von generierten JPEG-Bildern
     * new: json_decode() implementation in PHP falls json_decode nicht verfügbar ist
     * change: jQuery Nivo Slider Plugins im separaten Scope um Probleme mit anderen
-	  JS-Frameworks zu vermeiden
+      JS-Frameworks zu vermeiden
     * change: Entfernen diverser Nivo Slider Optionen,
-	  siehe https://nivo.dev7studios.com/2012/05/30/the-nivo-slider-is-responsive/
+      siehe https://nivo.dev7studios.com/2012/05/30/the-nivo-slider-is-responsive/
 
 2011-11-22 mpNivoSlider Modul 0.13rc (für CONTENIDO 4.8.x)
     * new: Erweitert auf mehrfachen Einsatz innerhalb einer Seite

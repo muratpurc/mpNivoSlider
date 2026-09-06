@@ -31,7 +31,6 @@ class ModuleMpNivoSliderOutput extends ModuleMpNivoSliderAbstract
 {
     /**
      * To store occurred errors
-     * @var  string
      */
     protected $_sError = '';
 
@@ -87,7 +86,6 @@ class ModuleMpNivoSliderOutput extends ModuleMpNivoSliderAbstract
 
     /**
      * Generates the view data.
-     * @return array
      */
     public function getViewData()
     {
@@ -251,7 +249,7 @@ class ModuleMpNivoSliderOutput extends ModuleMpNivoSliderAbstract
     }
 
     /**
-     * Builds the images query statement, executes it and returns found images.
+     * Builds the image query statement, executes it, and returns found images.
      *
      * @return array List of found images
      */
@@ -365,7 +363,7 @@ class ModuleMpNivoSliderOutput extends ModuleMpNivoSliderAbstract
                 $file, $maxWidth, $maxHeight, false, false, $this->maxCacheTime, $this->imageQuality
             );
             if (!$file) {
-                return null;
+                return [];
             }
             $file = str_replace($this->_sHtmlPath, '', $file);
         } else {
@@ -389,7 +387,7 @@ class ModuleMpNivoSliderOutput extends ModuleMpNivoSliderAbstract
     }
 
     /**
-     * Returns value of getimagesize function, and also stores maximum width/height of
+     * Returns value of getimagesize function and also stores the maximum width / height of
      * existing images.
      *
      * @param string Image file to ger size array for
@@ -410,7 +408,7 @@ class ModuleMpNivoSliderOutput extends ModuleMpNivoSliderAbstract
     }
 
     /**
-     * Composes css definition 2 center a image horizontally and returns it back.
+     * Composes css definition 2 center an image horizontally and returns it back.
      *
      * @param mixed Array including image size information (result of getimagesize())
      * @return string Composed css definition
