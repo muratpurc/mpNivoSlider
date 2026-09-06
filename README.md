@@ -2,24 +2,25 @@
 
 ## Beschreibung
 
-**Nivo Slider:**
+### Nivo Slider
 
 Nivo Slider (v3.2) ist ein Image-Slider basierend auf jQuery, mit vielen Features wie Effekte, Tastatursteuerung,
 Verlinkung von Bildern, Themes, diversen Einstellungen usw.
 
-Benötigt jQuery v1.7+ und unterstützt folgende Browser:
+**Benötigt jQuery v1.7+ und unterstützt folgende Browser:**
 
 Internet Explorer v7+, Firefox v3+, Google Chrome v4+, Safari v4+, Opera v10+
 
-Webseite von Nivo Slider:
+**Webseite von Nivo Slider:**
+
 https://themeisle.com/plugins/nivo-slider/ (ehemals http://nivo.dev7studios.com/)
 
-**CONTENIDO Modul:**
+### CONTENIDO Modul
 
 Das Modul bietet diverse Einstellungsmöglichkeiten zur Steuerung des Nivo Sliders. Unterstützt die Bildformate
 jpg, jpeg, png, und gif. Die Skalierung der Bilder ist von der installierten GD-Library oder ImageMagick abhängig.
 
-Konfigurationsmöglichkeiten des Moduls:
+**Konfigurationsmöglichkeiten des Moduls:**
 
 * Auswahl des Bilderordners innerhalb des upload-Verzeichnisses des Mandanten
 * Verwendung von Bildern auch in Unterordnern
@@ -181,14 +182,9 @@ speichern, um es später auszugeben.
 
 ## mpNivoSlider Modul Links
 
-CONTENIDO Forum unter "CONTENIDO 4.10 -> Module und Plugins":
-https://forum.contenido.org/viewtopic.php?t=43782
-
-CONTENIDO Forum unter "CONTENIDO 4.9 -> Module und Plugins":
-https://forum.contenido.org/viewtopic.php?t=34705
-
-CONTENIDO Forum unter "CONTENIDO 4.8 -> Module und Plugins":
-https://forum.contenido.org/viewtopic.php?t=31601
+- [CONTENIDO Forum unter "CONTENIDO 4.10 &gt; Module und Plugins"](https://forum.contenido.org/viewtopic.php?t=43782)
+- [CONTENIDO Forum unter "CONTENIDO 4.9 &gt; Module und Plugins"](https://forum.contenido.org/viewtopic.php?t=34705)
+- [CONTENIDO Forum unter "CONTENIDO 4.8 &gt; Module und Plugins"](https://forum.contenido.org/viewtopic.php?t=31601)
 
 ----
 
