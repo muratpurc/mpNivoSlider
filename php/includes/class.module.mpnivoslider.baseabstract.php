@@ -64,37 +64,37 @@ abstract class BaseAbstract
 
     /**
      * Default cache time of resized images in minutes (0 = no limit)
-     * @var  int
+     * @var int
      */
     public const DEFAULT_CACHE_TIME = 0;
 
     /**
      * Default quality for downsized jpeg images
-     * @var  int
+     * @var int
      */
     public const DEFAULT_QUALITY = 90;
 
     /**
      * Default image width
-     * @var  string
+     * @var string
      */
     public const DEFAULT_WIDTH = '100%';
 
     /**
      * Default image height
-     * @var  string
+     * @var string
      */
     public const DEFAULT_HEIGHT = '100%';
 
     /**
      * Supported filetypes for the slideshow
-     * @var  string
+     * @var string
      */
     public const FILE_TYPES = "'jpg','jpeg','png','gif'";
 
     /**
      * Comma separated list of allowed effects
-     * @var  string
+     * @var string
      */
     public const EFFECTS = 'sliceDown,sliceDownLeft,sliceUp,sliceUpLeft,sliceUpDown,sliceUpDownLeft,fold,fade,random,slideInRight,slideInLeft,boxRandom,boxRain,boxRainReverse,boxRainGrow,boxRainGrowReverse';
 
